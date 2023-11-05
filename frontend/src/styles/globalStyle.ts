@@ -4,7 +4,7 @@ import { normalize } from "styled-normalize";
 const styled = { createGlobalStyle };
 
 const GlobalStyle = styled.createGlobalStyle`
-  ${normalize}
+  ${normalize} // 브라우저마다 동일하게 CSS 적용시키기
 
   @font-face {
     font-family: "Noto Sans KR", sans-serif;

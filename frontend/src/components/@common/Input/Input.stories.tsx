@@ -24,10 +24,23 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const ArrowInput: Story = {
+export const DefaultInput: Story = {
   args: {
-    placeholder: "위치를 입력해 주세요.",
     color: "white",
     align: "left",
+    isValid: "true",
+  },
+};
+
+export const InvalidDefaultInput: Story = {
+  args: {
+    isValid: false,
+  },
+};
+
+export const GreyRightInput: Story = {
+  args: {
+    color: "grey",
+    align: "right",
   },
 };

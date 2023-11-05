@@ -3,10 +3,6 @@ import styled, { css } from "styled-components";
 
 interface InputProps {
   /*
-   * 힌트 설정합니다.
-   */
-  placeholder?: string;
-  /*
    * 배경색을 설정합니다.
    */
   color?: "white" | "grey";
@@ -15,39 +11,27 @@ interface InputProps {
    */
   align?: "left" | "right";
   /*
-   * 우측에 들어갈 아이콘을 설정합니다.
+   * 유효성 확인 여부를 설정합니다.
    */
-  icon?: string;
-  /*
-   * input 이벤트.
-   */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  isValid?: boolean;
 }
 
 export const Input = (inputProps: InputProps) => {
-  const { icon, ...props } = inputProps;
+  const {
+    color = "white",
+    align = "left",
+    isValid = true,
+    ...props
+  } = inputProps;
 
   return (
-    <InputOuter>
-      <InputWrapper {...props} />
-      {icon && (
-        <IconWrapper>
-          <img src={icon} alt="icon" />
-        </IconWrapper>
-      )}
-    </InputOuter>
+    <InputWrapper color={color} align={align} isValid={isValid} {...props} />
   );
 };
-
-const InputOuter = styled.div`
-  position: relative;
-  width: 100%;
-`;
 
 const InputWrapper = styled.input<InputProps>`
   width: 100%;
   padding: 10px;
-  padding-right: ${({ icon }) => (icon ? "40px" : "10px")};
   font-size: 13px;
   border: 1px solid ${({ theme }) => theme.color.grey50};
   border-radius: 4px;
@@ -59,13 +43,10 @@ const InputWrapper = styled.input<InputProps>`
   &:focus {
     border-color: ${({ theme }) => theme.color.primary};
   }
-`;
 
-const IconWrapper = styled.div`
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
+  ${({ isValid }) =>
+    !isValid &&
+    css`
+      border-color: ${({ theme }) => theme.color.warning};
+    `};
 `;

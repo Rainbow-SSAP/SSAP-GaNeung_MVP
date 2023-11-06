@@ -2,7 +2,7 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import type { Preview } from "@storybook/react";
 import theme from "../src/styles/theme";
-import GlobalStyle from "../src/styles/GlobalStyle";
+import GlobalStyle from "../src/styles/globalStyle";
 
 const preview: Preview = {
   parameters: {
@@ -14,7 +14,8 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [ // 스토리북에서 테마를 제공하도록 설정
+  decorators: [
+    // 스토리북에서 테마를 제공하도록 설정
     (Story) => (
       <ThemeProvider theme={theme}>
         <GlobalStyle />

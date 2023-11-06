@@ -28,7 +28,7 @@ export const DefaultInput: Story = {
   args: {
     color: "white",
     align: "left",
-    isValid: "true",
+    isValid: true,
   },
 };
 

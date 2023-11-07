@@ -12,6 +12,10 @@ public class TaskRequestDto {
     @AllArgsConstructor
     /*심부름 요청서 작성시 쓰는 DTO*/
     public static class CreateForm {
+
+        private String category;
+        private String detailedItem;
+
         private String title;
         private String description;
         private String location;

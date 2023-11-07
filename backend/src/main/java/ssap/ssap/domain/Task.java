@@ -18,43 +18,67 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private Long id;
 
+    @Column
     private String title;
 
+    @Column
     private String description;
 
+    @Column
     private String location;
 
+    @Column
     private String roadAddress;
 
+    @Column
     private String jibunAddress;
 
+    @Column
     private String detailedAddress;
 
+    @Column
     private String preferredGender;
 
+    @Column
     private String startTime;
 
+    @Column
     private String endTime;
 
+    @Column
     private String fee;
 
+    @Column
     private String auctionStatus;
 
+    @Column
     private String termsAgreed;
 
+    @Column
     private String autionStartTime;
 
+    @Column
     private String autionEndTime;
 
+    @Column
     private String status;
 
-//    private Long userId;
-//
-//    private String helperId;
-//
-//    private String categoryId;
-//
-//    private String detailedItemsId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "helper_id")
+    private User helper;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "detailed_item_id")
+    private DetailedItem detailedItem;
 }

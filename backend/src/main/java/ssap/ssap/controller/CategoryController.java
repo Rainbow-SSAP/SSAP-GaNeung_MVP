@@ -1,5 +1,6 @@
 package ssap.ssap.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,7 @@ import ssap.ssap.service.CategoryService;
 
 import java.util.List;
 
+@Tag(name = "Category", description = "카테고리 관련 API")
 @RestController
 @RequestMapping("/api")
 public class CategoryController {

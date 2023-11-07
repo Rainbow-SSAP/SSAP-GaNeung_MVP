@@ -10,5 +10,8 @@
         <module name="ssap.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ssap" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

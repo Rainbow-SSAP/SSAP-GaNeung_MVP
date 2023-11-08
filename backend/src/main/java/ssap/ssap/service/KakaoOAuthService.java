@@ -49,7 +49,6 @@ public class KakaoOAuthService implements OAuthService {
         loginResponse.setLoginSuccess(true);
 
         Account account = new Account();
-        account.setProviderId(userInfo.getProviderId());
         account.setUserName(userInfo.getUserName());
         account.setUserEmail(userInfo.getUserEmail());
         loginResponse.setAccount(account);

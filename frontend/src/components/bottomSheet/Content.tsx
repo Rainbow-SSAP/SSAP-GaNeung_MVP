@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { Button } from "../@common/Button/Button";
+import ToastContext from "../../context/toast/ToastContext";
 
-const Content = () => {
+const Content = ({ setIsOpen }) => {
+  const [toast, setToast] = useState(false);
+
   const handleBidClick = () => {
     console.log("입찰하기 버튼 클릭!");
+    setToast(true);
+    setTimeout(() => {
+      setToast(false); //TODO 토스트 알림과 바텀시트 따로 구분해야함. 현재 바텀시트내에 토스트 알림이 같이 나오고 있음
+      setIsOpen(false); //TODO 3초후에 닫히는 것이 아닌 바로 닫히면서 토스트알림이 뜨게 변경 예정
+    }, 3000);
   };
 
   return (
@@ -35,6 +43,7 @@ const Content = () => {
         text="💓 입찰하기"
         onClick={handleBidClick}
       />
+      {toast && <ToastContext message="입찰이 완료되었습니다" />}
     </ContentWrapper>
   );
 };
@@ -108,15 +117,4 @@ const Info = styled.ul`
     margin-bottom: 0.5em;
     font-size: 0.9em;
   }
-`;
-
-const BidButton = styled.button`
-  background-color: pink;
-  color: white;
-  border: none;
-  padding: 15px;
-  width: 100%;
-  border-radius: 5px;
-  font-size: 1em;
-  cursor: pointer;
 `;

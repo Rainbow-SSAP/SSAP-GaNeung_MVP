@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { BOTTOM_SHEET_HEIGHT } from "../../constants/common";
 import useBottomSheet from "../../hooks/bottomSheet/useBottomSheet";
+import Content from "./Content";
 
 const BottomSheet = ({ children, isOpen, setIsOpen }) => {
   const { onDragEnd, controls } = useBottomSheet(isOpen, setIsOpen);
@@ -26,7 +27,9 @@ const BottomSheet = ({ children, isOpen, setIsOpen }) => {
       dragElastic={0.2}
     >
       <Header />
-      <ContentWrapper>{children}</ContentWrapper>
+      <ContentWrapper>
+        <Content setIsOpen={setIsOpen} />
+      </ContentWrapper>
     </Wrapper>
   );
 };

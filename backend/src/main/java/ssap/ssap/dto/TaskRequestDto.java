@@ -26,11 +26,12 @@ public class TaskRequestDto {
         private String startTime;
         private String endTime;
         private String fee;
-        private String auctionStatus;
-        private String termsAgreed;
-        private String autionStartTime;
-        private String autionEndTime;
-        private String status;
+        private Boolean auctionStatus;
+        private Boolean termsAgreed;
+        private String auctionStartTime;
+        private String auctionEndTime;
+
+        private String fileData;
     }
 
     @Getter

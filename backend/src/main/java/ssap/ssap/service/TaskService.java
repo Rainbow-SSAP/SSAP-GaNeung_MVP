@@ -3,15 +3,9 @@ package ssap.ssap.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ssap.ssap.domain.Category;
-import ssap.ssap.domain.DetailedItem;
-import ssap.ssap.domain.Task;
-import ssap.ssap.domain.User;
+import ssap.ssap.domain.*;
 import ssap.ssap.dto.TaskRequestDto;
-import ssap.ssap.repository.CategoryRepository;
-import ssap.ssap.repository.DetailedItemRepository;
-import ssap.ssap.repository.TaskRepository;
-import ssap.ssap.repository.UserRepository;
+import ssap.ssap.repository.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +18,7 @@ public class TaskService {
     private final TaskRepository taskRepository;
     private final CategoryRepository categoryRepository;
     private final DetailedItemRepository detailedItemRepository;
+    private final TaskAttachmentRepository taskAttachmentRepository;
 
     //Test
     private final UserRepository userRepository;
@@ -61,9 +56,16 @@ public class TaskService {
         task.setFee(createForm.getFee());
         task.setAuctionStatus(createForm.getAuctionStatus());
         task.setTermsAgreed(createForm.getTermsAgreed());
-        task.setAutionStartTime(createForm.getAutionStartTime());
-        task.setAutionEndTime(createForm.getAutionEndTime());
-        task.setStatus(createForm.getStatus());
+        task.setAuctionStartTime(createForm.getAuctionStartTime());
+        task.setAuctionEndTime(createForm.getAuctionEndTime());
+        if (task.getAuctionStatus().equals(true)) {
+            task.setStatus("경매중");
+        } else {
+            task.setStatus("대기중");
+        }
+
+        TaskAttachment taskAttachment = new TaskAttachment();
+        taskAttachment.setFileData(createForm.getFileData());
 
         //Test User: 레인보우
         Optional<User> optionalUser = userRepository.findByName("쌉가능");
@@ -71,10 +73,15 @@ public class TaskService {
             user = optionalUser.get();
         }
 
+
+        //Foreign Key Mapping
         task.setUser(user);
         task.setCategory(category);
         task.setDetailedItem(detailedItem);
+        taskAttachment.setTask(task);
 
-        return taskRepository.save(task);
+        Task saveTask = taskRepository.save(task);
+        taskAttachmentRepository.save(taskAttachment);
+        return saveTask;
     }
 }

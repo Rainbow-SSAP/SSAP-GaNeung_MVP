@@ -52,16 +52,16 @@ public class Task {
     private String fee;
 
     @Column
-    private String auctionStatus;
+    private Boolean auctionStatus;
 
     @Column
-    private String termsAgreed;
+    private Boolean termsAgreed;
 
     @Column
-    private String autionStartTime;
+    private String auctionStartTime;
 
     @Column
-    private String autionEndTime;
+    private String auctionEndTime;
 
     @Column
     private String status;

@@ -11,7 +11,9 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
 import ssap.ssap.domain.User;
 import ssap.ssap.dto.Account;
 import ssap.ssap.dto.LoginResponseDto;
@@ -42,6 +44,10 @@ public class KakaoOAuthService implements OAuthService {
 
     @Value("${kakao.user-info-uri:https://kapi.kakao.com/v2/user/me}")
     private String kakaoUserInfoUri;
+
+    @Value("${kakao.token-info-uri:https://kapi.kakao.com/v1/user/access_token_info}")
+    private String kakaoTokenInfoUri;
+
 
     @Autowired
     public KakaoOAuthService(RestTemplate restTemplate, UserRepository userRepository) {
@@ -164,4 +170,39 @@ public class KakaoOAuthService implements OAuthService {
 
         return oauthInfo;
     }
+
+    public boolean isAccessTokenValid(String accessToken) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(accessToken);
+        HttpEntity<?> httpEntity = new HttpEntity<>(headers);
+
+        try {
+            restTemplate.exchange(kakaoTokenInfoUri, HttpMethod.GET, httpEntity, String.class);
+            return true; // 토큰이 유효한 경우
+        } catch (HttpClientErrorException e) {
+            log.error("액세스 토큰 유효성 검사 실패: {}", e.getMessage());
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "액세스 토큰이 유효하지 않거나 만료되었습니다.", e);
+        }
+    }
+
+    public String refreshAccessToken(String refreshToken) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("grant_type", "refresh_token");
+        params.add("client_id", clientId);
+        params.add("refresh_token", refreshToken);
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
+
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(kakaoTokenUri, HttpMethod.POST, request, String.class);
+            JSONObject jsonObj = new JSONObject(response.getBody());
+            return jsonObj.getString("access_token"); // 새로운 액세스 토큰 반환
+        } catch (HttpClientErrorException e) {
+            log.error("액세스 토큰 갱신 실패: {}", e.getMessage());
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "액세스 토큰 갱신에 실패했습니다.", e);
+        }
+    }
+
+
 }

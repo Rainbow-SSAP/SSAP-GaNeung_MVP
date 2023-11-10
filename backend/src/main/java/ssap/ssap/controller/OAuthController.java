@@ -1,10 +1,14 @@
 package ssap.ssap.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ssap.ssap.dto.LoginResponseDto;
@@ -30,5 +34,44 @@ public class OAuthController {
         LoginResponseDto oauthInfo = oauthService.kakaoLogin(provider, code, response);
 
         return ResponseEntity.ok(oauthInfo);
+    }
+
+    @Operation(summary = "액세스 토큰 유효성 검증", description = "제공된 액세스 토큰이 유효한지 확인합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "액세스 토큰이 유효합니다."),
+            @ApiResponse(responseCode = "401", description = "액세스 토큰이 유효하지 않거나 만료되었습니다.")
+    })
+    @GetMapping("/validate-token")
+    public ResponseEntity<?> validateAccessToken(
+            @Parameter(description = "유효성을 검증할 액세스 토큰", required = true)
+            @RequestParam("accessToken") String accessToken
+    ) {
+        boolean isValid = oauthService.isAccessTokenValid(accessToken);
+        if (isValid) {
+            return ResponseEntity.status(HttpStatus.OK).body("액세스 토큰이 유효합니다.");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("액세스 토큰이 유효하지 않거나 만료되었습니다.");
+        }
+    }
+
+    @Operation(summary = "액세스 토큰 갱신", description = "제공된 리프레시 토큰을 사용해 액세스 토큰을 갱신합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "새 액세스 토큰이 생성되었습니다."),
+            @ApiResponse(responseCode = "401", description = "액세스 토큰 갱신에 실패했습니다.")
+    })
+    @GetMapping("/refresh-token")
+    public ResponseEntity<?> refreshAccessToken(
+            @Parameter(description = "새 액세스 토큰을 생성하기 위해 사용될 리프레시 토큰", required = true)
+            @RequestParam("refreshToken") String refreshToken
+    ) {
+        String newAccessToken = oauthService.refreshAccessToken(refreshToken);
+        if (newAccessToken != null) {
+            return ResponseEntity.ok(newAccessToken);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("액세스 토큰 갱신에 실패했습니다.");
+
+
+
+        }
     }
 }

@@ -2,21 +2,31 @@ package ssap.ssap.service;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import ssap.ssap.domain.User;
 import ssap.ssap.dto.Account;
 import ssap.ssap.dto.LoginResponseDto;
 import ssap.ssap.dto.OAuthDTO;
 import org.json.JSONObject;
+import ssap.ssap.exception.CustomDuplicateKeyException;
+import ssap.ssap.repository.UserRepository;
+
+import java.util.Optional;
 
 @Service
+@Slf4j
 public class KakaoOAuthService implements OAuthService {
     private final RestTemplate restTemplate;
+    private final UserRepository userRepository;
 
     @Value("${KAKAO_CLIENT_ID:default_client_id}")
     private String clientId;
@@ -34,8 +44,9 @@ public class KakaoOAuthService implements OAuthService {
     private String kakaoUserInfoUri;
 
     @Autowired
-    public KakaoOAuthService(RestTemplate restTemplate) {
+    public KakaoOAuthService(RestTemplate restTemplate, UserRepository userRepository) {
         this.restTemplate = restTemplate;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -64,6 +75,39 @@ public class KakaoOAuthService implements OAuthService {
         loginResponse.setAccessToken(oauthInfo.getAccessToken());
 
         return loginResponse;
+    }
+
+    private User mapOAuthDTOToUserEntity(OAuthDTO oauthInfo) {
+        User user = new User();
+        user.setProviderId(oauthInfo.getProviderId());
+        user.setName(oauthInfo.getUserName());
+        user.setEmail(oauthInfo.getUserEmail());
+
+        return user;
+    }
+
+    @Transactional
+    public User saveOrUpdateUser(OAuthDTO oauthInfo) {
+        // 사용자가 데이터베이스에 이미 있는지 확인합니다.
+        Optional<User> existingUserOpt = userRepository.findByProviderId(oauthInfo.getProviderId());
+
+        try {
+            if (existingUserOpt.isPresent()) {
+                // 기존 사용자가 이미 있으므로 아무런 업데이트도 하지 않고 반환합니다.
+                return existingUserOpt.get();
+            } else {
+                User newUser = mapOAuthDTOToUserEntity(oauthInfo);
+
+                newUser.setProviderId(oauthInfo.getProviderId());
+                newUser.setName(oauthInfo.getUserName());
+                newUser.setEmail(oauthInfo.getUserEmail());
+
+                return userRepository.save(newUser);
+            }
+        } catch (DataIntegrityViolationException e) {
+            // 데이터베이스 레벨의 유니크 제약 조건 위반이 발생하면 CustomDuplicateKeyException을 던집니다.
+            throw new CustomDuplicateKeyException("Provider ID " + oauthInfo.getProviderId() + " already exists.");
+        }
     }
 
     private OAuthDTO requestAccessToken(String code) {

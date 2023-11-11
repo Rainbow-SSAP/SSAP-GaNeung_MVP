@@ -3,7 +3,7 @@ import { css, keyframes as styledKeyframes } from "styled-components";
 // 색상 팔레트
 const color = {
   primary: "#262626",
-  secondary: "#5E6EFF",
+  secondary: "#FFFFFF",
   warning: "#DE1135",
   orange: "#EE8D1B",
   yellow: "#FFE500",
@@ -39,9 +39,7 @@ const font = {
 } as const;
 
 // 보더
-const border = {
-  
-} as const;
+const border = {} as const;
 
 // 그림자 스타일
 const shadow = {

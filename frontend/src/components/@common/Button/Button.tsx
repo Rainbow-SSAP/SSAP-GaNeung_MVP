@@ -5,6 +5,10 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   // 기본 HTML button 속성 확장
   /*
+   * 버튼 안에 내용을 설정합니다.
+   */
+  text: string;
+  /*
    * 버튼 크기를 설정합니다.
    */
   size?: "small" | "medium" | "large";
@@ -24,10 +28,6 @@ export interface ButtonProps
    * 버튼 클릭 시 action(border 색상 활성화) 유무를 설정합니다.
    */
   selected?: boolean;
-  /*
-   * 버튼 안에 내용을 설정합니다.
-   */
-  text: string;
 }
 
 export const Button = (buttonProps: ButtonProps) => {
@@ -89,7 +89,7 @@ const ButtonColors = {
   `,
 };
 
-const ButtonOuter = styled.div<ButtonProps>`
+const ButtonOuter = styled.div<Omit<ButtonProps, "text">>`
   width: 100%;
   ${({ fixed }) =>
     fixed &&
@@ -100,7 +100,7 @@ const ButtonOuter = styled.div<ButtonProps>`
     `}
 `;
 
-const ButtonWapper = styled.button<ButtonProps>`
+const ButtonWapper = styled.button<Omit<ButtonProps, "text">>`
   border: none;
   border-radius: 50px;
   font-weight: ${({ theme }) => theme.componentStyle.button.fontWeight};

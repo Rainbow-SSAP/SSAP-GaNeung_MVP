@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-interface InputProps {
+export interface InputProps {
   /*
    * 배경색을 설정합니다.
    */

@@ -1,7 +1,7 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-interface LabelProps {
+export interface LabelProps {
   /*
    * 라벨에 들어갈 내용을 설정합니다.
    */

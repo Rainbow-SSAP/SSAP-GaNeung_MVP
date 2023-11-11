@@ -23,7 +23,7 @@ interface SimpleProps extends BaseCheckboxProps {
   isCompound?: false;
 }
 
-type CheckboxProps = CompoundProps | SimpleProps;
+export type CheckboxProps = CompoundProps | SimpleProps;
 
 export const Checkbox = (props: CheckboxProps) => {
   if (props.isCompound) {

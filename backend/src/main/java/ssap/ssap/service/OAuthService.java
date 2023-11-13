@@ -9,4 +9,6 @@ public interface OAuthService {
     boolean isAccessTokenValid(String accessToken);
 
     String refreshAccessToken(String refreshToken);
+
+    void logout(String provider, String accessToken);
 }

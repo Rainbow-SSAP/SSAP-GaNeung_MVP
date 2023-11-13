@@ -69,9 +69,21 @@ public class OAuthController {
             return ResponseEntity.ok(newAccessToken);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("액세스 토큰 갱신에 실패했습니다.");
-
-
-
         }
+    }
+    @Operation(summary = "OAuth 로그아웃", description = "사용자를 OAuth 세션에서 로그아웃합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OAuth 로그아웃 성공"),
+            @ApiResponse(responseCode = "401", description = "인증 실패 또는 토큰 만료"),
+            @ApiResponse(responseCode = "500", description = "서버 내부 오류")
+    })
+    @PostMapping("/{provider}/logout")
+    public ResponseEntity<?> logout(
+            @Parameter(name = "provider", description = "OAuth 제공자", required = true) @PathVariable String provider,
+            @Parameter(description = "로그아웃할 사용자의 액세스 토큰", required = true) @RequestHeader("Authorization") String authorizationHeader
+    ) {
+        String accessToken = authorizationHeader.substring("Bearer ".length());
+        oauthService.logout(provider, accessToken);
+        return ResponseEntity.ok(provider + " 로그아웃 성공");
     }
 }

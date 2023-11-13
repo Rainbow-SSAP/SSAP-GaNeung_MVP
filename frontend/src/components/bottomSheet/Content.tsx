@@ -4,8 +4,10 @@ import { Button } from "../@common/Button/Button";
 import ToastContext from "../../context/toast/ToastContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Input } from "../@common/Input/Input";
 
 const Content = ({ setIsOpen }) => {
+  const [bidAmount, setBidAmount] = useState("");
   // const [toast, setToast] = useState(false);
   const notify = () => toast("입찰에 성공하였습니다");
   //TODO 입찰에 실패했을 경우 추후에 추가
@@ -18,6 +20,14 @@ const Content = ({ setIsOpen }) => {
   //     setIsOpen(false); //TODO 3초후에 닫히는 것이 아닌 바로 닫히면서 토스트알림이 뜨게 변경 예정
   //   }, 3000);
   // };
+
+  const validateInputChange = (event) => {
+    const value = event.target.value;
+
+    if (value === "" || /^[0-9\b]+$/.test(value)) {
+      setBidAmount(value);
+    }
+  };
 
   return (
     <>
@@ -37,7 +47,12 @@ const Content = ({ setIsOpen }) => {
         </OptionsWrapper>
         <BidInputWrapper>
           <InputTitle>입찰가격</InputTitle>
-          <BidInput placeholder="0 원" />
+          <Input
+            color="white"
+            align="left"
+            value={bidAmount}
+            onChange={validateInputChange}
+          />
         </BidInputWrapper>
         <Info>
           <li>헬퍼가 하루에 2번 당일 취소할 경우 하루 서비스 정지 됩니다.</li>

@@ -29,6 +29,8 @@ const Content = ({ setIsOpen }) => {
     }
   };
 
+  //TODO 현재입찰가보다 높은 가격으로 설정하고 버튼 클릭 시 오류 발생 추후 심부름 요청서와 상태공유로 추가
+
   return (
     <>
       <ContentWrapper>

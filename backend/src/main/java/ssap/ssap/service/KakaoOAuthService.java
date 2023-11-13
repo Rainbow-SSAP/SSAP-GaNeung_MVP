@@ -20,6 +20,7 @@ import ssap.ssap.dto.LoginResponseDto;
 import ssap.ssap.dto.OAuthDTO;
 import org.json.JSONObject;
 import ssap.ssap.exception.CustomDuplicateKeyException;
+import ssap.ssap.exception.CustomServiceException;
 import ssap.ssap.repository.UserRepository;
 
 import java.util.Optional;
@@ -47,6 +48,9 @@ public class KakaoOAuthService implements OAuthService {
 
     @Value("${kakao.token-info-uri:https://kapi.kakao.com/v1/user/access_token_info}")
     private String kakaoTokenInfoUri;
+
+    @Value("${kakao.api.base-url:https://kapi.kakao.com}")
+    private String kakaoApiBaseUrl;
 
 
     @Autowired
@@ -204,5 +208,23 @@ public class KakaoOAuthService implements OAuthService {
         }
     }
 
+    @Override
+    public void logout(String provider, String accessToken) {
+        if (!"kakao".equalsIgnoreCase(provider)) {
+            throw new IllegalArgumentException("지원하지 않는 OAuth 제공자입니다: " + provider);
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(accessToken);
+        HttpEntity<?> httpEntity = new HttpEntity<>(headers);
+
+        String logoutUri = kakaoApiBaseUrl + "/v1/user/logout";
+
+        try {
+            restTemplate.exchange(logoutUri, HttpMethod.POST, httpEntity, String.class);
+        } catch (HttpClientErrorException e) {
+            throw new CustomServiceException("카카오 로그아웃 중 오류가 발생했습니다.", e);
+        }
+    }
 
 }

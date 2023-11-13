@@ -17,7 +17,7 @@ const ErrandRequestPage = () => {
       {/* 심부름 상세 페이지 보이는 컴포넌트 추가 TODO */}
       <Button
         text="✋ 심부름 지원하기"
-        size="medium"
+        size="large"
         color="primary"
         onClick={handleBtnClick}
       />

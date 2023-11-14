@@ -1,5 +1,7 @@
 package ssap.ssap.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import ssap.ssap.service.TaskService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Tag(name = "심부름 요청서 작성 API", description = "Swagger 테스트용 심부름 요청서 작성 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -24,6 +27,7 @@ public class RequestController {
     private final TaskService taskService;
     private final KakaoOAuthService oauthService;
 
+    @Operation(summary = "Errand_Post Create", description = "게시글 생성을 위한 심부름 요청서를 작성한다.")
     @PostMapping("/request")
     public ResponseEntity<?> createErrandRequestForm(
             @RequestHeader("Authorization") String authorizationHeader,

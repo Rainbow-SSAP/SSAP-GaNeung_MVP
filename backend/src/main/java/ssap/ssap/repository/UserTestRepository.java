@@ -2,11 +2,11 @@ package ssap.ssap.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ssap.ssap.domain.User;
+import ssap.ssap.domain.UserTest;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByName(String name);
+public interface UserTestRepository extends JpaRepository<UserTest, Long> {
+    Optional<UserTest> findByName(String name);
 }

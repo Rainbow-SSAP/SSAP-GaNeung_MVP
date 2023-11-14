@@ -1,25 +1,19 @@
 package ssap.ssap.domain;
 
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "users_test")
+public class UserTest {
     //ToDo: 테이블 필드 검증 추가 필요
 
     @Id
@@ -80,8 +74,8 @@ public class User {
     @Column
     private String jibunAddress;
 
-    public User(String name, String email, String gender, String birthdate, String phoneNumber, Boolean isVerified, Boolean hasAgreedToTerms,
-                String profilePicture, String rating, String roadAddress, String jibunAddress) {
+    public UserTest(String name, String email, String gender, String birthdate, String phoneNumber, Boolean isVerified, Boolean hasAgreedToTerms,
+                    String profilePicture, String rating, String roadAddress, String jibunAddress) {
         this.name = name;
         this.email = email;
         this.gender = gender;

@@ -68,11 +68,11 @@ public class Task {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserTest user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "helper_id")
-    private User helper;
+    private UserTest helper;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")

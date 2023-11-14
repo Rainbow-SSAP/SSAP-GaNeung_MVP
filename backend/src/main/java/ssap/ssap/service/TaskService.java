@@ -19,11 +19,11 @@ public class TaskService {
     private final CategoryRepository categoryRepository;
     private final DetailedItemRepository detailedItemRepository;
     private final TaskAttachmentRepository taskAttachmentRepository;
-    private final UserRepository userRepository;
+    private final UserTestRepository userTestRepository;
 
     public Task createPost(TaskRequestDto.CreateForm createForm) {
 
-        User user = null;
+        UserTest user = null;
         Category category = null;
         DetailedItem detailedItem =null;
 
@@ -66,7 +66,7 @@ public class TaskService {
         taskAttachment.setFileData(createForm.getFileData());
 
         //Test User: 레인보우
-        Optional<User> optionalUser = userRepository.findByName("쌉가능");
+        Optional<UserTest> optionalUser = userTestRepository.findByName("쌉가능");
         if (optionalUser.isPresent()) {
             user = optionalUser.get();
         }

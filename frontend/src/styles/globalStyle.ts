@@ -44,6 +44,9 @@ const GlobalStyle = styled.createGlobalStyle`
 
   body {
     font-family: "Noto Sans KR", sans-serif;
+    /* TODO: 전체 레이아웃 수정 필요 */
+    /* min-width: 768px; */
+    padding: 50px;
   }
 
   ol,

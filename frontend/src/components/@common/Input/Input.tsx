@@ -14,6 +14,10 @@ interface InputProps {
    * 유효성 확인 여부를 설정합니다.
    */
   isValid?: boolean;
+
+  value?: string;
+
+  onChange?: (event: string) => void;
 }
 
 export const Input = (inputProps: InputProps) => {

@@ -27,8 +27,8 @@ public class Task {
     @Column
     private String description;
 
-    @Column
-    private String location;
+//    @Column
+//    private String location;
 
     @Column
     private String roadAddress;

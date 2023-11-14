@@ -1,5 +1,7 @@
 package ssap.ssap.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,23 +14,49 @@ public class TaskRequestDto {
     @AllArgsConstructor
     /*심부름 요청서 작성시 쓰는 DTO*/
     public static class CreateForm {
-
+        @NotBlank
         private String category;
+        @NotBlank
         private String detailedItem;
 
+        @NotBlank
         private String title;
+
+        @NotBlank
         private String description;
-        private String location;
+
+//        private String location;
+        @NotBlank
         private String roadAddress;
+
+        @NotBlank
         private String jibunAddress;
+
+        @NotBlank
         private String detailedAddress;
+
+        @NotBlank
         private String preferredGender;
+
+        @NotBlank
         private String startTime;
+
+        @NotBlank
         private String endTime;
+
+        @NotBlank
         private String fee;
+
+        @NotBlank
         private Boolean auctionStatus;
+
+        @NotBlank
         private Boolean termsAgreed;
+
+        @NotNull
         private String auctionStartTime;
+
+        @NotNull
         private String auctionEndTime;
 
         private String fileData;

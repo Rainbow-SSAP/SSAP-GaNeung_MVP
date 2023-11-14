@@ -19,8 +19,6 @@ public class TaskService {
     private final CategoryRepository categoryRepository;
     private final DetailedItemRepository detailedItemRepository;
     private final TaskAttachmentRepository taskAttachmentRepository;
-
-    //Test
     private final UserRepository userRepository;
 
     public Task createPost(TaskRequestDto.CreateForm createForm) {
@@ -46,7 +44,7 @@ public class TaskService {
         Task task = new Task();
         task.setTitle(createForm.getTitle());
         task.setDescription(createForm.getDescription());
-        task.setLocation(createForm.getLocation());
+//        task.setLocation(createForm.getLocation());
         task.setRoadAddress(createForm.getRoadAddress());
         task.setJibunAddress(createForm.getJibunAddress());
         task.setDetailedAddress(createForm.getDetailedAddress());

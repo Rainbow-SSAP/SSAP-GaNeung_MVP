@@ -1,7 +1,8 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styled, { css } from "styled-components";
 
-export interface InputProps {
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   /*
    * 배경색을 설정합니다.
    */
@@ -16,18 +17,21 @@ export interface InputProps {
   isValid?: boolean;
 }
 
-export const Input = (inputProps: InputProps) => {
-  const {
-    color = "white",
-    align = "left",
-    isValid = true,
-    ...props
-  } = inputProps;
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ color = "white", align = "left", isValid = true, ...restProps }, ref) => {
+    return (
+      <InputWrapper
+        ref={ref}
+        color={color}
+        align={align}
+        isValid={isValid}
+        {...restProps}
+      />
+    );
+  },
+);
 
-  return (
-    <InputWrapper color={color} align={align} isValid={isValid} {...props} />
-  );
-};
+Input.displayName = "Input";
 
 const InputWrapper = styled.input<InputProps>`
   width: 100%;
@@ -35,7 +39,7 @@ const InputWrapper = styled.input<InputProps>`
   font-size: 13px;
   border: 1px solid ${({ theme }) => theme.color.grey50};
   border-radius: 4px;
-  color: ${({ theme }) => theme.color.grey600};
+  color: ${({ theme }) => theme.color.primary};
   background-color: ${({ theme, color }) =>
     color === "white" ? theme.color.white : theme.color.grey50};
   text-align: ${({ align }) => align || "left"};

@@ -18,3 +18,7 @@ export const categories: Category[] = [
     ],
   },
 ];
+
+export const buttonOtions = {
+  auctionStatus: ["없음", "직접 설정"],
+};

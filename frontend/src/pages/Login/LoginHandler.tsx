@@ -23,7 +23,7 @@ export const LoginHandeler = () => {
         //계속 쓸 정보들( ex: 이름) 등은 localStorage에 저장해두자
         localStorage.setItem("name", res.data.account.kakaoName);
         //로그인이 성공하면 이동할 페이지
-        navigate("/main");
+        navigate("/");
       });
     };
     kakaoLogin();

@@ -9,6 +9,7 @@ import ErrorPage from "../pages/Error/ErrorPage";
 import ChatPage from "../pages/Chat/ChatPage";
 import HistoryPage from "../pages/History/HistoryPage";
 import ProfilePage from "../pages/Profile/ProfilePage";
+import { LoginHandeler } from "../pages/Login/LoginHandler";
 
 export default function AppRouter() {
   return (
@@ -16,6 +17,7 @@ export default function AppRouter() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/login/oauth2/code/kakao" element={<LoginHandeler />} />
         <Route path="/errandList" element={<ErrandListPage />} />
         <Route path="/errand/request" element={<ErrandRequestPage />} />
         <Route path="/errand/:errandId" element={<ErrandDetailsPage />} />

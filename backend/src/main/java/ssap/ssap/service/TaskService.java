@@ -27,6 +27,9 @@ public class TaskService {
         Category category = null;
         DetailedItem detailedItem =null;
 
+        //ToDo: User 정보 조회 로직 수행 필요.
+        //
+
         Optional<Category> optionalCategory = categoryRepository.findByCategoryName(createForm.getCategory());
         if (optionalCategory.isPresent()) {
             category = optionalCategory.get();
@@ -49,8 +52,12 @@ public class TaskService {
         task.setJibunAddress(createForm.getJibunAddress());
         task.setDetailedAddress(createForm.getDetailedAddress());
         task.setPreferredGender(createForm.getPreferredGender());
-        task.setStartTime(createForm.getStartTime());
-        task.setEndTime(createForm.getEndTime());
+        if (createForm.getImmediateExecutionStatus().equals(false)) {
+            task.setStartTime(createForm.getStartTime());
+        }
+        // ToDo: 끝나는 시간 비지니스 로직 수행 필요
+        task.setEndTime(createForm.getEstimatedTime());
+
         task.setFee(createForm.getFee());
         task.setAuctionStatus(createForm.getAuctionStatus());
         task.setTermsAgreed(createForm.getTermsAgreed());
@@ -64,13 +71,6 @@ public class TaskService {
 
         TaskAttachment taskAttachment = new TaskAttachment();
         taskAttachment.setFileData(createForm.getFileData());
-
-        //Test User: 레인보우
-        Optional<UserTest> optionalUser = userTestRepository.findByName("쌉가능");
-        if (optionalUser.isPresent()) {
-            user = optionalUser.get();
-        }
-
 
         //Foreign Key Mapping
         task.setUser(user);

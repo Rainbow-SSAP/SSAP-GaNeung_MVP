@@ -17,6 +17,10 @@ public class TaskRequestDto {
     @AllArgsConstructor
     public static class CreateForm {
 
+        @Schema(description = "email", example = "honggildong@gmail.com")
+        @NotBlank
+        private String email;
+
         @Schema(description = "심부름 항목", example = "배달")
         @NotBlank
         private String category;
@@ -33,7 +37,7 @@ public class TaskRequestDto {
         @NotBlank
         private String description;
 
-        //        private String location;
+//        private String location;
 
         @Schema(description = "심부름을 수행할 장소의 도로명 주소", example = "서울특별시 동작구 상도로 369")
         @NotBlank
@@ -51,13 +55,17 @@ public class TaskRequestDto {
         @NotBlank
         private String preferredGender;
 
-        @Schema(description = "심부름 시작 시간", example = "2023-11-14 15:00:00")
+        @Schema(description = "심부름 즉시 수행 여부", example = "false")
+        @NotBlank
+        private Boolean immediateExecutionStatus;
+
+        @Schema(description = "심부름 시작 시간", example = "2023-11-14 15:00:00", defaultValue = "지금 즉시")
         @NotBlank
         private String startTime;
 
-        @Schema(description = "심부름 종료 시간", example = "2023-11-14 17:00:00")
+        @Schema(description = "예상 소요 시간", example = "30분")
         @NotBlank
-        private String endTime;
+        private String estimatedTime;
 
         @Schema(description = "심부름을 수행하기 위한 비용", example = "5000")
         @NotBlank

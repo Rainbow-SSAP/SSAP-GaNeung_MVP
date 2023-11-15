@@ -3,6 +3,7 @@ package ssap.ssap.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ssap.ssap.domain.*;
 import ssap.ssap.dto.TaskRequestDto;
 import ssap.ssap.repository.*;
@@ -19,16 +20,20 @@ public class TaskService {
     private final CategoryRepository categoryRepository;
     private final DetailedItemRepository detailedItemRepository;
     private final TaskAttachmentRepository taskAttachmentRepository;
-    private final UserTestRepository userTestRepository;
+    private final UserRepository userRepository;
+//    private final UserTestRepository userTestRepository;
 
+    @Transactional
     public Task createPost(TaskRequestDto.CreateForm createForm) {
 
-        UserTest user = null;
+        User user = null;
         Category category = null;
         DetailedItem detailedItem =null;
 
-        //ToDo: User 정보 조회 로직 수행 필요.
-        //
+        Optional<User> optionalUser = userRepository.findByEmail(createForm.getEmail());
+        if (optionalUser.isPresent()) {
+            user = optionalUser.get();
+        }
 
         Optional<Category> optionalCategory = categoryRepository.findByCategoryName(createForm.getCategory());
         if (optionalCategory.isPresent()) {

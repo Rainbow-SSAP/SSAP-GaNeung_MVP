@@ -25,7 +25,7 @@ public class ErrandController {
     private final OAuthService oAuthService;
 
     @Autowired
-    public ErrandController(ErrandService errandService, KakaoOAuthService kakaoOAuthService, OAuthService oAuthService) {
+    public ErrandController(ErrandService errandService, OAuthService oAuthService) {
         this.errandService = errandService;
         this.oAuthService = oAuthService;
     }

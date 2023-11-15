@@ -44,7 +44,7 @@ export const Button = (buttonProps: ButtonProps) => {
 
   return (
     <ButtonOuter fixed={fixed}>
-      <ButtonWapper
+      <ButtonWrapper
         size={size}
         color={color}
         selected={selected}
@@ -53,7 +53,7 @@ export const Button = (buttonProps: ButtonProps) => {
         {...restProps}
       >
         {text}
-      </ButtonWapper>
+      </ButtonWrapper>
     </ButtonOuter>
   );
 };
@@ -100,7 +100,7 @@ const ButtonOuter = styled.div<Omit<ButtonProps, "text">>`
     `}
 `;
 
-const ButtonWapper = styled.button<Omit<ButtonProps, "text">>`
+const ButtonWrapper = styled.button<Omit<ButtonProps, "text">>`
   border: none;
   border-radius: 50px;
   font-weight: ${({ theme }) => theme.componentStyle.button.fontWeight};

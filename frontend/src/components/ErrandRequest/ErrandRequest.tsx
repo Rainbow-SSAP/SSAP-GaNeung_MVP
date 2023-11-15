@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Category from "./Category/Category";
 import Title from "./Title/Title";
 import Description from "./Description/Description";
+import PreferredGender from "./PreferredGender/PreferredGender";
 
 export const ErrandRequest = () => {
   return (
@@ -10,6 +11,7 @@ export const ErrandRequest = () => {
       <Category />
       <Title />
       <Description />
+      <PreferredGender />
     </ErrandRequestWarpper>
   );
 };

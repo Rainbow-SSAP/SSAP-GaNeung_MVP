@@ -4,7 +4,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Button } from "../../components/@common/Button/Button";
 import { ErrandRequest } from "../../components/ErrandRequest/ErrandRequest";
 import { ErrandFormData } from "../../types/errand";
-import { categories } from "../../constants/errand";
+import { buttonOtions, categories } from "../../constants/errand";
 
 const ErrandRequestPage = () => {
   const methods = useForm<ErrandFormData>({
@@ -14,6 +14,7 @@ const ErrandRequestPage = () => {
       detailedItem: categories[0].detailedItems
         ? categories[0].detailedItems[0].value
         : "",
+      preferredGender: buttonOtions.preferredGender[0],
     },
   });
 
@@ -28,7 +29,7 @@ const ErrandRequestPage = () => {
   const onSubmit = (data: ErrandFormData) => {
     // 폼 제출 시 실행될 로직
     console.log(data);
-
+    
   };
 
   return (

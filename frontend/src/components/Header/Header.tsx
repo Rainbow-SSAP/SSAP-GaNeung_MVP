@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { headerImage } from "../../assets/headerImages";
 
 export interface HeaderProps {
   title: string;
@@ -10,7 +11,7 @@ export interface HeaderProps {
 // 헤더 컴포넌트
 const Header = ({ title, onBack, onMenu }: HeaderProps) => (
   <HeaderContainer>
-    <BackIcon onClick={onBack}>{"<"}</BackIcon>
+    <BackIcon onClick={onBack}>{headerImage.goback}</BackIcon>
     <Title>{title}</Title>
     <HamburgerIcon onClick={onMenu}>{"≡"}</HamburgerIcon>
   </HeaderContainer>

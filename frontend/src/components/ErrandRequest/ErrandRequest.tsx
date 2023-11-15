@@ -4,6 +4,7 @@ import Category from "./Category/Category";
 import Title from "./Title/Title";
 import Description from "./Description/Description";
 import PreferredGender from "./PreferredGender/PreferredGender";
+import Fee from "./Fee/Fee";
 
 export const ErrandRequest = () => {
   return (
@@ -12,6 +13,7 @@ export const ErrandRequest = () => {
       <Title />
       <Description />
       <PreferredGender />
+      <Fee />
     </ErrandRequestWarpper>
   );
 };

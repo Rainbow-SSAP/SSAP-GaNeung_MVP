@@ -25,7 +25,7 @@ public class TaskRequestDto {
         @NotBlank
         private String category;
 
-        @Schema(description = "심부름 상세 항목", example = "반납")
+        @Schema(description = "심부름 상세 항목", example = "세탁물 배달")
         @NotBlank
         private String detailedItem;
 
@@ -56,14 +56,14 @@ public class TaskRequestDto {
         private String preferredGender;
 
         @Schema(description = "심부름 즉시 수행 여부", example = "false")
-        @NotBlank
+        @NotNull
         private Boolean immediateExecutionStatus;
 
         @Schema(description = "심부름 시작 시간", example = "2023-11-14 15:00:00", defaultValue = "지금 즉시")
         @NotBlank
         private String startTime;
 
-        @Schema(description = "예상 소요 시간", example = "30분")
+        @Schema(description = "예상 소요 시간", example = "01:30")
         @NotBlank
         private String estimatedTime;
 
@@ -72,11 +72,11 @@ public class TaskRequestDto {
         private String fee;
 
         @Schema(description = "경매 진행 여부", example = "true")
-        @NotBlank
+        @NotNull
         private Boolean auctionStatus;
 
         @Schema(description = "약관동의여부", example = "true")
-        @NotBlank
+        @NotNull
         private Boolean termsAgreed;
 
         @Schema(description = "경매의 시작 시간", example = "2023-11-12 13:00:00")

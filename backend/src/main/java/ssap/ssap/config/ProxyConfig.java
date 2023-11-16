@@ -10,7 +10,8 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class ProxyConfig {
-    @Value("${PROXY_HOST:defaultProxyHost}")
+//    @Value("${PROXY_HOST:defaultProxyHost}")
+    @Value("${PROXY_HOST:}")
     private String proxyHost;
 
     @Value("${PROXY_PORT:8080}")

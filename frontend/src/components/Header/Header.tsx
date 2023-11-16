@@ -6,24 +6,52 @@ export interface HeaderProps {
   title: string;
   onBack: () => void;
   onMenu: () => void;
+  alignItems?: "flex-start" | "center" | "flex-end";
+  justifyContent?: "flex-start" | "center" | "space-between" | "flex-end";
+  titleAlign?: "left" | "center" | "right";
 }
 
-// 헤더 컴포넌트
-const Header = ({ title, onBack, onMenu }: HeaderProps) => (
-  <HeaderContainer>
-    <BackIcon src={headerImage.goback} onClick={onBack}></BackIcon>
-    <Title>{title}</Title>
-    <HamburgerIcon src={headerImage.menu} onClick={onMenu}></HamburgerIcon>
-  </HeaderContainer>
-);
+export const Header = (headerProps: HeaderProps) => {
+  const {
+    title,
+    onBack,
+    onMenu,
+    alignItems = "center",
+    justifyContent = "space-between",
+    titleAlign = "center",
+  } = headerProps;
 
-export default Header;
+  return (
+    <HeaderContainer alignItems={alignItems} justifyContent={justifyContent}>
+      <BackIcon src={headerImage.goback} onClick={onBack}></BackIcon>
+      <Title titleAlign={titleAlign}>{title}</Title>
+      <HamburgerIcon src={headerImage.menu} onClick={onMenu}></HamburgerIcon>
+    </HeaderContainer>
+  );
+};
+
+// export const Header = ({
+//   title,
+//   onBack,
+//   onMenu,
+//   alignItems = "center",
+//   justifyContent = "space-between",
+// }: HeaderProps) => (
+//   <HeaderContainer alignItems={alignItems} justifyContent={justifyContent}>
+//     <BackIcon src={headerImage.goback} onClick={onBack}></BackIcon>
+//     <Title>{title}</Title>
+//     <HamburgerIcon src={headerImage.menu} onClick={onMenu}></HamburgerIcon>
+//   </HeaderContainer>
+// );
 
 // 스타일 컴포넌트 정의
-const HeaderContainer = styled.header`
+const HeaderContainer = styled.header<{
+  alignItems: string;
+  justifyContent: string;
+}>`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: ${(props) => props.justifyContent || "space-between"};
+  align-items: ${(props) => props.alignItems || "center"};
   padding: 1rem;
   background: #ececec; // 임시 배경색
 `;
@@ -33,8 +61,9 @@ const BackIcon = styled.img`
   // 뒤로가기 아이콘 스타일
 `;
 
-const Title = styled.h1`
+const Title = styled.h1<{ titleAlign: string }>`
   // 텍스트 스타일
+  text-align: ${(props) => props.titleAlign || "center"};
 `;
 
 const HamburgerIcon = styled.img`

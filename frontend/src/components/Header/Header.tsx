@@ -11,9 +11,9 @@ export interface HeaderProps {
 // 헤더 컴포넌트
 const Header = ({ title, onBack, onMenu }: HeaderProps) => (
   <HeaderContainer>
-    <BackIcon onClick={onBack}>{headerImage.goback}</BackIcon>
+    <BackIcon src={headerImage.goback} onClick={onBack}></BackIcon>
     <Title>{title}</Title>
-    <HamburgerIcon onClick={onMenu}>{"≡"}</HamburgerIcon>
+    <HamburgerIcon src={headerImage.menu} onClick={onMenu}></HamburgerIcon>
   </HeaderContainer>
 );
 
@@ -28,7 +28,8 @@ const HeaderContainer = styled.header`
   background: #ececec; // 임시 배경색
 `;
 
-const BackIcon = styled.div`
+const BackIcon = styled.img`
+  cursor: pointer;
   // 뒤로가기 아이콘 스타일
 `;
 
@@ -36,8 +37,9 @@ const Title = styled.h1`
   // 텍스트 스타일
 `;
 
-const HamburgerIcon = styled.div`
+const HamburgerIcon = styled.img`
   // 햄버거 메뉴 아이콘 스타일
+  cursor: pointer;
 `;
 
 // 헤더 컴포넌트의 Props 타입 정의

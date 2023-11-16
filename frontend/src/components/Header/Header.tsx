@@ -48,10 +48,13 @@ export const Header = (headerProps: HeaderProps) => {
 const HeaderContainer = styled.header<{
   alignItems: string;
   justifyContent: string;
+  titleAlign: string;
 }>`
   display: flex;
   justify-content: ${(props) => props.justifyContent || "space-between"};
   align-items: ${(props) => props.alignItems || "center"};
+  text-align: ${(props) => props.titleAlign || "center"};
+
   padding: 1rem;
   background: #ececec; // 임시 배경색
 `;

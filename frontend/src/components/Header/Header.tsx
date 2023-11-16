@@ -62,7 +62,7 @@ const BackIcon = styled.img`
 `;
 
 const Title = styled.h1<{ titleAlign: string }>`
-  // 텍스트 스타일
+  // 텍스트 스타일 TODO 헤더 타이틀 위치 변경 가능하게 수정
   text-align: ${(props) => props.titleAlign || "center"};
 `;
 

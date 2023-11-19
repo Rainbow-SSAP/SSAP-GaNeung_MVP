@@ -8,12 +8,14 @@ import Fee from "./Fee/Fee";
 import AuctionStatus from "./AuctionStatus/AuctionStatus";
 import Terms from "./Terms/Terms";
 import Timing from "./Timing/Timing";
+import Location from "./Location/Location";
 
 export const ErrandRequest = () => {
   return (
     <ErrandRequestWarpper>
       <Category />
       <Title />
+      <Location />
       <Description />
       <PreferredGender />
       <Timing />

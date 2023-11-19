@@ -15,7 +15,8 @@ const ErrandRequestPage = () => {
         ? categories[0].detailedItems[0].value
         : "",
       preferredGender: buttonOtions.preferredGender[0],
-      auctionStatus: buttonOtions.auctionStatus[0],
+      immediateExecutionStatus: false,
+      auctionStatus: false,
     },
   });
 
@@ -30,7 +31,7 @@ const ErrandRequestPage = () => {
   const onSubmit = (data: ErrandFormData) => {
     // 폼 제출 시 실행될 로직
     console.log(data);
-    
+
   };
 
   return (

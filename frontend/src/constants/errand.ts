@@ -21,5 +21,6 @@ export const categories: Category[] = [
 
 export const buttonOtions = {
   preferredGender: ["없음", "남성", "여성"],
+  timing: ["지금 즉시", "일정 예약"],
   auctionStatus: ["없음", "직접 설정"],
 };

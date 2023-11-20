@@ -2,17 +2,14 @@ package ssap.ssap.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ssap.ssap.dto.DetailItemDTO;
-import ssap.ssap.service.DetailItemService;
+import ssap.ssap.dto.DetailedItemDTO;
+import ssap.ssap.service.DetailedItemService;
 import ssap.ssap.service.OAuthService;
 
 import java.util.List;
@@ -21,12 +18,12 @@ import java.util.List;
 @Slf4j
 @RequestMapping("/api/categories")
 @Tag(name = "카테고리 상세 목록 조회 입니다.", description = "카테고리 상세 목록 조회 API EndPoint 입니다.")
-public class DetailItemController {
-    private final DetailItemService detailItemService;
+public class DetailedItemController {
+    private final DetailedItemService detailItemService;
     private final OAuthService oAuthService;
 
     @Autowired
-    public DetailItemController(DetailItemService detailItemService, OAuthService oAuthService) {
+    public DetailedItemController(DetailedItemService detailItemService, OAuthService oAuthService) {
         this.detailItemService = detailItemService;
         this.oAuthService = oAuthService;
     }
@@ -44,7 +41,7 @@ public class DetailItemController {
             String accessToken = authorizationHeader.substring("Bearer ".length());
             boolean isValid = oAuthService.isAccessTokenValid(accessToken);
         if (isValid) {
-            List<DetailItemDTO> detailItems = detailItemService.findAllDetailItemsByCategoryId(categoryId);
+            List<DetailedItemDTO> detailItems = detailItemService.findAllDetailItemsByCategoryId(categoryId);
             return ResponseEntity.ok(detailItems);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("액세스 토큰이 유효하지 않거나 만료되었습니다.");

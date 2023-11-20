@@ -30,3 +30,4 @@ public class DetailedItem {
     public DetailedItem(String detailedItemName) {
         this.detailedItemName = detailedItemName;
     }
+}

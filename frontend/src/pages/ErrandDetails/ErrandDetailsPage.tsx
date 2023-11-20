@@ -3,6 +3,8 @@ import { Button } from "../../components/@common/Button/Button";
 import BottomSheet from "../../components/bottomSheet/BottomSheet";
 import Content from "../../components/bottomSheet/Content";
 import { ToastContainer } from "react-toastify";
+import { Header } from "../../components/Header/Header";
+import KakaoMap from "./KakaoMap";
 
 const ErrandDetailsPage = () => {
   const [open, setOpen] = useState(false);
@@ -13,9 +15,26 @@ const ErrandDetailsPage = () => {
     console.log("클릭!!");
   };
 
+  const handleBack = () => {
+    console.log("뒤로가기 로직 구현 //TODO");
+  };
+
+  const handleMenu = () => {
+    console.log("메뉴 창 오픈 (오른쪽 애니메이션으로) //TODO");
+  };
+
   return (
     <div>
       {/* 심부름 상세 페이지 보이는 컴포넌트 추가 TODO */}
+      <Header
+        title="상세 페이지"
+        onBack={handleBack}
+        onMenu={handleMenu}
+        alignItems="center"
+        justifyContent="space-between"
+        titleAlign="center"
+      />
+      <KakaoMap />
       <Button
         text="✋ 심부름 지원하기"
         size="large"

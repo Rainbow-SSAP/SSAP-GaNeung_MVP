@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface DetailedItemRepository extends JpaRepository<DetailedItem, Long> {
-    //    Optional<DetailedItem> findByDetailedItemName(String detailedItemName);
+//    Optional<DetailedItem> findByDetailedItemName(String detailedItemName);
     List<DetailedItem> findByCategory_Id(Long categoryId);
 }

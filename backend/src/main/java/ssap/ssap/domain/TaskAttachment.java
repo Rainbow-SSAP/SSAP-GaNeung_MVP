@@ -11,17 +11,18 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "categories")
-public class Category {
-    //ToDo: 테이블 필드 검증 추가 필요
+@Table(name = "task_attachments")
+public class TaskAttachment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private Long id;
 
     @Column
-    private String categoryName;
+    private String fileData;
 
-    public Category(String categoryName) {
-        this.categoryName = categoryName;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id")
+    private Task task;
+}

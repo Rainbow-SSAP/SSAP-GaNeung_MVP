@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class DetailedItemDTO {
     private Long itemId;
-    private String name;
+    private String detailedItemName;
 
-    public DetailedItemDTO(Long itemId, String name) {
+    public DetailedItemDTO(Long itemId, String detailedItemName) {
         this.itemId = itemId;
-        this.name = name;
+        this.detailedItemName = detailedItemName;
     }
 }

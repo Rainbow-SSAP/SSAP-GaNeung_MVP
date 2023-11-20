@@ -3,7 +3,7 @@ package ssap.ssap.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ssap.ssap.dto.Category;
+import ssap.ssap.domain.Category;
 import ssap.ssap.repository.CategoryRepository;
 
 import java.util.List;

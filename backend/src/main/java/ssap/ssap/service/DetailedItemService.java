@@ -18,14 +18,14 @@ public class DetailedItemService {
     }
 
     public List<DetailedItemDTO> findAllDetailItemsByCategoryId(Long categoryId) {
-        List<DetailedItem> detailItems = detailItemRepository.findByCategoryId(categoryId);
+        List<DetailedItem> detailItems = detailItemRepository.findByCategory_Id(categoryId);
         return detailItems.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
     private DetailedItemDTO convertToDTO(DetailedItem detailItem) {
-        return new DetailedItemDTO(detailItem.getId(), detailItem.getName());
+        return new DetailedItemDTO(detailItem.getId(), detailItem.getDetailedItemName());
     }
 }
 

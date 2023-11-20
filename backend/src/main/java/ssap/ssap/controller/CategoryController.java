@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ssap.ssap.dto.Category;
+import ssap.ssap.domain.Category;
 import ssap.ssap.service.CategoryService;
 import ssap.ssap.service.OAuthService;
 

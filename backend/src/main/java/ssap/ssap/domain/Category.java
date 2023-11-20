@@ -11,23 +11,18 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "detailed_items")
-public class DetailedItem {
+@Table(name = "categories")
+public class Category {
     //ToDo: 테이블 필드 검증 추가 필요
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
 
     @Column
-    private String detailedItemName;
+    private String categoryName;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-
-    public DetailedItem(String detailedItemName) {
-        this.detailedItemName = detailedItemName;
+    public Category(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

@@ -22,7 +22,11 @@ export const Header = (headerProps: HeaderProps) => {
   } = headerProps;
 
   return (
-    <HeaderContainer alignItems={alignItems} justifyContent={justifyContent}>
+    <HeaderContainer
+      alignItems={alignItems}
+      justifyContent={justifyContent}
+      titleAlign={titleAlign}
+    >
       <BackIcon src={headerImage.goback} onClick={onBack}></BackIcon>
       <Title titleAlign={titleAlign}>{title}</Title>
       <HamburgerIcon src={headerImage.menu} onClick={onMenu}></HamburgerIcon>
@@ -48,7 +52,7 @@ export const Header = (headerProps: HeaderProps) => {
 const HeaderContainer = styled.header<{
   alignItems: string;
   justifyContent: string;
-  titleAlign: string;
+  titleAlign?: string;
 }>`
   display: flex;
   justify-content: ${(props) => props.justifyContent || "space-between"};

@@ -8,16 +8,16 @@ export interface ErrandFormData {
   detailedAddress: string; // 상세 주소
   description: string; // 요청 내용
   preferredGender: string; // 선호 성별
-  timing: string; // 일시
+  immediateExecutionStatus: boolean; // 일시
   startTime: string; // 시작 시간
   endTime: string; // 종료 시간
-  fee: number; // 비용
-  auctionStatus: string; // 경매 진행 여부
-  termsAgreed: string; // 약관동의여부
-  auctionDuration: string; // 경매 진행 시간
+  estimatedTime: string; // 예상 소요 시간
+  fee: string; // 비용
+  auctionStatus: boolean; // 경매 진행 여부
   auctionStartTime: string; // 경매 시작 시간
   auctionEndTime: string; // 경매 종료 시간
-  fileData: string; // 이미지 파일
+  termsAgreed: boolean; // 약관동의여부
+  fileData: FileList; // 이미지 파일 (여러개 처리)
 }
 
 export interface Category {

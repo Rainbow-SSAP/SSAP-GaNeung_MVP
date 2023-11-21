@@ -4,9 +4,13 @@ import styled, { css } from "styled-components";
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
-export const Textarea = ({ ...restProps }: TextareaProps) => {
-  return <TextareaWrapper {...restProps} />;
-};
+export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+  (restProps, ref) => {
+    return <TextareaWrapper ref={ref} {...restProps} />;
+  },
+);
+
+Textarea.displayName = "Textarea";
 
 const TextareaWrapper = styled.textarea`
   width: 100%;

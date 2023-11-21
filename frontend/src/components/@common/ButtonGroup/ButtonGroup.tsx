@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../@common/Button/Button";
+import { Button } from "../Button/Button";
 import styled from "styled-components";
 
 export interface ButtonGroupProps {
@@ -36,7 +36,7 @@ export const ButtonGroup = (buttonGroupProps: ButtonGroupProps) => {
     };
 
   return (
-    <ButtonGroupWapper>
+    <ButtonGroupWrapper>
       {options.map((option) => (
         <Button
           key={option}
@@ -48,11 +48,11 @@ export const ButtonGroup = (buttonGroupProps: ButtonGroupProps) => {
           {...props}
         />
       ))}
-    </ButtonGroupWapper>
+    </ButtonGroupWrapper>
   );
 };
 
-const ButtonGroupWapper = styled.div`
+const ButtonGroupWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;

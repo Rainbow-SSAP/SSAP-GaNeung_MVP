@@ -11,13 +11,13 @@ export interface CheckboxProps
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
-    return <CheckboxWarpper type="checkbox" ref={ref} {...props} />;
+    return <CheckboxWrapper type="checkbox" ref={ref} {...props} />;
   },
 );
 
 Checkbox.displayName = "Checkbox";
 
-const CheckboxWarpper = styled.input`
+const CheckboxWrapper = styled.input`
   margin-right: 6px;
   width: 16px;
   height: 16px;

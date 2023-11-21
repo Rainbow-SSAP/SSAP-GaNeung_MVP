@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ssap.ssap.dto.ErrandDTO;
 import ssap.ssap.service.ErrandService;
-import ssap.ssap.service.KakaoOAuthService;
 import ssap.ssap.service.OAuthService;
 
 @RestController

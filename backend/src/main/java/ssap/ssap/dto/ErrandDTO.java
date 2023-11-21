@@ -10,16 +10,18 @@ public class ErrandDTO {
     private Long taskId;
     private String title;
     private String description;
-    private String creationTime;
-    private String auctionEndTime;
+    private String fee;
+    private String district;
+    private String startTime;
+    private String endTime;
     private String thumbnailUrl;
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     // LocalDateTime을 받아 String으로 변환하여 저장
-    public void setCreationTime(LocalDateTime creationTime) {
-        this.creationTime = creationTime != null ? creationTime.format(formatter) : null;
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime != null ? startTime.format(formatter) : null;
     }
-    public void setAuctionEndTime(LocalDateTime auctionEndTime) {
-        this.auctionEndTime = auctionEndTime != null ? auctionEndTime.format(formatter) : null;
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime != null ? endTime.format(formatter) : null;
     }
 }

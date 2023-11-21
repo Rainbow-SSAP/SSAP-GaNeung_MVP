@@ -13,17 +13,23 @@ public class ErrandEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "title")
     private String title;
 
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "creation_time", nullable = false)
-    private LocalDateTime creationTime;
+    @Column(name = "fee")
+    private String fee;
 
-    @Column(name = "auction_end_time", nullable = false)
-    private LocalDateTime auctionEndTime;
+    @Column(name = "jibunAddress")
+    private String district;
+
+    @Column
+    private LocalDateTime startTime;
+
+    @Column
+    private LocalDateTime endTime;
 
     @OneToOne(mappedBy = "errand", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private ThumbNailEntity attachment;

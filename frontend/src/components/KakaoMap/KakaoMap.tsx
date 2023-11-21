@@ -18,7 +18,7 @@ function KakaoMap() {
   const jibunAddr = useRecoilValue(jibunAddrState);
   const { setValue } = useFormContext();
 
-  const KAKAO_API = process.env.REACT_APP_KAKAO_JAVASCRIPT_API_KEY;
+  const KAKAO_API = process.env.REACT_APP_JAVASCRIPT_API_KEY;
 
   useEffect(() => {
     // 스크립트 로딩

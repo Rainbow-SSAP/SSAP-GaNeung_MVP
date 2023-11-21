@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ErrandFormData } from "../types/errand";
 
-const APP_URL = process.env.REACT_APP_JAVASCRIPT_API_KEY;
+const APP_URL = process.env.REACT_APP_URL;
 const accessToken = process.env.REACT_APP_ACCESSTOKEN;
 const userEmail = "ssap.rainbow@gmail.com";
 
@@ -13,7 +13,7 @@ export const ErrandRequestPost = async (errandFormData: ErrandFormData) => {
   };
   console.log("ErrandRequestPost", formData);
   try {
-    const response = await axios.post(`${APP_URL}/api/request`, formData, {
+    const response = await axios.post(`/api/request`, formData, {
       headers: {
         // Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",

@@ -31,7 +31,6 @@ const ErrandRequestPage = () => {
   const onSubmit = (data: ErrandFormData) => {
     // 폼 제출 시 실행될 로직
     console.log(data);
-
   };
 
   return (

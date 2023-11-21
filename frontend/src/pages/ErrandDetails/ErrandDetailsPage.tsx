@@ -5,6 +5,11 @@ import Content from "../../components/bottomSheet/Content";
 import { ToastContainer } from "react-toastify";
 import { Header } from "../../components/Header/Header";
 import KakaoMap from "./KakaoMap";
+import Title from "./Title";
+import ErrandFeeContainer from "./ErrandFeeContainer";
+import ErrandDate from "./ErrandDate";
+import ErrandDetail from "./ErrandDetail";
+import UserProfile from "./UserProfile";
 
 const ErrandDetailsPage = () => {
   const [open, setOpen] = useState(false);
@@ -31,10 +36,15 @@ const ErrandDetailsPage = () => {
         onBack={handleBack}
         onMenu={handleMenu}
         alignItems="center"
-        justifyContent="space-between"
+        justifycontent="space-between"
         titleAlign="center"
       />
       <KakaoMap />
+      <Title />
+      <ErrandFeeContainer />
+      <ErrandDate />
+      <ErrandDetail />
+      <UserProfile />
       <Button
         text="✋ 심부름 지원하기"
         size="large"

@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Label } from "../@common/Label/Label";
-import { Input, InputProps } from "../@common/Input/Input";
-import { Button, ButtonProps } from "../@common/Button/Button";
+import { Label } from "../Label/Label";
+import { Input, InputProps } from "../Input/Input";
+import { Button, ButtonProps } from "../Button/Button";
 import { ButtonGroup, ButtonGroupProps } from "../ButtonGroup/ButtonGroup";
-import { Checkbox, CheckboxProps } from "../@common/Checkbox/Checkbox";
-import { Select, SelectProps } from "../@common/Select/Select";
-import { Textarea, TextareaProps } from "../@common/Textarea/Textarea";
+import { Checkbox, CheckboxProps } from "../Checkbox/Checkbox";
+import { Select, SelectProps } from "../Select/Select";
+import { Textarea, TextareaProps } from "../Textarea/Textarea";
 
 interface FormItemProps {
   /*

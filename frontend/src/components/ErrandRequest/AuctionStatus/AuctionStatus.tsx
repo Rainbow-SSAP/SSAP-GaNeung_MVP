@@ -1,17 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { FormItem } from "../../FormItem/FormItem";
+import { FormItem } from "../../@common/FormItem/FormItem";
 import { buttonOtions } from "../../../constants/errand";
 import ErrorMessage from "../../@common/Error/ErrorMessage";
+import DateInput from "../DateInput/DateInput";
+import { useRecoilState } from "recoil";
+import { auctionTimeState } from "../../../recoil/atoms/errand";
+import { format } from "date-fns";
 
 export default function AuctionStatus() {
   const {
-    register,
+    setValue,
     control,
     watch,
     formState: { errors, touchedFields },
   } = useFormContext();
   const auctionStatus = watch("auctionStatus");
+  const [{ startDate, endDate }, setAuctionTime] =
+    useRecoilState(auctionTimeState);
+
+  useEffect(() => {
+    if (auctionStatus) {
+      // 날짜 타입 변환
+      const formattedStartDate = format(startDate, "yyyy-MM-dd HH:mm");
+      const formattedEndDate = format(endDate, "yyyy-MM-dd HH:mm");
+
+      setValue("auctionStartTime", formattedStartDate);
+      setValue("auctionEndTime", formattedEndDate);
+    }
+  }, [startDate, endDate, auctionStatus]);
+
   return (
     <div>
       {" "}
@@ -34,32 +52,15 @@ export default function AuctionStatus() {
       />
       {auctionStatus && (
         <>
-          <FormItem
-            type="input"
-            inputProps={{
-              ...register("auctionStartTime", {
-                required: "시작 시간을 입력해주세요.",
-              }),
-              type: "datetime-loca",
-              placeholder: "YYYY-MM-DDTHH:mm",
-              isValid:
-                !errors.auctionStartTime && touchedFields.auctionStartTime,
-            }}
-          />
-          {errors.auctionStartTime &&
-            typeof errors.auctionStartTime.message === "string" && (
-              <ErrorMessage message={errors.auctionStartTime.message} />
-            )}
-          <FormItem
-            type="input"
-            inputProps={{
-              ...register("auctionEndTime", {
-                required: "마감 시간을 입력해주세요.",
-              }),
-              type: "datetime-loca",
-              placeholder: "YYYY-MM-DDTHH:mm",
-              isValid: !errors.auctionEndTime && touchedFields.auctionEndTime,
-            }}
+          <DateInput
+            startDate={startDate}
+            endDate={endDate}
+            setStartDate={(date) =>
+              setAuctionTime((prevState) => ({ ...prevState, startDate: date }))
+            }
+            setEndDate={(date) =>
+              setAuctionTime((prevState) => ({ ...prevState, endDate: date }))
+            }
           />
           {errors.auctionEndTime &&
             typeof errors.auctionEndTime.message === "string" && (

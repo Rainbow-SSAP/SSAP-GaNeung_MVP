@@ -18,3 +18,15 @@ export const jibunAddrState = atom({
   key: "jibunAddrState",
   default: "",
 });
+
+// 심부름 시간을 위한 상태
+export const errandTimeState = atom({
+  key: "errandTimeState", // 고유한 키
+  default: { startDate: new Date(), endDate: new Date() },
+});
+
+// 경매 진행 시간을 위한 상태
+export const auctionTimeState = atom({
+  key: "auctionTimeState",
+  default: { startDate: new Date(), endDate: new Date() },
+});

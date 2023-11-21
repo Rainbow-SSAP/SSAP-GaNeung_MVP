@@ -1,6 +1,6 @@
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { FormItem } from "../../FormItem/FormItem";
+import { FormItem } from "../../@common/FormItem/FormItem";
 import { buttonOtions } from "../../../constants/errand";
 
 export default function PreferredGender() {

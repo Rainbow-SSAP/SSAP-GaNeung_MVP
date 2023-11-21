@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { FormItem } from "../../FormItem/FormItem";
+import { FormItem } from "../../@common/FormItem/FormItem";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { detailedItemState } from "../../../recoil/atoms/errand";
 import { categories } from "../../../constants/errand";

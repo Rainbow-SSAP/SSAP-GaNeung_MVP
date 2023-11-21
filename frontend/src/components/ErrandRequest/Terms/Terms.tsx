@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FormItem } from "../../FormItem/FormItem";
+import { FormItem } from "../../@common/FormItem/FormItem";
 import { useFormContext } from "react-hook-form";
 
 function Terms() {

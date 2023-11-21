@@ -13,7 +13,7 @@ export interface ErrandFormData {
   startTime: string; // 시작 시간
   endTime: string; // 종료 시간
   estimatedTime: string; // 예상 소요 시간
-  fee: number; // 비용
+  fee: string; // 비용
   auctionStatus: boolean; // 경매 진행 여부
   auctionStartTime: string; // 경매 시작 시간
   auctionEndTime: string; // 경매 종료 시간

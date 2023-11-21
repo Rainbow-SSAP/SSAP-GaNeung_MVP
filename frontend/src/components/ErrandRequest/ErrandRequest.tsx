@@ -9,6 +9,7 @@ import AuctionStatus from "./AuctionStatus/AuctionStatus";
 import Terms from "./Terms/Terms";
 import Timing from "./Timing/Timing";
 import Location from "./Location/Location";
+import EstimatedTime from "./EstimatedTime/EstimatedTime";
 
 export const ErrandRequest = () => {
   return (
@@ -19,6 +20,7 @@ export const ErrandRequest = () => {
       <Description />
       <PreferredGender />
       <Timing />
+      <EstimatedTime />
       <Fee />
       <AuctionStatus />
       <Terms />

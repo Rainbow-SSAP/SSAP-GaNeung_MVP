@@ -1,5 +1,5 @@
 import React from "react";
-import { FormItem } from "../../FormItem/FormItem";
+import { FormItem } from "../../@common/FormItem/FormItem";
 import { useFormContext } from "react-hook-form";
 import KakaoMap from "../../KakaoMap/KakaoMap";
 

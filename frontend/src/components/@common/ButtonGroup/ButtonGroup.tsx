@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../@common/Button/Button";
+import { Button } from "../Button/Button";
 import styled from "styled-components";
 
 export interface ButtonGroupProps {

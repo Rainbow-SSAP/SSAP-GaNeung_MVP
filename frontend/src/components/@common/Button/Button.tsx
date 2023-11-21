@@ -1,7 +1,13 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-interface ButtonWrapperProps {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  // 기본 HTML button 속성 확장
+  /*
+   * 버튼 안에 내용을 설정합니다.
+   */
+  text: string;
   /*
    * 버튼 크기를 설정합니다.
    */
@@ -24,17 +30,6 @@ interface ButtonWrapperProps {
   selected?: boolean;
 }
 
-interface ButtonProps extends ButtonWrapperProps {
-  /*
-   * 버튼 안에 내용을 설정합니다.
-   */
-  text: string;
-  /*
-   * 클릭 이벤트.
-   */
-  onClick?: () => void;
-}
-
 export const Button = (buttonProps: ButtonProps) => {
   const {
     text,
@@ -42,20 +37,23 @@ export const Button = (buttonProps: ButtonProps) => {
     color = "primary",
     fixed,
     selected,
-    ...props
+    onClick,
+    disabled,
+    ...restProps
   } = buttonProps;
 
   return (
-    <ButtonOuter>
-      <ButtonWapper
+    <ButtonOuter fixed={fixed}>
+      <ButtonWrapper
         size={size}
         color={color}
-        fixed={fixed}
         selected={selected}
-        {...props}
+        onClick={onClick}
+        disabled={disabled}
+        {...restProps}
       >
         {text}
-      </ButtonWapper>
+      </ButtonWrapper>
     </ButtonOuter>
   );
 };
@@ -91,7 +89,7 @@ const ButtonColors = {
   `,
 };
 
-const ButtonOuter = styled.div<ButtonWrapperProps>`
+const ButtonOuter = styled.div<Omit<ButtonProps, "text">>`
   width: 100%;
   ${({ fixed }) =>
     fixed &&
@@ -102,7 +100,7 @@ const ButtonOuter = styled.div<ButtonWrapperProps>`
     `}
 `;
 
-const ButtonWapper = styled.button<ButtonWrapperProps>`
+const ButtonWrapper = styled.button<Omit<ButtonProps, "text">>`
   border: none;
   border-radius: 50px;
   font-weight: ${({ theme }) => theme.componentStyle.button.fontWeight};

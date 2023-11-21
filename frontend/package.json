@@ -17,6 +17,7 @@
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.4",
     "react": "^18.2.0",
+    "react-cookie": "^6.1.1",
     "react-datepicker": "^4.21.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.48.2",

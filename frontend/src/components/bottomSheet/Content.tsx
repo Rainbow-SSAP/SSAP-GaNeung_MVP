@@ -12,21 +12,17 @@ const Content = ({ setIsOpen }) => {
   const notify = () => toast("입찰에 성공하였습니다");
   //TODO 입찰에 실패했을 경우 추후에 추가
 
-  // const handleBidClick = () => {
-  //   console.log("입찰하기 버튼 클릭!");
-  //   setToast(true);
-  //   setTimeout(() => {
-  //     setToast(false); //TODO 토스트 알림과 바텀시트 따로 구분해야함. 현재 바텀시트내에 토스트 알림이 같이 나오고 있음
-  //     setIsOpen(false); //TODO 3초후에 닫히는 것이 아닌 바로 닫히면서 토스트알림이 뜨게 변경 예정
-  //   }, 3000);
-  // };
-
   const validateInputChange = (event) => {
     const value = event.target.value;
 
     if (value === "" || /^[0-9\b]+$/.test(value)) {
       setBidAmount(value);
     }
+  };
+
+  const bidBtnClick = () => {
+    notify();
+    setIsOpen(false);
   };
 
   //TODO 현재입찰가보다 높은 가격으로 설정하고 버튼 클릭 시 오류 발생 추후 심부름 요청서와 상태공유로 추가
@@ -64,20 +60,8 @@ const Content = ({ setIsOpen }) => {
           size="large"
           color="primary"
           text="💓 입찰하기"
-          onClick={notify}
+          onClick={bidBtnClick}
         />
-        <ToastContainer
-          position="top-right" // 알람 위치 지정
-          autoClose={3000} // 자동 off 시간
-          hideProgressBar={false} // 진행시간바 숨김
-          closeOnClick // 클릭으로 알람 닫기
-          rtl={false} // 알림 좌우 반전
-          pauseOnFocusLoss // 화면을 벗어나면 알람 정지
-          draggable // 드래그 가능
-          pauseOnHover // 마우스를 올리면 알람 정지
-          theme="light"
-        />
-        {/* {toast && <ToastContext message="입찰이 완료되었습니다" />} */}
       </ContentWrapper>
     </>
   );

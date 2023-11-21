@@ -22,7 +22,7 @@ export const Header = (headerProps: HeaderProps) => {
   } = headerProps;
 
   return (
-    <HeaderContainer alignItems={alignItems} justifyContent={justifyContent}>
+    <HeaderContainer alignItems={alignItems} justifyContent={justifycontent}>
       <BackIconAndPage>
         <BackIcon src={headerImage.goback} onClick={onBack}></BackIcon>
         <Title titleAlign={titleAlign}>{title}</Title>
@@ -53,8 +53,7 @@ const HeaderContainer = styled.header<{
   titleAlign?: string;
 }>`
   display: flex;
-  width: 37.5rem;
-  height: 4.8rem;
+  width: 100%;
   padding: 1rem 2rem;
   justify-content: ${(props) => props.justifyContent || "space-between"};
   align-items: ${(props) => props.alignItems || "center"};

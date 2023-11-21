@@ -7,7 +7,6 @@ export interface ErrandFormData {
   jibunAddress: string; // 지번 주소
   detailedAddress: string; // 상세 주소
   description: string; // 요청 내용
-  fileData: string; // 이미지 파일
   preferredGender: string; // 선호 성별
   immediateExecutionStatus: boolean; // 일시
   startTime: string; // 시작 시간
@@ -18,6 +17,7 @@ export interface ErrandFormData {
   auctionStartTime: string; // 경매 시작 시간
   auctionEndTime: string; // 경매 종료 시간
   termsAgreed: boolean; // 약관동의여부
+  fileData: FileList; // 이미지 파일 (여러개 처리)
 }
 
 export interface Category {

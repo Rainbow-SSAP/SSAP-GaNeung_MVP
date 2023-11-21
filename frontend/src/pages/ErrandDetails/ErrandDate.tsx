@@ -19,6 +19,7 @@ const Layout = styled.div`
   align-items: flex-start;
   gap: 1rem;
   align-self: stretch;
+  border-bottom: 1px solid #e2e2e2;
 `;
 
 const Date = styled.h1`

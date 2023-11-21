@@ -24,7 +24,8 @@ const ErrandContainer = styled.div`
   justify-content: center;
   align-items: flex-start;
   align-self: stretch;
-  border-right: 1px solid #f4f4f4;
+  border-top: 1px solid #f4f4f4;
+  border-bottom: 1px solid #f4f4f4;
 `;
 
 const ErrandFeeSection = styled.div`
@@ -34,6 +35,7 @@ const ErrandFeeSection = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
+  border-right: 1px solid #f4f4f4;
 `;
 
 const ErrandFeeTitle = styled.h1`
@@ -57,7 +59,7 @@ const PayMethodContainer = styled.div`
   width: 17.7rem;
   padding: 2rem 0rem;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 1rem;
 `;
 

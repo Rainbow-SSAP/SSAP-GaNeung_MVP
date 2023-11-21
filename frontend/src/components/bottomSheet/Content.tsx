@@ -69,6 +69,7 @@ export default Content;
 const ContentWrapper = styled.div`
   padding: 2rem;
   position: relative;
+  flex-shrink: 0;
 `;
 
 const Title = styled.h2`

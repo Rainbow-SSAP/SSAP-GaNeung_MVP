@@ -1,4 +1,4 @@
-import accompany_parenting from "./accompany-parenting.png";
+import accompany_parenting from "./accompany_parenting.png";
 import agency from "./agency.png";
 import bug from "./bug.png";
 import cleaning from "./cleaning.png";

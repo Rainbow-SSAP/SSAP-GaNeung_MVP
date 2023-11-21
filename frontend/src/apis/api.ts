@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Axios 인스턴스 생성
 const api = axios.create({
-  baseURL: "https://your-api-url.com",
+  baseURL: "https://k042b6e5a7030a.user-app.krampoline.com",
 });
 
 // Request 인터셉터 추가

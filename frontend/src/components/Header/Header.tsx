@@ -7,7 +7,7 @@ export interface HeaderProps {
   onBack: () => void;
   onMenu: () => void;
   alignItems?: "flex-start" | "center" | "flex-end";
-  justifyContent?: "flex-start" | "center" | "space-between" | "flex-end";
+  justifycontent?: "flex-start" | "center" | "space-between" | "flex-end";
   titleAlign?: "left" | "center" | "right";
 }
 
@@ -17,14 +17,14 @@ export const Header = (headerProps: HeaderProps) => {
     onBack,
     onMenu,
     alignItems = "center",
-    justifyContent = "space-between",
+    justifycontent = "space-between",
     titleAlign = "center",
   } = headerProps;
 
   return (
     <HeaderContainer
       alignItems={alignItems}
-      justifyContent={justifyContent}
+      justifycontent={justifycontent}
       titleAlign={titleAlign}
     >
       <BackIcon src={headerImage.goback} onClick={onBack}></BackIcon>
@@ -51,11 +51,11 @@ export const Header = (headerProps: HeaderProps) => {
 // 스타일 컴포넌트 정의
 const HeaderContainer = styled.header<{
   alignItems: string;
-  justifyContent: string;
+  justifycontent: string;
   titleAlign?: string;
 }>`
   display: flex;
-  justify-content: ${(props) => props.justifyContent || "space-between"};
+  justify-content: ${(props) => props.justifycontent || "space-between"};
   align-items: ${(props) => props.alignItems || "center"};
   text-align: ${(props) => props.titleAlign || "center"};
 

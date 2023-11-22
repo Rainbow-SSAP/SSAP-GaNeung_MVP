@@ -13,14 +13,13 @@ export const ErrandRequestPost = async (errandFormData: ErrandFormData) => {
   };
   console.log("ErrandRequestPost", formData);
   try {
-    const response = await axios.post(`/api/request`, formData, {
+    const response = await axios.post(`${APP_URL}/api/request`, formData, {
       headers: {
-        // Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-        // TODO 이미지 파일 타입 보낼 때 수정 필요
-        // 현재 api 호출시 multipart 타입을 지원하지 않음..
-        // "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${accessToken}`, // TODO 로컬 테스트용
+        "Content-Type": "multipart/form-data",
       },
+      // TODO 이미지 파일 타입 보낼 때 수정 필요
+      // 현재 api 호출시 multipart 타입을 지원하지 않음.. 및 api multipart/form-data으로 변경
     });
     return response.data;
   } catch (error) {

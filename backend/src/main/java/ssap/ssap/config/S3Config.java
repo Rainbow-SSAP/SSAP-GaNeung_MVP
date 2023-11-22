@@ -24,8 +24,7 @@ public class S3Config {
     @Value("${AWS_SECRET_ACCESS_KEY:defaultSecretKey}")
     private String secretKey;
 
-//    @Value("${PROXY_HOST:defaultProxyHost}")
-    @Value("${PROXY_HOST:}")
+    @Value("${PROXY_HOST:defaultProxyHost}")
     private String proxyHost;
 
     @Value("${PROXY_PORT:8080}")

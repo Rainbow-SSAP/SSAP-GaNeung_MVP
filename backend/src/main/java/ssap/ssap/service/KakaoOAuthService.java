@@ -63,28 +63,55 @@ public class KakaoOAuthService implements OAuthService {
     public LoginResponseDto kakaoLogin(String provider, String code, HttpServletResponse response) {
         OAuthDTO oauthInfo = requestAccessToken(code);
 
-        OAuthDTO userInfo = fetchUserInfo(oauthInfo.getAccessToken());
+        try {
+            OAuthDTO userInfo = fetchUserInfo(oauthInfo.getAccessToken());
 
-        LoginResponseDto loginResponse = new LoginResponseDto();
-        //TODO: 나중에 DB 연동을 통해 기존 회원 여부에 따라 로그인 성공 여부 설정하도록 수정 필요
-        loginResponse.setLoginSuccess(true);
+            LoginResponseDto loginResponse = new LoginResponseDto();
+            // 로그인 성공 여부 판단 로직
+            boolean loginSuccess = isLoginSuccessful(userInfo);
 
-        Account account = new Account();
-        account.setUserName(userInfo.getUserName());
-        account.setUserEmail(userInfo.getUserEmail());
-        loginResponse.setAccount(account);
+            if (loginSuccess) {
+                // 사용자 정보 저장
+                User user = saveOrUpdateUser(userInfo);
 
-        loginResponse.setAccessToken(oauthInfo.getAccessToken());
+                Account account = new Account();
+                account.setUserName(user.getName());
+                account.setUserEmail(user.getEmail());
+                account.setGender(user.getGender());
+                account.setBirthdate(user.getBirthdate());
+                account.setAgeRange(user.getAgeRange());
+                account.setProfileImageUrl(user.getProfileImageUrl());
+                loginResponse.setAccount(account);
+                loginResponse.setLoginSuccess(true);
 
-        Cookie refreshTokenCookie = new Cookie("refreshToken", oauthInfo.getRefreshToken());
-        refreshTokenCookie.setHttpOnly(true);
-        refreshTokenCookie.setPath("/");
-        response.addCookie(refreshTokenCookie);
+                log.info("사용자 {}가 성공적으로 로그인했습니다.", user.getName());
 
-        // 토큰 정보를 LoginResponseDto에 설정
-        loginResponse.setAccessToken(oauthInfo.getAccessToken());
+                loginResponse.setAccessToken(oauthInfo.getAccessToken());
 
-        return loginResponse;
+                Cookie refreshTokenCookie = new Cookie("refreshToken", oauthInfo.getRefreshToken());
+                refreshTokenCookie.setHttpOnly(true);
+                refreshTokenCookie.setPath("/");
+                response.addCookie(refreshTokenCookie);
+
+                // 토큰 정보를 LoginResponseDto에 설정
+                loginResponse.setAccessToken(oauthInfo.getAccessToken());
+
+                return loginResponse;
+            } else {
+                loginResponse.setLoginSuccess(false);
+
+                log.error("로그인에 실패했습니다.");
+
+                return loginResponse;
+            }
+        } catch (Exception e) {
+            log.error("로그인 중 오류 발생: {}", e.getMessage());
+
+            LoginResponseDto errorResponse = new LoginResponseDto();
+            errorResponse.setLoginSuccess(false);
+
+            return errorResponse;
+        }
     }
 
     private User mapOAuthDTOToUserEntity(OAuthDTO oauthInfo) {
@@ -93,7 +120,37 @@ public class KakaoOAuthService implements OAuthService {
         user.setName(oauthInfo.getUserName());
         user.setEmail(oauthInfo.getUserEmail());
 
+        String gender = oauthInfo.getGender();
+        if ("male".equals(gender)) {
+            user.setGender("남자");
+        } else if ("female".equals(gender)) {
+            user.setGender("여자");
+        } else {
+            user.setGender("기타"); // gender 값이 없거나 다른 경우
+        }
+
+        user.setBirthdate(oauthInfo.getBirthdate());
+
+        String ageRange = oauthInfo.getAgeRange();
+        if (ageRange != null && ageRange.matches("\\d+~\\d+")) {
+            // 숫자~숫자 형식에 맞는 경우
+            String ageGroup = ageRange.split("~")[0] + "대";
+            user.setAgeRange(ageGroup);
+        } else {
+            // 형식에 맞지 않는 경우나 비어 있는 경우
+            user.setAgeRange("정보 없음"); // 또는 다른 적절한 기본값 사용
+        }
+
+        user.setProfileImageUrl(oauthInfo.getProfileImageUrl());
+
+
         return user;
+    }
+
+    private boolean isLoginSuccessful(OAuthDTO userInfo) {
+        return userInfo != null &&
+                !userInfo.getUserName().isEmpty() &&
+                !userInfo.getUserEmail().isEmpty();
     }
 
     @Transactional
@@ -107,10 +164,6 @@ public class KakaoOAuthService implements OAuthService {
                 return existingUserOpt.get();
             } else {
                 User newUser = mapOAuthDTOToUserEntity(oauthInfo);
-
-                newUser.setProviderId(oauthInfo.getProviderId());
-                newUser.setName(oauthInfo.getUserName());
-                newUser.setEmail(oauthInfo.getUserEmail());
 
                 return userRepository.save(newUser);
             }
@@ -165,12 +218,22 @@ public class KakaoOAuthService implements OAuthService {
         JSONObject jsonObj = new JSONObject(response.getBody());
         JSONObject account = jsonObj.getJSONObject("kakao_account");
 
+        String gender = account.optString("gender");
+        String birthdate = account.optString("birthday");
+        String ageRange = account.optString("age_range");
+        String profileImageUrl = account.optJSONObject("profile").optString("thumbnail_image_url");
+
+
         OAuthDTO oauthInfo = new OAuthDTO();
         oauthInfo.setProvider("kakao");
         oauthInfo.setProviderId(String.valueOf(jsonObj.getLong("id")));
         oauthInfo.setUserName(account.optJSONObject("profile").optString("nickname"));
         oauthInfo.setUserEmail(account.optString("email"));
         oauthInfo.setAccessToken(accessToken);
+        oauthInfo.setGender(gender);
+        oauthInfo.setBirthdate(birthdate);
+        oauthInfo.setAgeRange(ageRange);
+        oauthInfo.setProfileImageUrl(profileImageUrl);
 
         return oauthInfo;
     }

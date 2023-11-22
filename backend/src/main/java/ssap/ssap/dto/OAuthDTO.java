@@ -12,4 +12,8 @@ public class OAuthDTO {
     private String userEmail;
     private String accessToken;
     private String refreshToken;
+    private String gender;
+    private String birthdate;
+    private String ageRange;
+    private String profileImageUrl;
 }

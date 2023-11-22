@@ -29,15 +29,11 @@ public class ErrandService {
         dto.setTaskId(errand.getId());
         dto.setTitle(errand.getTitle());
         dto.setDescription(errand.getDescription());
-        dto.setFee(errand.getFee());
-        dto.setStartTime(errand.getStartTime());
-        dto.setEndTime(errand.getEndTime());
+        dto.setCreationTime(errand.getAuctionStartTime());
+        dto.setAuctionEndTime(errand.getAuctionEndTime());
         if (errand.getAttachment() != null) {
             dto.setThumbnailUrl(errand.getAttachment().getFileData());
         }
-        // '동'을 추출하는 로직
-        String district = extractDistrictFromAddress(errand.getDistrict());
-        dto.setDistrict(district);
         return dto;
     }
     @Transactional(readOnly = true)
@@ -46,18 +42,4 @@ public class ErrandService {
                 .map(this::convertToDTO); // 페이지를 DTO로 변환합니다.
     }
     // 기타 CRUD 메소드 작성해야함. 현재는 조회만 가능.
-
-    // 주소에서 '동'을 추출하는 메소드
-    public String extractDistrictFromAddress(String fullAddress) {
-        if(fullAddress == null || fullAddress.isEmpty()) {
-            return null;
-        }
-        String[] parts = fullAddress.split(" ");
-        for (int i = parts.length - 1; i >= 0; i--) {
-            if (parts[i].matches("\\d+.*")) {
-                return i > 0 ? parts[i - 1] : null;
-            }
-        }
-        return null; // '동'을 찾지 못한 경우
-    }
 }

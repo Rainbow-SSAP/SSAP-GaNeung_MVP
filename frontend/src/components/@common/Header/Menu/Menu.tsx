@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import UserProfile from "./UserProfile";
 import styled from "styled-components";
 import Nav from "./Nav";
+import { GnbHeader } from "../GnbHeader/GnbHeader";
 
 interface MenuProps {
   isOpen: boolean;
@@ -20,6 +21,7 @@ function Menu({ isOpen }: MenuProps) {
 
   return (
     <MenuContainer isOpen={isOpen}>
+      <GnbHeader leftItems="home" />
       <MenuContents>
         <UserProfile />
         <Nav />

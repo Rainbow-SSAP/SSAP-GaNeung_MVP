@@ -30,3 +30,9 @@ export const auctionTimeState = atom({
   key: "auctionTimeState",
   default: { startDate: new Date(), endDate: new Date() },
 });
+
+// 이미지 파일 미리보기
+export const uploadImgState = atom({
+  key: "uploadImgState",
+  default: [],
+});

@@ -19,7 +19,7 @@ const ErrandRequestPage = () => {
       preferredGender: buttonOtions.preferredGender[0],
       immediateExecutionStatus: false,
       auctionStatus: false,
-      fileData: undefined,
+      files: undefined,
     },
   });
 

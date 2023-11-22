@@ -2,7 +2,6 @@ export interface ErrandFormData {
   category: string; // 심부름 항목
   detailedItem: string; // 상세 항목
   title: string; // 제목
-  location: string; // 장소
   roadAddress: string; // 도로명 주소
   jibunAddress: string; // 지번 주소
   detailedAddress: string; // 상세 주소
@@ -18,6 +17,7 @@ export interface ErrandFormData {
   auctionEndTime: string; // 경매 종료 시간
   termsAgreed: boolean; // 약관동의여부
   fileData: FileList; // 이미지 파일 (여러개 처리)
+  files: FileList;
 }
 
 export interface Category {

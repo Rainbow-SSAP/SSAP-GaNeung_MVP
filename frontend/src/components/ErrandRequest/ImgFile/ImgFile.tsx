@@ -1,9 +1,11 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { uploadImgState } from "../../../recoil/atoms/errand";
 
 function ImgFile() {
-  const [previews, setPreviews] = useState<File[]>([]);
+  const [uploadImg, setUploadImg] = useRecoilState<File[]>(uploadImgState);
   const { control, setValue } = useFormContext();
 
   // 이미지 올리기
@@ -31,35 +33,23 @@ function ImgFile() {
               console.log("미리보기 업데이트", updatedPreviews);
 
               // 파일을 선택할 때마다 상태에 추가
-              setPreviews((prevPreviews) => [...prevPreviews, previewFile]);
+              setUploadImg(updatedPreviews);
               // setValue("fileData", files);
             }
           }
         };
 
         fileReader.readAsArrayBuffer(file);
-        console.log("previews state", previews);
+        console.log("previews state", uploadImg);
       });
     }
   };
 
   return (
     <ImgFileWrapper>
-      <PreviewContainer>
-        {previews.map((preview, index) => (
-          <PreviewWrapper key={index}>
-            <img
-              src={URL.createObjectURL(preview)} // File 객체를 URL.createObjectURL을 사용하여 표시
-              alt={`Preview ${index}`}
-              style={{ maxWidth: "100px" }}
-            />
-          </PreviewWrapper>
-        ))}
-      </PreviewContainer>
-
       <Controller
         control={control}
-        name="fileData"
+        name="files"
         render={({ field: { onChange, onBlur, name, ref } }) => (
           <input
             type="file"
@@ -79,6 +69,17 @@ function ImgFile() {
           />
         )}
       />
+      <PreviewContainer>
+        {uploadImg.map((preview, index) => (
+          <PreviewWrapper key={index}>
+            <img
+              src={URL.createObjectURL(preview)} // File 객체를 URL.createObjectURL을 사용하여 표시
+              alt={`Preview ${index}`}
+              style={{ maxWidth: "100px" }}
+            />
+          </PreviewWrapper>
+        ))}
+      </PreviewContainer>
     </ImgFileWrapper>
   );
 }
@@ -88,16 +89,42 @@ const ImgFileWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+
+  input {
+    display: block;
+    width: 100%;
+  }
+  > input[type="file"]::file-selector-button {
+    width: 100%;
+    height: 30px;
+    background: #fff;
+    border: 1px solid ${({ theme }) => theme.color.grey50};
+    border-radius: 4px;
+    line-height: 1.15;
+    font-size: 12px;
+    cursor: pointer;
+
+    &:hover {
+      border: 1px solid ${({ theme }) => theme.color.primary};
+    }
+  }
 `;
 
 const PreviewContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-top: 10px;
 `;
 
 const PreviewWrapper = styled.div`
   position: relative;
-  // 스타일링 추가
+  display: flex;
+
+  > img {
+    width: 50px;
+    border: 1px solid ${({ theme }) => theme.color.grey50};
+  }
 `;
 export default ImgFile;

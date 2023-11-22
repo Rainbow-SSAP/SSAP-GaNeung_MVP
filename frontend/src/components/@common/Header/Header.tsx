@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { headerImage } from "../../assets/headerImages";
+import { headerImage } from "../../../assets/headerImages";
 
 export interface HeaderProps {
   title: string;

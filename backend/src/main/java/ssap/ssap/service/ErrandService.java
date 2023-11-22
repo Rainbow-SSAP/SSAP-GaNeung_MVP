@@ -7,12 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ssap.ssap.domain.Task;
 import ssap.ssap.domain.TaskAttachment;
+import ssap.ssap.dto.ErrandResponseDto;
 import ssap.ssap.dto.TaskRequestDto;
 import ssap.ssap.repository.TaskAttachmentRepository;
 import ssap.ssap.repository.TaskRepository;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -24,12 +22,12 @@ public class ErrandService {
         this.taskAttachmentRepository = taskAttachmentRepository;
     }
     @Transactional(readOnly = true)
-    public Page<TaskRequestDto.CreateForm> findAllErrands(Pageable pageable) {
+    public Page<ErrandResponseDto> findAllErrands(Pageable pageable) {
         return taskRepository.findAll(pageable)
                 .map(this::convertToDto);
     }
-    private TaskRequestDto.CreateForm convertToDto(Task task) {
-        TaskRequestDto.CreateForm dto = new TaskRequestDto.CreateForm();
+    private ErrandResponseDto convertToDto(Task task) {
+        ErrandResponseDto dto = new ErrandResponseDto();
         dto.setTitle(task.getTitle());
         dto.setDescription(task.getDescription());
         dto.setFee(task.getFee());
@@ -43,10 +41,10 @@ public class ErrandService {
         return dto;
     }
 
-    private void setFirstAttachmentFileData(Task task, TaskRequestDto.CreateForm dto) {
-        TaskAttachment attachment = task.getTaskAttachment();
-        if (attachment != null) {
-            dto.setFileData(attachment.getFileData());
+    private void setFirstAttachmentFileData(Task task, ErrandResponseDto dto) {
+        if (!task.getAttachments().isEmpty()) {
+            TaskAttachment firstAttachment = task.getAttachments().get(0);
+            dto.setFileData(firstAttachment.getFileData());
         }
     }
 

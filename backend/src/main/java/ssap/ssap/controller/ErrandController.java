@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ssap.ssap.dto.ErrandResponseDto;
 import ssap.ssap.dto.TaskRequestDto;
 import ssap.ssap.service.ErrandService;
 import ssap.ssap.service.OAuthService;
@@ -39,7 +40,7 @@ public class ErrandController {
             String accessToken = authorizationHeader.substring("Bearer ".length());
             boolean isValid = oAuthService.isAccessTokenValid(accessToken);
             if (isValid) {
-                Page<TaskRequestDto.CreateForm> errands = errandService.findAllErrands(pageable);
+                Page<ErrandResponseDto> errands = errandService.findAllErrands(pageable);
                 return ResponseEntity.ok(errands);
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("액세스 토큰이 유효하지 않거나 만료되었습니다.");

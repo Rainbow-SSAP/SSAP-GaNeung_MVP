@@ -83,9 +83,6 @@ public class TaskRequestDto {
         @Schema(description = "경매의 종료 시간", example = "2023-11-14 13:00:00")
         private String auctionEndTime;
 
-        @Schema(description = "심부름 게시글 첨부 사진 파일 URL", example = "S3에 저장된 파일 URL")
-        private String fileData;
-
         @Schema(description = "요청 내용 첨부 이미지", example = "[image1.jpg, image2.jpg]")
         private List<MultipartFile> files; // 클라이언트로부터 업로드할 파일들을 받습니다.
     }

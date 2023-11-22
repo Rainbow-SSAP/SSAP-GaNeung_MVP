@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Header } from "./Header";
 
 const meta = {
-  title: "Header",
+  title: "@common/Header",
   component: Header,
   argTypes: {
     title: { control: "text" },

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { ErrandFormData } from "../types/errand";
+import { APP_URL, accessToken } from "./OAuth";
 
-const APP_URL = process.env.REACT_APP_URL;
-const accessToken = process.env.REACT_APP_ACCESSTOKEN;
+// TODO 사용자 데이터로 변경 예정
 const userEmail = "ssap.rainbow@gmail.com";
 
 // 심부름 요청 데이터 보내기
@@ -18,8 +18,23 @@ export const ErrandRequestPost = async (errandFormData: ErrandFormData) => {
         Authorization: `Bearer ${accessToken}`, // TODO 로컬 테스트용
         "Content-Type": "multipart/form-data",
       },
-      // TODO 이미지 파일 타입 보낼 때 수정 필요
-      // 현재 api 호출시 multipart 타입을 지원하지 않음.. 및 api multipart/form-data으로 변경
+    });
+    return response.data;
+  } catch (error) {
+    // 오류 처리
+    console.error(error);
+    throw error;
+  }
+};
+
+// 심부름 내역 가져오기
+export const getErrands = async () => {
+  try {
+    const response = await axios.get(`${APP_URL}/api/errands`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
     });
     return response.data;
   } catch (error) {

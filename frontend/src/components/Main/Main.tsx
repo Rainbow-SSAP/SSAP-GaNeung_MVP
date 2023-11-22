@@ -9,6 +9,7 @@ function Main() {
       <CategoryWrapper>
         <CategoryGrid />
       </CategoryWrapper>
+      <Errands />
     </MainWrapper>
   );
 }

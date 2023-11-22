@@ -31,7 +31,6 @@ const ErrandRequestPage = () => {
       preferredGender: buttonOtions.preferredGender[0],
       immediateExecutionStatus: false,
       startTime: "",
-      estimatedTime: "",
       fee: "",
       auctionStatus: false,
       auctionStartTime: "",
@@ -56,8 +55,8 @@ const ErrandRequestPage = () => {
     const formData = new FormData();
 
     // FileList에서 모든 파일을 FormData에 추가
-    if (data.fileData && data.fileData.length > 0) {
-      Array.from(data.fileData).forEach((file) => {
+    if (data.files && data.files.length > 0) {
+      Array.from(data.files).forEach((file) => {
         formData.append("files", file);
       });
     }

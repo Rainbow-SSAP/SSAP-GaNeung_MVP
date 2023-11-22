@@ -16,8 +16,7 @@ export interface ErrandFormData {
   auctionStartTime: string; // 경매 시작 시간
   auctionEndTime: string; // 경매 종료 시간
   termsAgreed: boolean; // 약관동의여부
-  fileData: FileList; // 이미지 파일 (여러개 처리)
-  files: FileList;
+  files: FileList; // 이미지 파일 (여러개 처리)
 }
 
 export interface Category {

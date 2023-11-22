@@ -26,9 +26,7 @@ export default function Timing() {
       const formattedEndDate = format(endDate, "yyyy-MM-dd HH:mm");
 
       setValue("startTime", formattedStartDate);
-      // TODO 심부름 진행 시간을 선택하기 때문에 예상 소요시간 제거 예정으로
-      // endTime 백엔드에서 데이터 추가 시 주석 제거 예정
-      // setValue("endTime", formattedEndDate);
+      setValue("endTime", formattedEndDate);
     }
   }, [startDate, endDate, immediateExecutionStatus]);
 

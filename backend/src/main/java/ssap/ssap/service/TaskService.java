@@ -77,8 +77,8 @@ public class TaskService {
         task.setPreferredGender(createForm.getPreferredGender());
         if (!createForm.getImmediateExecutionStatus()) {
             task.setStartTime(createForm.getStartTime());
+            task.setEndTime(createForm.getEndTime());
         }
-        task.setEndTime(createForm.getEstimatedTime());
         task.setFee(createForm.getFee());
         task.setAuctionStatus(createForm.getAuctionStatus());
         task.setTermsAgreed(createForm.getTermsAgreed());

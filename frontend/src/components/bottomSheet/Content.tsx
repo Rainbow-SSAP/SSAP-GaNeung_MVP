@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Input } from "../@common/Input/Input";
 import { headerImage } from "../../assets/headerImages";
+import { successToast } from "../../constants/toast";
 
 const Content = ({ setIsOpen }) => {
   const [bidAmount, setBidAmount] = useState(""); //입찰가격 입력 상태
@@ -25,6 +26,11 @@ const Content = ({ setIsOpen }) => {
   const bidBtnClick = () => {
     notify();
     setIsOpen(false);
+  };
+
+  const handleToast = () => {
+    console.log("클릭!");
+    successToast("입찰에 성공하였습니다.");
   };
 
   //TODO 현재입찰가보다 높은 가격으로 설정하고 버튼 클릭 시 오류 발생 추후 심부름 요청서와 상태공유로 추가
@@ -63,7 +69,8 @@ const Content = ({ setIsOpen }) => {
         size="large"
         color="primary"
         text="💓 입찰하기"
-        onClick={bidBtnClick}
+        // onClick={bidBtnClick}
+        onClick={handleToast}
       />
     </ContentWrapper>
   );

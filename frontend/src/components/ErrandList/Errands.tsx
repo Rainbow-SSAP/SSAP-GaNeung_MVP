@@ -1,7 +1,7 @@
 import React from "react";
 import { ErrandItem, ErrandItemProps } from "./ErrandItem";
 import styled from "styled-components";
-import { ErrandItems } from "../../mocks/errands";
+import { errandsData } from "../../mocks/errandsData";
 import { useQuery } from "react-query";
 import { getErrands } from "../../apis/errand";
 

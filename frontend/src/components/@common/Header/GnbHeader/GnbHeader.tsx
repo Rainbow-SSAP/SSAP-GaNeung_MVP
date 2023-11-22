@@ -52,11 +52,7 @@ export const GnbHeader = (gnbHeaderProps: GnbHeaderProps) => {
       )}
       <Title>{title}</Title>
       <IconWrapper>
-        <img
-          src={headerImage.close}
-          alt="닫기 버튼"
-          onClick={handleClose}
-        />
+        <img src={headerImage.close} alt="닫기 버튼" onClick={handleClose} />
       </IconWrapper>
     </GnbHeaderWrapper>
   );
@@ -78,6 +74,8 @@ const IconWrapper = styled.div`
   align-items: center;
   width: 24px;
   height: 24px;
+  cursor: pointer;
+
   img {
     width: 100%;
   }

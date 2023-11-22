@@ -90,13 +90,17 @@ const ButtonColors = {
 };
 
 const ButtonOuter = styled.div<Omit<ButtonProps, "text">>`
+  display: flex;
+  justify-content: center;
   width: 100%;
+
   ${({ fixed }) =>
     fixed &&
     css`
       position: fixed;
-      /* top: 0;  */
-      /* left: 0;     */
+      left: 0;
+      /* top: 0 */
+      bottom: 20px;
     `}
 `;
 

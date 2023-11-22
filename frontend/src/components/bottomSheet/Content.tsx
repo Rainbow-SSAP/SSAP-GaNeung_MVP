@@ -8,15 +8,16 @@ import { Input } from "../@common/Input/Input";
 import { headerImage } from "../../assets/headerImages";
 
 const Content = ({ setIsOpen }) => {
-  const [bidAmount, setBidAmount] = useState("");
-  // const [toast, setToast] = useState(false);
+  const [bidAmount, setBidAmount] = useState(""); //입찰가격 입력 상태
+  const [errandFee, setErrandFee] = useState(""); //심부름비 상태
+
   const notify = () => toast("입찰에 성공하였습니다");
   //TODO 입찰에 실패했을 경우 추후에 추가
 
   const validateInputChange = (event) => {
     const value = event.target.value;
 
-    if (value === "" || /^[0-9\b]+$/.test(value)) {
+    if (/^\d*$/.test(value)) {
       setBidAmount(value);
     }
   };
@@ -50,8 +51,12 @@ const Content = ({ setIsOpen }) => {
       <BidPriceContainer>
         <Bid>입찰가격</Bid>
         {/* TODO placeholder 오른족으로 이동 */}
-        <BidInput placeholder="0원" />
-        {/* 약관동의 문구 및 체크박스 컴포넌트 가져다 쓰기 */}
+        <BidInput
+          value={bidAmount}
+          onChange={validateInputChange}
+          placeholder="0원"
+        />
+        {/* TODO 약관동의 문구 및 체크박스 컴포넌트 가져다 쓰기 */}
       </BidPriceContainer>
 
       <Button

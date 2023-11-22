@@ -2,6 +2,7 @@ package ssap.ssap.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,11 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ssap.ssap.dto.ErrandDTO;
+import ssap.ssap.dto.TaskRequestDto;
 import ssap.ssap.service.ErrandService;
 import ssap.ssap.service.OAuthService;
 
 @RestController
+@Slf4j
 @RequestMapping("/api/errands")
 @Tag(name = "메인페이지 실시간 심부름 리스트", description = "메인페이지 실시간 심부름 리스트 관련 API")
 public class ErrandController {
@@ -37,12 +39,13 @@ public class ErrandController {
             String accessToken = authorizationHeader.substring("Bearer ".length());
             boolean isValid = oAuthService.isAccessTokenValid(accessToken);
             if (isValid) {
-                Page<ErrandDTO> errands = errandService.findAllErrands(pageable);
+                Page<TaskRequestDto.CreateForm> errands = errandService.findAllErrands(pageable);
                 return ResponseEntity.ok(errands);
             } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("토큰 검증 중 오류가 발생했습니다.");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("액세스 토큰이 유효하지 않거나 만료되었습니다.");
             }
         }catch(Exception e){
+                log.error("토큰 검증 중 오류 발생: ", e);
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("토큰 검증 중 오류가 발생했습니다.");
             }
     }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import defaultProfileImg from "../../assets/images/ssap_logo_B.svg";
+import defaultProfileImg from "../../assets/images/ssap_icon.svg";
 import { LikedButton } from "./LikedButton";
 
 export interface ErrandItemProps {

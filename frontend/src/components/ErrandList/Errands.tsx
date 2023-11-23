@@ -31,15 +31,17 @@ function Errands() {
       <h3>🌈 우리 동네 심부름</h3>
       <ErrandItemsWrapper>
         {data.content.map((item) => {
-          console.log("Errand item:", item);
+          console.log("Errands Porps:", item);
           return (
             <ErrandItem
               key={item.taskId}
-              thumbnailUrl={item.thumbnailUrl}
-              jibunAddress={item.jibunAddress}
+              taskId={item.taskId}
+              fileData={item.fileData}
+              district={item.district}
               title={item.title}
-              auctionStartTime={item.auctionStartTime}
-              auctionEndTime={item.auctionEndTime}
+              fee={item.fee}
+              startTime={item.startTime}
+              endTime={item.endTime}
               isLiked={item.isLiked}
             />
           );

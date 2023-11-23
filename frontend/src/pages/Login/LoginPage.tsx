@@ -1,6 +1,6 @@
 import React from "react";
 import { KAKAO_AUTH_URL } from "../../apis/OAuth";
-import kakaoImage from "../../assets/Kakao.png";
+import kakaoImage from "../../assets/images/Kakao.png";
 import { Link } from "react-router-dom";
 
 export default function LoginPage() {

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "email": "user@example.com",
+    "category": "배달",
+    "detailedItem": "배달_상세_3",
+    "title": "급한 문서 배달 요청",
+    "description": "서류를 빠르게 배달해주실 분을 찾습니다.",
+    "roadAddress": "서울특별시 강남구 테헤란로 123",
+    "jibunAddress": "서울특별시 강남구 역삼동 456-78",
+    "detailedAddress": "101호",
+    "preferredGender": "없음",
+    "immediateExecutionStatus": true,
+    "startTime": "2023-11-20T14:00:00",
+    "estimatedTime": "00:45",
+    "fee": 20000,
+    "auctionStatus": false,
+    "termsAgreed": true,
+    "auctionStartTime": null,
+    "auctionEndTime": null,
+    "fileData": "https://example.com/uploads/document_photo.jpg"
+  },
+  "response": {
+    "message": "심부름 요청이 생성되었습니다.",
+    "requestId": 12345,
+    "taskStatus": "대기중"
+  }
+}

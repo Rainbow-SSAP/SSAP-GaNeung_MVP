@@ -17,6 +17,8 @@ export interface InputProps
   isValid?: boolean;
 
   value?: string;
+
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(

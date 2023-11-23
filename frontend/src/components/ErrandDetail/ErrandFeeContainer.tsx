@@ -3,11 +3,12 @@ import styled from "styled-components";
 import mockData from "../../mocks/ErrandRequestMockData.json";
 
 const ErrandFeeContainer = ({ data }) => {
+  const fee = Number(data.fee).toLocaleString();
   return (
     <ErrandContainer>
       <ErrandFeeSection>
         <ErrandFeeTitle>심부름비</ErrandFeeTitle>
-        <Fee>{data.fee}원</Fee>
+        <Fee>{fee}원</Fee>
       </ErrandFeeSection>
       <PayMethodContainer>
         <PayMethodTitle>물품비 지불 방식</PayMethodTitle>

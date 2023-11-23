@@ -88,4 +88,9 @@ const ErrandRequestPage = () => {
   );
 };
 
+const FormWapper = styled.form`
+  display: grid;
+  grid-gap: 20px;
+`;
+
 export default ErrandRequestPage;

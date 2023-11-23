@@ -1,6 +1,6 @@
-import axios from "axios";
 import { ErrandFormData } from "../types/errand";
 import { APP_URL, accessToken } from "./OAuth";
+import api from "./api";
 
 // TODO 사용자 데이터로 변경 예정
 const userEmail = "ssap.rainbow@gmail.com";
@@ -13,7 +13,7 @@ export const ErrandRequestPost = async (errandFormData: ErrandFormData) => {
   };
   console.log("ErrandRequestPost", formData);
   try {
-    const response = await axios.post(`${APP_URL}/api/request`, formData, {
+    const response = await api.post(`${APP_URL}/api/request`, formData, {
       headers: {
         Authorization: `Bearer ${accessToken}`, // TODO 로컬 테스트용
         "Content-Type": "multipart/form-data",
@@ -30,7 +30,7 @@ export const ErrandRequestPost = async (errandFormData: ErrandFormData) => {
 // 심부름 내역 가져오기
 export const getErrands = async () => {
   try {
-    const response = await axios.get(`${APP_URL}/api/errands`, {
+    const response = await api.get(`${APP_URL}/api/errands`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",

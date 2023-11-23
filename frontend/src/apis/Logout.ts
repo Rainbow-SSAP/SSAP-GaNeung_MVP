@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "./api";
 
 export const LogoutHandler = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export const LogoutHandler = () => {
     }
 
     try {
-      const response = await axios.post(
+      const response = await api.post(
         `/api/oauth/kakao/logout`,
         // `/api/oauth/${provider}/logout`,
         {},

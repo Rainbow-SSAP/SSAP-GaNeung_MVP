@@ -64,7 +64,7 @@ const ErrandDetailsPage = () => {
         titleAlign="center"
       />
       <KakaoMap />
-      <ErrandCategory data={data} />
+      {/* <ErrandCategory data={data} /> */}
       <Title data={data} />
       <ErrandFeeContainer data={data} />
       <ErrandDate data={data} />

@@ -53,7 +53,7 @@ const KakaoMap = ({ data }) => {
               // 인포윈도우로 장소에 대한 설명을 표시
               const infowindow = new window.kakao.maps.InfoWindow({
                 content:
-                  '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>',
+                  '<div style="width:150px;text-align:center;padding:6px 0;">심부름 장소</div>',
               });
               infowindow.open(map, marker);
 

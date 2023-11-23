@@ -19,10 +19,8 @@ const ErrandRequestPage = () => {
   const methods = useForm<ErrandFormData>({
     defaultValues: {
       // 기본값
-      category: categories[0].value,
-      detailedItem: categories[0].detailedItems
-        ? categories[0].detailedItems[0].value
-        : "",
+      category: "",
+      detailedItem: "",
       title: "",
       roadAddress: "",
       jibunAddress: "",
@@ -60,6 +58,7 @@ const ErrandRequestPage = () => {
         formData.append("files", file);
       });
     }
+
     mutation.mutate(data, {
       onSuccess: (response) => {
         console.log("Response:", response);

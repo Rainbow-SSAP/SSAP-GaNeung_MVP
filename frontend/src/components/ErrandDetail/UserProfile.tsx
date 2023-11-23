@@ -1,16 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import mockData from "../../mocks/ErrandRequestMockData.json";
 
-const UserProfile = () => {
+const UserProfile = ({ data }) => {
   return (
     <OutsideLayout>
       <InsideLayout>
-        <UserThumbnail>TODO 유저 썸네일</UserThumbnail>
+        <UserThumbnail>
+          <img src={data.profileImageUrl} />
+        </UserThumbnail>
         <UserInfoLayout>
           <UserInfoDetail>
-            <UserNickname>홍길동</UserNickname>
-            <UserAge>남 20대 후반</UserAge>
+            <UserNickname>{data.name}</UserNickname>
+            <UserAge>
+              {data.gender}
+              {data.ageRange}
+            </UserAge>
           </UserInfoDetail>
         </UserInfoLayout>
       </InsideLayout>

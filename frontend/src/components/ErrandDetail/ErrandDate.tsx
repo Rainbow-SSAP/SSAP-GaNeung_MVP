@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const ErrandDate = () => {
+const ErrandDate = ({ data }) => {
+  const auctionEndTime = data.auctionEndTime || "없음";
   return (
     <Layout>
       <Date>일시</Date>
-      <DateDetail>TODO 자세한 일정 추가</DateDetail>
+      <DateDetail>{auctionEndTime}</DateDetail>
     </Layout>
   );
 };

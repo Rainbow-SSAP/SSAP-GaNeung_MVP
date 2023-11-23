@@ -2,16 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import mockData from "../../mocks/ErrandRequestMockData.json";
 
-const ErrandFeeContainer = () => {
+const ErrandFeeContainer = ({ data }) => {
   return (
     <ErrandContainer>
       <ErrandFeeSection>
         <ErrandFeeTitle>심부름비</ErrandFeeTitle>
-        <Fee>{mockData.request.fee}원</Fee>
+        <Fee>{data.fee}원</Fee>
       </ErrandFeeSection>
       <PayMethodContainer>
         <PayMethodTitle>물품비 지불 방식</PayMethodTitle>
-        <PayMethodDetail>TODO 선택지 추가</PayMethodDetail>
+        <PayMethodDetail>추후 협의</PayMethodDetail>
       </PayMethodContainer>
     </ErrandContainer>
   );

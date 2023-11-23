@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import mockData from "../../mocks/ErrandRequestMockData.json";
-const Title = () => {
+const Title = ({ data }) => {
   const [requestData, setRequestData] = useState(mockData.request);
   const [response, setResponseData] = useState(mockData.response);
+  const auctionStartTime =
+    data.startTime || "경매로 설정되지 않은 심부름입니다.";
+
   return (
     <Layout>
       <TitleLayout>
-        <ErrandTitle>{requestData.title}</ErrandTitle>
-        <Deadline>{requestData.startTime}</Deadline>
+        <ErrandTitle>{data.title}</ErrandTitle>
+        <Deadline>{auctionStartTime}</Deadline>
       </TitleLayout>
-      {/* <ErrandFeeContainer>
-        <ErrandFeeSection>
-          <ErrandFeeTitle>심부름비</ErrandFeeTitle>
-          <Fee>TODO 5000원</Fee>
-        </ErrandFeeSection>
-      </ErrandFeeContainer> */}
     </Layout>
   );
 };

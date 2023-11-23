@@ -5,23 +5,23 @@ import { LikedButton } from "./LikedButton";
 
 export interface ErrandItemProps {
   taskId?: number;
-  thumbnailUrl?: string; // 썸네일 이미지 URL
-  jibunAddress?: string; // 장소
+  fileData?: string; // 썸네일 이미지 URL
+  district: string; // 동 이름
   title: string; // 제목
-  fee?: number; // 심부름비
-  auctionStartTime: Date | string; // 심부름 시작 시간
-  auctionEndTime: Date | string; // 경매 마감 시간
+  fee: string; // 심부름비
+  startTime?: Date | string; // 심부름 시작 시간
+  endTime?: Date | string; // 경매 마감 시간
   isLiked?: boolean; // 찜하기
 }
 
 export const ErrandItem = (errandItemProps: ErrandItemProps) => {
   const {
-    thumbnailUrl,
-    jibunAddress,
+    fileData,
+    district,
     title,
     fee,
-    auctionStartTime,
-    auctionEndTime,
+    startTime,
+    endTime,
     isLiked = false,
   } = errandItemProps;
   const [liked, setLiked] = useState(isLiked);
@@ -33,38 +33,34 @@ export const ErrandItem = (errandItemProps: ErrandItemProps) => {
     // 찜 상태 업뎃 api 호출 로직 필요
   };
 
-  console.log("Rendering ErrandItem", {
-    thumbnailUrl,
-    jibunAddress,
+  console.log("심부름 내역", {
+    fileData,
+    district,
     title,
     fee,
-    auctionStartTime,
-    auctionEndTime,
+    startTime,
+    endTime,
     isLiked,
   });
 
   return (
     <ErrandItemWrapper>
-      <ItemLeft thumbnailUrl={thumbnailUrl}>
+      <ItemLeft thumbnailUrl={fileData}>
         <img
-          src={thumbnailUrl || defaultProfileImg}
+          src={fileData || defaultProfileImg}
           alt={`${title}의 심부름 이미지`}
         />
       </ItemLeft>
       <ItemRight>
-        <span>{jibunAddress}</span>
+        <span>{district}</span>
         <h4>{title}</h4>
-        <p>{`${fee || 0}원`}</p>
+        <p>{fee}원</p>
         <Time>
           <span>
-            {auctionStartTime instanceof Date
-              ? auctionStartTime.toLocaleString()
-              : auctionStartTime}
+            {startTime instanceof Date ? startTime.toLocaleString() : startTime}
           </span>
           <span>
-            {auctionEndTime instanceof Date
-              ? auctionEndTime.toLocaleString()
-              : auctionEndTime}
+            {endTime instanceof Date ? endTime.toLocaleString() : endTime}
           </span>
         </Time>
       </ItemRight>

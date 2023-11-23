@@ -7,11 +7,12 @@ import { isMenuOpenState } from "../../../../recoil/atoms/settingsState";
 
 export interface GnbHeaderProps {
   title?: string;
-  leftItems: "back" | "home";
+  goBack?: boolean;
+  close?: boolean;
 }
 
 export const GnbHeader = (gnbHeaderProps: GnbHeaderProps) => {
-  const { title, leftItems } = gnbHeaderProps;
+  const { title, goBack = true, close = true } = gnbHeaderProps;
   const [isMenuOpen, setIsMenuOpen] = useRecoilState(isMenuOpenState);
   const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ export const GnbHeader = (gnbHeaderProps: GnbHeaderProps) => {
 
   return (
     <GnbHeaderWrapper>
-      {leftItems === "back" ? (
+      {goBack && (
         <IconWrapper>
           <img
             src={headerImage.arrow_back}
@@ -41,19 +42,13 @@ export const GnbHeader = (gnbHeaderProps: GnbHeaderProps) => {
             onClick={handleGoBack}
           />
         </IconWrapper>
-      ) : (
-        <IconWrapper>
-          <img
-            src={headerImage.home_line}
-            alt="홈으로 이동 버튼"
-            onClick={handleHome}
-          />
-        </IconWrapper>
       )}
       <Title>{title}</Title>
-      <IconWrapper>
-        <img src={headerImage.close} alt="닫기 버튼" onClick={handleClose} />
-      </IconWrapper>
+      {close && (
+        <IconWrapper>
+          <img src={headerImage.close} alt="닫기 버튼" onClick={handleClose} />
+        </IconWrapper>
+      )}
     </GnbHeaderWrapper>
   );
 };
@@ -61,7 +56,7 @@ export const GnbHeader = (gnbHeaderProps: GnbHeaderProps) => {
 const GnbHeaderWrapper = styled.div`
   display: flex;
   width: 100%;
-  padding: 20px 5vw;
+  padding: 5vw 5vw 10px;
   justify-content: space-between;
   align-items: center;
   /* border-bottom: 1px solid #e2e2e2; */

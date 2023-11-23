@@ -21,7 +21,7 @@ function Menu({ isOpen }: MenuProps) {
 
   return (
     <MenuContainer isOpen={isOpen}>
-      <GnbHeader leftItems="home" />
+      <GnbHeader goBack={false} />
       <MenuContents>
         <UserProfile />
         <Nav />

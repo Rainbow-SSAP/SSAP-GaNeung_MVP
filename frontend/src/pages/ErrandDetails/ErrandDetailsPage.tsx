@@ -3,13 +3,13 @@ import { Button } from "../../components/@common/Button/Button";
 import BottomSheet from "../../components/bottomSheet/BottomSheet";
 import Content from "../../components/bottomSheet/Content";
 import { ToastContainer } from "react-toastify";
-import { Header } from "../../components/Header/Header";
 import KakaoMap from "./KakaoMap";
 import Title from "./Title";
 import ErrandFeeContainer from "./ErrandFeeContainer";
 import ErrandDate from "./ErrandDate";
 import ErrandDetail from "./ErrandDetail";
 import UserProfile from "./UserProfile";
+import { Header } from "../../components/@common/Header/Header";
 
 const ErrandDetailsPage = () => {
   const [open, setOpen] = useState(false);

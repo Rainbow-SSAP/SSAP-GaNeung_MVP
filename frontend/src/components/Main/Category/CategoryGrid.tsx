@@ -20,13 +20,15 @@ const CategoryGrid = () => {
 
   // 아이콘이랑 매칭
   const transformedCategories =
-    data?.map((category) => ({
-      id: category.id,
-      text: category.categoryName,
-      icon:
-        categoryImage[categoryMapping[category.categoryName]] ||
-        "기본_아이콘_URL",
-    })) || [];
+    data && Array.isArray(data)
+      ? data.map((category) => ({
+          id: category.id,
+          text: category.categoryName,
+          icon:
+            categoryImage[categoryMapping[category.categoryName]] ||
+            "기본_아이콘_URL",
+        }))
+      : [];
 
   const handleCategoryClick = () => {
     navigate("/errandList");

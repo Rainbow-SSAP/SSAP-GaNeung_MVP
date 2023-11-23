@@ -20,7 +20,7 @@ export default function AppRouter() {
         <Route path="/login/oauth2/code/kakao" element={<LoginHandler />} />
         <Route path="/errandList" element={<ErrandListPage />} />
         <Route path="/errand/request" element={<ErrandRequestPage />} />
-        <Route path="/errand/:errandId" element={<ErrandDetailsPage />} />
+        <Route path="/errand/:taskId" element={<ErrandDetailsPage />} />
         <Route path="/error" element={<ErrorPage />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/history" element={<HistoryPage />} />

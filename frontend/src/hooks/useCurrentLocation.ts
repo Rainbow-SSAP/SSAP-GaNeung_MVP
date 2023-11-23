@@ -32,28 +32,33 @@ function useCurrentLocation(map: any, marker: any) {
     console.log("클릭한 위치에 마커 표시", currentPos);
     marker.setMap(map);
 
-    // 주소-좌표 변환 객체를 생성
-    const geocoder = new window.kakao.maps.services.Geocoder();
-    console.log("주소-좌표 변환 객체를 생성");
-    geocoder.coord2Address(lng, lat, (result: any, status: any) => {
-      console.log("주소-좌표 변환", lng, lat);
-      if (status === window.kakao.maps.services.Status.OK) {
-        // 도로명 주소
-        const roadAddress = result[0].road_address
-          ? result[0].road_address.address_name
-          : "";
-        // 지번 주소
-        const jibunAddress = result[0].address
-          ? result[0].address.address_name
-          : "";
+    // window.kakao.maps.services 객체가 로드된 후에 Geocoder 객체를 생성
+    if (window.kakao.maps.services) {
+      // 주소-좌표 변환 객체를 생성
+      const geocoder = new window.kakao.maps.services.Geocoder();
+      console.log("주소-좌표 변환 객체를 생성");
+      geocoder.coord2Address(lng, lat, (result: any, status: any) => {
+        console.log("주소-좌표 변환", lng, lat);
+        if (status === window.kakao.maps.services.Status.OK) {
+          // 도로명 주소
+          const roadAddress = result[0].road_address
+            ? result[0].road_address.address_name
+            : "";
+          // 지번 주소
+          const jibunAddress = result[0].address
+            ? result[0].address.address_name
+            : "";
 
-        console.log("도로명 주소: ", roadAddress);
-        console.log("지번 주소: ", jibunAddress);
+          console.log("도로명 주소: ", roadAddress);
+          console.log("지번 주소: ", jibunAddress);
 
-        setRoadAddr(roadAddress);
-        setJibunAddr(jibunAddress);
-      }
-    });
+          setRoadAddr(roadAddress);
+          setJibunAddr(jibunAddress);
+        }
+      });
+    } else {
+      console.log("Kakao maps API 아직 로드되지 않았습니다.");
+    }
   };
 
   // 마커 위치 변경 이벤트 핸들러

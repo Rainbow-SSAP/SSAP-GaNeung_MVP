@@ -3,7 +3,7 @@ import styled from "styled-components";
 import useCurrentLocation from "../../hooks/useCurrentLocation";
 import { useFormContext } from "react-hook-form";
 import { useRecoilValue } from "recoil";
-import { jibunAddrState, roadAddrState } from "../../recoil/atoms/errand";
+import { jibunAddrState, roadAddrState } from "../../recoil/atoms/errandState";
 import { CLIENT_ID } from "../../apis/OAuth";
 
 declare global {

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { jibunAddrState, roadAddrState } from "../recoil/atoms/errand";
+import { jibunAddrState, roadAddrState } from "../recoil/atoms/errandState";
 
 function useCurrentLocation(map: any, marker: any) {
   const setRoadAddr = useSetRecoilState(roadAddrState);

@@ -2,7 +2,7 @@ import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { uploadImgState } from "../../../recoil/atoms/errand";
+import { uploadImgState } from "../../../recoil/atoms/errandState";
 
 function ImgFile() {
   const [uploadImg, setUploadImg] = useRecoilState<File[]>(uploadImgState);

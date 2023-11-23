@@ -9,7 +9,7 @@ import { ErrandFormData } from "../../types/errand";
 import { buttonOtions, categories } from "../../constants/errand";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { uploadImgState } from "../../recoil/atoms/errand";
+import { uploadImgState } from "../../recoil/atoms/errandState";
 
 const ErrandRequestPage = () => {
   const [uploadImg, setUploadImg] = useRecoilState<File[]>(uploadImgState);

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { FormItem } from "../../@common/FormItem/FormItem";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { detailedItemState } from "../../../recoil/atoms/errand";
+import { detailedItemState } from "../../../recoil/atoms/errandState";
 import { categories } from "../../../constants/errand";
 
 export default function Category() {

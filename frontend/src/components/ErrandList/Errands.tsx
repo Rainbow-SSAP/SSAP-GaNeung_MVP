@@ -35,6 +35,7 @@ function Errands() {
           return (
             <ErrandItem
               key={item.taskId}
+              taskId={item.taskId}
               fileData={item.fileData}
               district={item.district}
               title={item.title}

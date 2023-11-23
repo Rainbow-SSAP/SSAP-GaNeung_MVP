@@ -41,11 +41,11 @@ const Wrapper = styled(motion.div)`
   top: 20vh;
   left: 0;
   right: 0;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-left-radius: 0.8rem;
+  border-top-right-radius: 0.8rem;
   background-color: white;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
-  height: ${BOTTOM_SHEET_HEIGHT}px;
+  box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.6);
+  height: ${BOTTOM_SHEET_HEIGHT}px / 10;
 
   margin: 0 auto;
 
@@ -53,8 +53,12 @@ const Wrapper = styled(motion.div)`
 `;
 
 const ContentWrapper = styled.div`
-  height: 80vh;
-  padding: 10px;
+  /* width: 37.5rem; */
+  height: 55rem;
+  flex-shrink: 0;
+  border-radius: 2rem;
+  background: #fff;
+  /* box-shadow: 0px -0.4rem 1rem 0rem rgba(0, 0, 0, 0.1); TODO*/
 `;
 
 export default BottomSheet;

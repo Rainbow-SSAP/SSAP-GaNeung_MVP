@@ -11,7 +11,7 @@ const Header = () => {
 };
 
 const HeaderWrapper = styled(motion.div)`
-  height: 48px;
+  /* height: 48px; */
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   position: relative;
@@ -20,9 +20,9 @@ const HeaderWrapper = styled(motion.div)`
 `;
 
 const HandleBar = styled(motion.div)`
-  width: 32px;
-  height: 4px;
-  border-radius: 2px;
+  width: 14.6rem;
+  height: 0.4rem;
+  border-radius: 0.2rem;
   background-color: #d0d0d0;
   margin: auto;
 `;

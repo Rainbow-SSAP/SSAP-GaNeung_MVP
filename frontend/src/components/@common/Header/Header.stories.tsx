@@ -14,7 +14,7 @@ const meta = {
         options: ["flex-start", "center", "flex-end"],
       },
     },
-    justifyContent: {
+    justifycontent: {
       control: {
         type: "select",
         options: ["flex-start", "center", "space-between", "flex-end"],
@@ -38,7 +38,7 @@ export const HeaderComponent: Story = {
     onBack: action("back-icon-clicked"),
     onMenu: action("menu-icon-clicked"),
     alignItems: "center",
-    justifyContent: "space-between",
+    justifycontent: "space-between",
     titleAlign: "center",
   },
 };

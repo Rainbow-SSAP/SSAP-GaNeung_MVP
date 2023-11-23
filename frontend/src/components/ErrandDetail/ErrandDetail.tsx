@@ -7,7 +7,7 @@ const ErrandDetail = ({ data }) => {
       <DetailTitle>심부름 장소 및 요청 내용</DetailTitle>
       <StopOverContainer>
         <StopOverTitle>장소</StopOverTitle>
-        <StopOverAddress>{data.roadAddress}</StopOverAddress>
+        <StopOverAddress>{data.detailedAddress}</StopOverAddress>
       </StopOverContainer>
       <StopOverDetailLayout>
         <StopOverContents>{data.description}</StopOverContents>

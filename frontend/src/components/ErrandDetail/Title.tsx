@@ -14,8 +14,7 @@ const Title = ({ data }) => {
         <Btn>
           <CategoryTag>{data.categoryTag}</CategoryTag>
         </Btn>
-        <DetailItem>편의점 배달</DetailItem>
-        {/* <DetailItem>${data.detailItem}</DetailItem>  */}
+        <DetailItem>{data.detailitem}</DetailItem>
       </BtnLayout>
       <Layout>
         <TitleLayout>

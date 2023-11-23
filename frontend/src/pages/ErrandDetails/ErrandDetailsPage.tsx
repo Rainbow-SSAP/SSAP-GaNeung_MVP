@@ -63,7 +63,7 @@ const ErrandDetailsPage = () => {
         justifycontent="space-between"
         titleAlign="center"
       />
-      <KakaoMap />
+      <KakaoMap data={data} />
       {/* <ErrandCategory data={data} /> */}
       <Title data={data} />
       <ErrandFeeContainer data={data} />

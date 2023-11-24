@@ -30,6 +30,9 @@ export default function Category() {
   const selectedCategory = watch("category");
   console.log("선택된 카테고리:", selectedCategory);
 
+  const selectedSubCategory = watch("detailedItem");
+  console.log("선택된 하위 카테고리:", selectedSubCategory);
+
   // 선택된 카테고리의 ID를 찾아서 저장
   useEffect(() => {
     const CategoryId = categories.find(
@@ -49,7 +52,7 @@ export default function Category() {
         setValue("detailedItem", subCategories[0].categoryName);
       }
     }
-  }, [categories]);
+  }, [categories, subCategories]);
 
   return (
     <CategoryContainer>

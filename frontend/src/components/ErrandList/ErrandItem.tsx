@@ -48,7 +48,7 @@ export const ErrandItem = (errandItemProps: ErrandItemProps) => {
 
   return (
     <ErrandItemWrapper>
-      <Link to={`/errand/:${taskId}`}>
+      <Link to={`/errand/${taskId}`}>
         <ItemLeft fileData={fileData}>
           <img
             src={fileData || defaultProfileImg}

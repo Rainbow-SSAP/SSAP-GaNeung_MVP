@@ -1,22 +1,28 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import mockData from "../../mocks/ErrandRequestMockData.json";
-const Title = () => {
+const Title = ({ data }) => {
   const [requestData, setRequestData] = useState(mockData.request);
   const [response, setResponseData] = useState(mockData.response);
+  const auctionEndTime =
+    data.auctionEndTime || "경매로 설정되지 않은 심부름입니다.";
+
+  //TODO 편의점 배달 부분 detailItem api 수정되면 고치기
   return (
-    <Layout>
-      <TitleLayout>
-        <ErrandTitle>{requestData.title}</ErrandTitle>
-        <Deadline>{requestData.startTime}</Deadline>
-      </TitleLayout>
-      {/* <ErrandFeeContainer>
-        <ErrandFeeSection>
-          <ErrandFeeTitle>심부름비</ErrandFeeTitle>
-          <Fee>TODO 5000원</Fee>
-        </ErrandFeeSection>
-      </ErrandFeeContainer> */}
-    </Layout>
+    <>
+      <BtnLayout>
+        <Btn>
+          <CategoryTag>{data.categoryTag}</CategoryTag>
+        </Btn>
+        <DetailItem>{data.detailitem}</DetailItem>
+      </BtnLayout>
+      <Layout>
+        <TitleLayout>
+          <ErrandTitle>{data.title}</ErrandTitle>
+          <Deadline>{auctionEndTime} 경매 마감</Deadline>
+        </TitleLayout>
+      </Layout>
+    </>
   );
 };
 
@@ -24,7 +30,7 @@ export default Title;
 
 const Layout = styled.div`
   display: flex;
-  padding: 3rem 0rem;
+  padding: 1.5rem 0rem;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
@@ -52,6 +58,44 @@ const Deadline = styled.h2`
   font-style: normal;
   font-weight: 400;
   line-height: 1.8rem;
+`;
+
+const BtnLayout = styled.div`
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+`;
+
+const Btn = styled.div`
+  display: flex;
+  width: 6.5rem;
+  height: 2.3rem;
+  padding: 0.45rem 1.4rem 0.65rem 1.2rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5rem;
+  border: 0.5px solid var(--neutral-grey-800, #323f4b);
+  background: #262626;
+`;
+
+const CategoryTag = styled.p`
+  color: var(--neutral-white, #fff);
+  text-align: center;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+  letter-spacing: 1.25px;
+`;
+
+const DetailItem = styled.p`
+  color: #8c8c8c;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 150% */
 `;
 
 // const ErrandFeeContainer = styled.div`

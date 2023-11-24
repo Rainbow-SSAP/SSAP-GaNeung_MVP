@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const ErrandDate = () => {
+const ErrandDate = ({ data }) => {
+  const errandStartTime = data.startTime || "심부름 시작 시간 미설정";
   return (
     <Layout>
       <Date>일시</Date>
-      <DateDetail>TODO 자세한 일정 추가</DateDetail>
+      <DateDetail>{errandStartTime}</DateDetail>
     </Layout>
   );
 };

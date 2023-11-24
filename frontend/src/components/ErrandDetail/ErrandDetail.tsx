@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-const ErrandDetail = () => {
+const ErrandDetail = ({ data }) => {
   return (
     <Layout>
       <DetailTitle>심부름 장소 및 요청 내용</DetailTitle>
       <StopOverContainer>
-        <StopOverTitle>경유지</StopOverTitle>
-        <StopOverAddress>TODO 경유지 주소</StopOverAddress>
+        <StopOverTitle>장소</StopOverTitle>
+        <StopOverAddress>{data.detailedAddress}</StopOverAddress>
       </StopOverContainer>
       <StopOverDetailLayout>
-        <StopOverContents>TODO 심부름 요청 내용입니다.</StopOverContents>
+        <StopOverContents>{data.description}</StopOverContents>
       </StopOverDetailLayout>
     </Layout>
   );

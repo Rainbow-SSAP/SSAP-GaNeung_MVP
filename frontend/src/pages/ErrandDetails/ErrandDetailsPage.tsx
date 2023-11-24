@@ -3,16 +3,40 @@ import { Button } from "../../components/@common/Button/Button";
 import BottomSheet from "../../components/bottomSheet/BottomSheet";
 import Content from "../../components/bottomSheet/Content";
 import { ToastContainer } from "react-toastify";
-import KakaoMap from "./KakaoMap";
-import Title from "./Title";
-import ErrandFeeContainer from "./ErrandFeeContainer";
-import ErrandDate from "./ErrandDate";
-import ErrandDetail from "./ErrandDetail";
-import UserProfile from "./UserProfile";
+import ErrandDetail from "../../components/ErrandDetail/ErrandDetail";
 import { Header } from "../../components/@common/Header/Header";
+import ErrandDate from "../../components/ErrandDetail/ErrandDate";
+import ErrandFeeContainer from "../../components/ErrandDetail/ErrandFeeContainer";
+import KakaoMap from "../../components/ErrandDetail/KakaoMap";
+import Title from "../../components/ErrandDetail/Title";
+import UserProfile from "../../components/ErrandDetail/UserProfile";
+import { useParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import { getErrandDetails } from "../../apis/errandDetail";
+import { accessToken } from "../../apis/OAuth";
+import ErrandCategory from "../../components/ErrandDetail/ErrandCategory";
 
 const ErrandDetailsPage = () => {
   const [open, setOpen] = useState(false);
+
+  const { taskId } = useParams<{ taskId: string }>();
+  const { data, isLoading, error } = useQuery(`errand-details-${taskId}`, () =>
+    getErrandDetails(String(taskId), accessToken),
+  );
+
+  console.log("data", data);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: 데이터를 불러오는 중에 오류가 발생하였습니다.</div>;
+  }
+
+  if (data == null) {
+    return <div>데이터가 없습니다.</div>;
+  }
 
   const handleBtnClick = () => {
     //바텀 시트 로직
@@ -39,12 +63,13 @@ const ErrandDetailsPage = () => {
         justifycontent="space-between"
         titleAlign="center"
       />
-      <KakaoMap />
-      <Title />
-      <ErrandFeeContainer />
-      <ErrandDate />
-      <ErrandDetail />
-      <UserProfile />
+      <KakaoMap data={data} />
+      {/* <ErrandCategory data={data} /> */}
+      <Title data={data} />
+      <ErrandFeeContainer data={data} />
+      <ErrandDate data={data} />
+      <ErrandDetail data={data} />
+      <UserProfile data={data} />
       <Button
         text="✋ 심부름 지원하기"
         size="large"

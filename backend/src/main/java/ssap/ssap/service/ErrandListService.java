@@ -1,19 +1,17 @@
 package ssap.ssap.service;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ssap.ssap.domain.Auction;
-import ssap.ssap.domain.Category;
-import ssap.ssap.domain.Task;
-import ssap.ssap.domain.User;
+import ssap.ssap.domain.*;
 import ssap.ssap.repository.AuctionRepository;
 import ssap.ssap.repository.TaskRepository;
 import ssap.ssap.repository.UserRepository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ErrandListService {
@@ -30,54 +28,50 @@ public class ErrandListService {
     }
 
     @Transactional(readOnly = true)
-    public Map<String, Object> getErrandDetails(Long taskId) {
-        Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new EntityNotFoundException("id: " + taskId + " 를 찾을 수 없습니다"));
+    public List<Map<String, Object>> getErrandsByCategory(Long categoryId) {
+        List<Task> tasks = taskRepository.findByCategoryId(categoryId);
+        return tasks.stream().map(this::convertTaskToMap).collect(Collectors.toList());
+    }
 
-        // User 정보를 가져올 때는, Task 엔티티에서 직접 가져옵니다.
-        // 이 예제에서는 UserRepository를 사용하지 않습니다.
-        User user = task.getUser();
-        if (user == null) {
-            throw new EntityNotFoundException("User id: " + taskId + " 에 해당하는 사용자를 찾을 수 없습니다");
-        }
+    private Map<String, Object> convertTaskToMap(Task task) {
+        Map<String, Object> errandMap = new HashMap<>();
 
-        Category category = task.getCategory();
-        if (category == null) {
-            throw new EntityNotFoundException("Category id: " + taskId + " 에 해당하는 사용자를 찾을 수 없습니다");
-        }
-
-        Auction auction = task.getAuction();
-        if (auction == null) {
-            throw new EntityNotFoundException("Auction id: " + taskId + " 에 해당하는 사용자를 찾을 수 없습니다");
-        }
-
-        Map<String, Object> errandList = new HashMap<>();
-
-        // Task 정보
-        errandList.put("title", task.getTitle());
-        errandList.put("description", task.getDescription());
-        errandList.put("fee", task.getFee());
-        errandList.put("auctionStartTime", task.getAuctionStartTime());
-        errandList.put("auctionEndTime", task.getAuctionEndTime());
-        errandList.put("StartTime", task.getStartTime());
-        errandList.put("EndTime", task.getEndTime());
-        errandList.put("roadAddress", task.getRoadAddress());
-        errandList.put("jibunAddress", task.getJibunAddress());
-        errandList.put("detailedAddress", task.getDetailedAddress());
+        errandMap.put("taskId", task.getId());
+        errandMap.put("title", task.getTitle());
+        errandMap.put("fee", task.getFee());
+        errandMap.put("startTime", task.getStartTime());
+        errandMap.put("auctionEndTime", task.getAuctionEndTime());
+        errandMap.put("roadAddress", task.getRoadAddress());
+        errandMap.put("jibunAddress", task.getJibunAddress());
+        errandMap.put("detailedAddress", task.getDetailedAddress());
 
         // User 정보
-        errandList.put("name", task.getUser().getName());
-        errandList.put("ageRange", task.getUser().getAgeRange());
-        errandList.put("gender", task.getUser().getGender());
-        errandList.put("profileImageUrl", task.getUser().getProfileImageUrl());
+        User user = task.getUser();
+        if (user != null) {
+            errandMap.put("userId", user.getUserId());
+        }
 
         // Category 정보
-        errandList.put("categoryTag", task.getCategory().getCategoryName());
-        errandList.put("detailitem", task.getDetailedItem().getDetailedItemName()); // 필요 시 사용
+        Category category = task.getCategory();
+        if (category != null) {
+            errandMap.put("categoryId", category.getId());
+            errandMap.put("categoryName", category.getCategoryName());
+        }
 
         // Auction 정보
-        errandList.put("auctionId",auction.getId());
+        Auction auction = task.getAuction();
+        if (auction != null) {
+            errandMap.put("auctionId", auction.getId());
+        }
 
-        return errandList;
+        // TaskAttachment 정보 (첨부 파일 정보)
+        List<TaskAttachment> attachments = task.getAttachments();
+        if (attachments != null && !attachments.isEmpty()) {
+            // 첫 번째 첨부 파일 정보만 불러오기
+            TaskAttachment firstAttachment = attachments.get(0);
+            errandMap.put("firstAttachmentId", firstAttachment.getId());
+            errandMap.put("firstAttachmentFileData", firstAttachment.getFileData());
+        }
+        return errandMap;
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import ssap.ssap.service.ErrandListService;
 import ssap.ssap.service.OAuthService;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -28,9 +29,9 @@ public class ErrandListController {
         this.oAuthService = oAuthService;
     }
 
-    @GetMapping("/{taskId}")
+    @GetMapping("/category/{categoryId}")
     @Operation(summary = "심부름 리스트 상세 페이지 조회")
-    public ResponseEntity<?> getErrandDetails(@PathVariable Long taskId,
+    public ResponseEntity<?> getErrandsByCategory(@PathVariable Long categoryId,
                                               @RequestHeader("Authorization") String authorizationHeader) {
 
         try {
@@ -40,8 +41,8 @@ public class ErrandListController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("액세스 토큰이 유효하지 않거나 만료되었습니다.");
             }
 
-            Map<String, Object> errandDetails = errandListService.getErrandDetails(taskId);
-            return ResponseEntity.ok(errandDetails);
+            List<Map<String, Object>> errands = errandListService.getErrandsByCategory(categoryId);
+            return ResponseEntity.ok(errands);
 
         }catch (EntityNotFoundException e){
             log.error("요청한 엔터티를 찾을 수 없습니다.", e);

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import UserProfile from "./UserProfile";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Nav from "./Nav";
 import { GnbHeader } from "../GnbHeader/GnbHeader";
 
@@ -31,17 +31,26 @@ function Menu({ isOpen }: MenuProps) {
 }
 
 const MenuContainer = styled.aside<MenuProps>`
-  position: fixed;
+  position: absolute;
   top: 0;
   right: ${({ isOpen }) => (isOpen ? "0" : "-100%")};
   width: 100%;
   height: 100vh;
   z-index: 10;
+  padding: 0 2rem;
   background-color: white;
   transition: right 0.3s;
   overflow-y: auto;
+
+  scrollbar-width: none; /* Firefox 용 스크롤바 숨김 */
+  -ms-overflow-style: none; /* IE/Edge 용 스크롤바 숨김 */
+  &::-webkit-scrollbar {
+    /* Webkit (Safari, Chrome) 용 스크롤바 숨김 */
+    width: 0px;
+  }
 `;
+
 const MenuContents = styled.div`
-  padding: 0 5vw;
+  padding: 0 2rem;
 `;
 export default Menu;

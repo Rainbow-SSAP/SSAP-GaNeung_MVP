@@ -9,7 +9,8 @@ import { ErrandFormData } from "../../types/errand";
 import { buttonOtions, categories } from "../../constants/errand";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { uploadImgState } from "../../recoil/atoms/errand";
+import { uploadImgState } from "../../recoil/atoms/errandState";
+import Template from "../../components/Template";
 
 const ErrandRequestPage = () => {
   const [uploadImg, setUploadImg] = useRecoilState<File[]>(uploadImgState);
@@ -19,10 +20,8 @@ const ErrandRequestPage = () => {
   const methods = useForm<ErrandFormData>({
     defaultValues: {
       // 기본값
-      category: categories[0].value,
-      detailedItem: categories[0].detailedItems
-        ? categories[0].detailedItems[0].value
-        : "",
+      category: "",
+      detailedItem: "",
       title: "",
       roadAddress: "",
       jibunAddress: "",
@@ -60,13 +59,17 @@ const ErrandRequestPage = () => {
         formData.append("files", file);
       });
     }
+
     mutation.mutate(data, {
       onSuccess: (response) => {
         console.log("Response:", response);
-        // 성공 시 초기화 및 home으로 라우터
+        // 성공 시 초기화
         reset();
         setUploadImg([]);
-        navigaet("/home");
+
+        // 상세페이지로 라우터
+        const errandId = response.requestId;
+        navigaet(`/errand/:${errandId}`);
       },
       onError: (error) => {
         // 오류 처리
@@ -76,21 +79,22 @@ const ErrandRequestPage = () => {
   };
 
   return (
-    <div>
-      <FormWapper onSubmit={methods.handleSubmit(onSubmit)}>
+    <Template headerProps={{ title: "심부름 요청서" }}>
+      <FormWapper onSubmit={handleSubmit(onSubmit)}>
         {/* useForm 훅에서 반환된 메서드를 자식 컴포넌트로 전달합니다 */}
         <FormProvider {...methods}>
           <ErrandRequest />
           <Button text="🚨 심부름 요청하기" type="submit" />
         </FormProvider>
       </FormWapper>
-    </div>
+    </Template>
   );
 };
 
 const FormWapper = styled.form`
+  width: 100%;
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 2rem;
 `;
 
 export default ErrandRequestPage;

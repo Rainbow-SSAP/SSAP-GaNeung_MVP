@@ -3,15 +3,16 @@ import styled, { css } from "styled-components";
 import defaultProfileImg from "../../assets/images/ssap_icon.svg";
 import { LikedButton } from "./LikedButton";
 import { Link } from "react-router-dom";
+import useAuctionTimeLeft from "../../hooks/useAuctionTimeLeft";
 
 export interface ErrandItemProps {
   taskId: string;
   fileData?: string; // 썸네일 이미지 URL
   district: string; // 동 이름
   title: string; // 제목
-  fee: string; // 심부름비
+  fee: number; // 심부름비
   startTime?: string; // 심부름 시작 시간
-  endTime?: string; // 경매 마감 시간
+  auctionEndTime?: string; // 경매 마감 시간
   isLiked?: boolean; // 찜하기
 }
 
@@ -23,17 +24,12 @@ export const ErrandItem = (errandItemProps: ErrandItemProps) => {
     title,
     fee,
     startTime,
-    endTime,
+    auctionEndTime,
     isLiked = false,
   } = errandItemProps;
+
   const [liked, setLiked] = useState(isLiked);
-
-  // 찜하기 상태를 토글하는 함수
-  const toggleLiked = () => {
-    setLiked(!liked);
-
-    // 찜 상태 업뎃 api 호출 로직 필요
-  };
+  const coutdown = useAuctionTimeLeft(auctionEndTime);
 
   console.log("심부름 내역", {
     taskId,
@@ -42,9 +38,19 @@ export const ErrandItem = (errandItemProps: ErrandItemProps) => {
     title,
     fee,
     startTime,
-    endTime,
+    auctionEndTime,
     isLiked,
   });
+
+  // fee가 문자열이라면 숫자로 변환, 아니면 그대로 사용
+  const numFee = typeof fee === "string" ? parseInt(fee, 10) : fee;
+
+  // 찜하기 상태를 토글하는 함수
+  const toggleLiked = () => {
+    setLiked(!liked);
+
+    // 찜 상태 업뎃 api 호출 로직 필요
+  };
 
   return (
     <ErrandItemWrapper>
@@ -58,14 +64,14 @@ export const ErrandItem = (errandItemProps: ErrandItemProps) => {
         <ItemRight>
           <span>{district}</span>
           <h4>{title}</h4>
-          <p>{fee}원</p>
+          <p>{`${numFee}원`}</p>
           <Time>
             <span>{startTime || `지금 즉시 헬프미`}</span>
-            <span>{endTime || `시간 제한 없음`}</span>
+            <span>{coutdown || `시간 제한 없음`}</span>
           </Time>
         </ItemRight>
-        <LikedButton isLiked={liked} onToggleLiked={toggleLiked} />
       </Link>
+      <LikedButton isLiked={liked} onToggleLiked={toggleLiked} />
     </ErrandItemWrapper>
   );
 };

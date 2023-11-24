@@ -5,7 +5,7 @@ import { buttonOtions } from "../../../constants/errand";
 import ErrorMessage from "../../@common/Error/ErrorMessage";
 import DateInput from "../DateInput/DateInput";
 import { useRecoilState } from "recoil";
-import { auctionTimeState } from "../../../recoil/atoms/errand";
+import { auctionTimeState } from "../../../recoil/atoms/errandState";
 import { format } from "date-fns";
 
 export default function AuctionStatus() {

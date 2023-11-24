@@ -1,7 +1,6 @@
 import React from "react";
 import { ErrandItem, ErrandItemProps } from "./ErrandItem";
 import styled from "styled-components";
-import { errandsData } from "../../mocks/errandsData";
 import { useQuery } from "react-query";
 import { getErrands } from "../../apis/errand";
 
@@ -41,20 +40,18 @@ function Errands() {
               title={item.title}
               fee={item.fee}
               startTime={item.startTime}
-              endTime={item.endTime}
+              auctionEndTime={item.auctionEndTime}
               isLiked={item.isLiked}
             />
           );
         })}
-        {/* {ErrandItems.map((item, index) => (
-          <ErrandItem key={index} {...item} />
-        ))}*/}
       </ErrandItemsWrapper>
     </ErrandsWrapper>
   );
 }
 
 const ErrandsWrapper = styled.section`
+  width: 100%;
   margin: 40px 0;
   > h3 {
     font-size: 18px;

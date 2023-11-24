@@ -1,20 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import defaultProfileImg from "../../../../assets/images/ssap_icon.svg";
-import { user } from "../../../../mocks/userData";
-import { LogoutHandler } from "../../../../apis/Logout";
-
-// 로그아웃 처리
-const handleLogout = () => {
-  LogoutHandler();
-};
+import { useLogoutHandler } from "../../../../apis/Logout";
+import user from "../../../../mocks/userData.json";
+import { useRecoilValue } from "recoil";
+// import { authInfoState } from "../../recoil/atoms/userInfo";
 
 function UserProfile() {
+  // const authInfo = useRecoilValue(authInfoState); // TODO 로그인된 사용자 데이터로 변경 예정
+  const logoutFunction = useLogoutHandler();
+
+  // 로그아웃 처리
+  const handleLogout = () => {
+    logoutFunction();
+  };
+
   return (
     <UserProfileWrapper>
       <UserImgBox>
         <img
-          src={user.profileImg || defaultProfileImg}
+          src={user.profileImageUrl || defaultProfileImg}
           alt={`${user.userName}의 프로필 이미지`}
         />
       </UserImgBox>

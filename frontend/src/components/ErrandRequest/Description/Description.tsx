@@ -11,9 +11,10 @@ export default function Description() {
         name="description"
         control={control}
         rules={{
-          minLength: {
-            value: 1,
-            message: "요청 내용을 입력해 주세요.", // 최소 길이
+          required: "요청 내용은 필수항목입니다.", // 필수 입력
+          maxLength: {
+            value: 1000,
+            message: "1000자까지 입력해 주세요.", // 최소 길이
           },
         }}
         render={({ field, fieldState: { error } }) => (

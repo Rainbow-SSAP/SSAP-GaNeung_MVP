@@ -69,7 +69,7 @@ const ErrandRequestPage = () => {
 
         // 상세페이지로 라우터
         const errandId = response.requestId;
-        navigaet(`/errand/:${errandId}`);
+        navigaet(`/errand/${errandId}`);
       },
       onError: (error) => {
         // 오류 처리

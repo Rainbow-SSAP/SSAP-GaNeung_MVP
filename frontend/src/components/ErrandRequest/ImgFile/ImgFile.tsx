@@ -11,6 +11,11 @@ function ImgFile() {
 
   // 유효성 검사
   const validateFiles = (fileList) => {
+    // fileList가 undefined이거나 비어있는 경우, 유효성 검사를 통과
+    if (!fileList || fileList.length === 0) {
+      return true;
+    }
+
     if (!fileList || fileList.length > 0) {
       // 파일 개수 검사
       if (fileList.length > 5) {

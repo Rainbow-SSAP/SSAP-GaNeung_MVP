@@ -23,6 +23,11 @@ export default function Category() {
     () => getSubCategories(selectedCategoryId),
     {
       enabled: !!selectedCategoryId, // 선택된 카테고리가 있을 때만 쿼리 실행
+      onSuccess: (subCategories) => {
+        if (subCategories.length > 0) {
+          setValue("detailedItem", subCategories[0].categoryName);
+        }
+      },
     },
   );
 
@@ -35,24 +40,18 @@ export default function Category() {
 
   // 선택된 카테고리의 ID를 찾아서 저장
   useEffect(() => {
-    const CategoryId = categories.find(
+    const foundCategory = categories.find(
       (category) => category.categoryName === selectedCategory,
-    )?.id;
-    console.log("선택된 카테고리 Id:", CategoryId);
-
-    setSelectedCategoryId(CategoryId);
-  }, [selectedCategory]);
+    );
+    setSelectedCategoryId(foundCategory?.id);
+  }, [selectedCategory, categories, setSelectedCategoryId]);
 
   // 카테고리 데이터가 로드되었을 때 초기값 설정
   useEffect(() => {
     if (categories.length > 0) {
       setValue("category", categories[0].categoryName);
-
-      if (subCategories.length > 0) {
-        setValue("detailedItem", subCategories[0].categoryName);
-      }
     }
-  }, [categories, subCategories]);
+  }, [categories, setValue]);
 
   return (
     <CategoryContainer>

@@ -89,8 +89,6 @@ public class TaskService {
         task.setAuctionEndTime(createForm.getAuctionEndTime());
         task.setStatus(createForm.getAuctionStatus() ? "경매중" : "대기중");
 
-        taskRepository.save(task); // task 저장
-
         // 파일 업로드 처리
         if (createForm.getFiles() != null && !createForm.getFiles().isEmpty()) {
             List<TaskAttachment> attachments = uploadFilesToS3(createForm.getFiles());
@@ -105,6 +103,8 @@ public class TaskService {
         task.setUser(user);
         task.setCategory(category);
         task.setDetailedItem(detailedItem);
+
+        taskRepository.save(task); // task 저장
 
         if (task.getAuctionStatus()) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

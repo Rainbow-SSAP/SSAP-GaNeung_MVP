@@ -5,6 +5,8 @@ import { useRecoilState } from "recoil";
 import { selectedCategoryIdState } from "../../../recoil/atoms/errandState";
 import { useQuery } from "react-query";
 import { getCategories, getSubCategories } from "../../../apis/category";
+import ErrorMessage from "../../@common/Error/ErrorMessage";
+import styled from "styled-components";
 
 export default function Category() {
   const { control, watch, setValue } = useFormContext();
@@ -50,39 +52,52 @@ export default function Category() {
   }, [categories]);
 
   return (
-    <div>
+    <CategoryContainer>
       <Controller
         name="category"
         control={control}
-        render={({ field }) => (
-          <FormItem
-            label="항목 선택"
-            type="select"
-            selectProps={{
-              ...field,
-              options: categories,
-              id: "id",
-              text: "categoryName",
-            }}
-          />
+        rules={{ required: "심부름 항목을 선택해주세요." }}
+        render={({ field, fieldState: { error } }) => (
+          <div>
+            <FormItem
+              label="항목 선택"
+              type="select"
+              selectProps={{
+                ...field,
+                options: categories,
+                id: "id",
+                text: "categoryName",
+              }}
+            />
+            <ErrorMessage message={error?.message} />
+          </div>
         )}
       />
       <Controller
         name="detailedItem"
         control={control}
-        render={({ field }) => (
-          <FormItem
-            label="하위 카테고리"
-            type="select"
-            selectProps={{
-              ...field,
-              options: subCategories,
-              id: "id",
-              text: "categoryName",
-            }}
-          />
+        rules={{ required: "하위 심부름 항목을 선택해주세요." }}
+        render={({ field, fieldState: { error } }) => (
+          <div>
+            <FormItem
+              label="하위 카테고리"
+              type="select"
+              selectProps={{
+                ...field,
+                options: subCategories,
+                id: "id",
+                text: "categoryName",
+              }}
+            />
+            <ErrorMessage message={error?.message} />
+          </div>
         )}
       />
-    </div>
+    </CategoryContainer>
   );
 }
+
+const CategoryContainer = styled.div`
+  display: grid;
+  grid-gap: 2rem;
+`;

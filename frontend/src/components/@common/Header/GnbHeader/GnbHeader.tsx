@@ -34,21 +34,21 @@ export const GnbHeader = (gnbHeaderProps: GnbHeaderProps) => {
 
   return (
     <GnbHeaderWrapper>
-      {goBack && (
-        <IconWrapper>
+      <IconWrapper>
+        {goBack && (
           <img
             src={headerImage.arrow_back}
             alt="뒤로가기 버튼"
             onClick={handleGoBack}
           />
-        </IconWrapper>
-      )}
+        )}
+      </IconWrapper>
       <Title>{title}</Title>
-      {close && (
-        <IconWrapper>
+      <IconWrapper>
+        {close && (
           <img src={headerImage.close} alt="닫기 버튼" onClick={handleClose} />
-        </IconWrapper>
-      )}
+        )}
+      </IconWrapper>
     </GnbHeaderWrapper>
   );
 };
@@ -56,11 +56,9 @@ export const GnbHeader = (gnbHeaderProps: GnbHeaderProps) => {
 const GnbHeaderWrapper = styled.div`
   display: flex;
   width: 100%;
-  padding: 5vw 5vw 10px;
+  padding: 20px 0;
   justify-content: space-between;
   align-items: center;
-  /* border-bottom: 1px solid #e2e2e2; */
-  /* box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25); */
 `;
 
 const IconWrapper = styled.div`
@@ -69,10 +67,10 @@ const IconWrapper = styled.div`
   align-items: center;
   width: 24px;
   height: 24px;
-  cursor: pointer;
 
   img {
     width: 100%;
+    cursor: pointer;
   }
 `;
 

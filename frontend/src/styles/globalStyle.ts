@@ -6,6 +6,10 @@ const styled = { createGlobalStyle };
 const GlobalStyle = styled.createGlobalStyle`
   ${normalize} // 브라우저마다 동일하게 CSS 적용시키기
 
+  :root {
+    --vh: 100%;
+  }
+
   @font-face {
     font-family: "Noto Sans KR", sans-serif;
     src: url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
@@ -44,10 +48,7 @@ const GlobalStyle = styled.createGlobalStyle`
 
   body {
     font-family: "Noto Sans KR", sans-serif;
-    /* TODO: 전체 레이아웃 수정 필요 */
-    /* min-width: 768px; */
-    padding: 5vw;
-    /* background-color: beige; */
+    background-color: #262626;
   }
 
   ol,

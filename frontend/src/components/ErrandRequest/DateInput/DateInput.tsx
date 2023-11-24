@@ -1,11 +1,11 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { FaCalendar } from "react-icons/fa";
 import { GoDash } from "react-icons/go";
 import { ko } from "date-fns/esm/locale";
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { format, setHours, setMinutes } from "date-fns";
+import { setHours, setMinutes } from "date-fns";
 
 interface DateInputProps {
   startDate: Date;
@@ -13,6 +13,19 @@ interface DateInputProps {
   endDate: Date;
   setEndDate: (date: Date) => void;
 }
+
+interface ExampleCustomInputProps {
+  value?: string;
+  onClick?: () => void;
+}
+
+const CustomInput = forwardRef<HTMLButtonElement, ExampleCustomInputProps>(
+  ({ value, onClick }) => (
+    <StyledCustomInput onClick={onClick}>{value}</StyledCustomInput>
+  ),
+);
+
+CustomInput.displayName = "CustomInput";
 
 function DateInput({
   startDate,
@@ -47,6 +60,7 @@ function DateInput({
           filterTime={filterPassedTime} // 이전 시간 필터링
           closeOnScroll={true} // 스크롤을 움직였을 때 자동으로 닫히도록 설정 기본값 false
           onChange={handleStartDateChange}
+          customInput={<CustomInput />}
         />
         <StyledIcon />
       </DateInputBox>
@@ -63,6 +77,7 @@ function DateInput({
           maxTime={setHours(setMinutes(new Date(), 59), 23)}
           closeOnScroll={true} // 스크롤을 움직였을 때 자동으로 닫히도록 설정 기본값 false
           onChange={(date: Date) => setEndDate(date)}
+          customInput={<CustomInput />}
         />
         <StyledIcon />
       </DateInputBox>
@@ -83,6 +98,13 @@ const DateInputBox = styled.div`
   > .react-datepicker-wrapper {
     width: 100%;
   }
+  .react-datepicker-popper {
+    display: flex;
+  }
+  .react-datepicker-popper[data-placement^="bottom"]
+    .react-datepicker__triangle {
+    display: none;
+  }
 `;
 
 const StyledDatePicker = styled(DatePicker)`
@@ -94,9 +116,18 @@ const StyledDatePicker = styled(DatePicker)`
   border: 1px solid #f4f4f4;
   background-color: white;
 
-  > input {
+  > .custom_input {
     width: 100%;
   }
+`;
+const StyledCustomInput = styled.div`
+  cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  border: 1px solid #f4f4f4;
+  background-color: white;
 `;
 
 const StyledIcon = styled(FaCalendar)`

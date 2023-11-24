@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const ErrandDate = ({ data }) => {
-  const auctionEndTime = data.auctionEndTime || "없음";
+  const errandStartTime = data.startTime || "심부름 시작 시간 미설정";
   return (
     <Layout>
       <Date>일시</Date>
-      <DateDetail>{auctionEndTime}</DateDetail>
+      <DateDetail>{errandStartTime}</DateDetail>
     </Layout>
   );
 };

@@ -2,14 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import defaultProfileImg from "../../../../assets/images/ssap_icon.svg";
 import { user } from "../../../../mocks/userData";
-import { LogoutHandler } from "../../../../apis/Logout";
-
-// 로그아웃 처리
-const handleLogout = () => {
-  LogoutHandler();
-};
+import { useLogoutHandler } from "../../../../apis/Logout";
 
 function UserProfile() {
+  const logoutFunction = useLogoutHandler();
+  // 로그아웃 처리
+  const handleLogout = () => {
+    logoutFunction();
+  };
+
   return (
     <UserProfileWrapper>
       <UserImgBox>

@@ -11,23 +11,21 @@ function ImgFile() {
 
   // 유효성 검사
   const validateFiles = (fileList) => {
-    if (!fileList || fileList.length === 0) {
-      return "파일을 선택해주세요.";
-    }
-
-    // 파일 개수 검사
-    if (fileList.length > 5) {
-      return "최대 5개의 파일만 업로드할 수 있습니다.";
-    }
-
-    // 파일 확장자 및 용량 검사
-    for (const file of fileList) {
-      if (!file.type.includes("jpeg") && !file.type.includes("png")) {
-        return "JPG 또는 PNG 파일만 업로드할 수 있습니다.";
+    if (!fileList || fileList.length > 0) {
+      // 파일 개수 검사
+      if (fileList.length > 5) {
+        return "최대 5개의 파일만 업로드할 수 있습니다.";
       }
-      if (file.size > 5 * 1024 * 1024) {
-        // 5MB
-        return "파일 크기는 5MB를 초과할 수 없습니다.";
+
+      // 파일 확장자 및 용량 검사
+      for (const file of fileList) {
+        if (!file.type.includes("jpeg") && !file.type.includes("png")) {
+          return "JPG 또는 PNG 파일만 업로드할 수 있습니다.";
+        }
+        if (file.size > 5 * 1024 * 1024) {
+          // 5MB
+          return "파일 크기는 5MB를 초과할 수 없습니다.";
+        }
       }
     }
     return true;

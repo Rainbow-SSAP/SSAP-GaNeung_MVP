@@ -55,14 +55,14 @@ const ErrandDetailsPage = () => {
   return (
     <div>
       {/* 심부름 상세 페이지 보이는 컴포넌트 추가 TODO */}
-      <Header
+      {/* <Header
         title="상세 페이지"
         onBack={handleBack}
         onMenu={handleMenu}
         alignItems="center"
         justifycontent="space-between"
         titleAlign="center"
-      />
+      /> */}
       <KakaoMap data={data} />
       {/* <ErrandCategory data={data} /> */}
       <Title data={data} />

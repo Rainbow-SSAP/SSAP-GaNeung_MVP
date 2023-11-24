@@ -1,0 +1,99 @@
+{
+  "content": [
+    {
+      "taskId": 41,
+      "title": "1",
+      "description": "1",
+      "district": "아라일동",
+      "startTime": null,
+      "auctionEndTime": "2023-11-24 04:26",
+      "fee": "5000",
+      "fileData": "https://ssap-ganeung.s3.ap-northeast-2.amazonaws.com/bfdda6f4-0332-4681-b640-8718bc09910a_1e60c2ab-5859-4efd-a75d-d6a29d0df964_SSAP.jpeg"
+    },
+    {
+      "taskId": 42,
+      "title": "2",
+      "description": "2",
+      "district": "영평동",
+      "startTime": null,
+      "auctionEndTime": "2023-11-24 04:26",
+      "fee": "5000",
+      "fileData": "https://ssap-ganeung.s3.ap-northeast-2.amazonaws.com/e9edfd8b-9d3f-4082-962d-16459f59fc23_3aa29116-e049-4476-a46d-feded9262866_5500ca7d-3b15-4e5c-93ed-c0920ad9590e_63165cafc2ae33674551a946f40733a2.jpg"
+    },
+    {
+      "taskId": 43,
+      "title": "3",
+      "description": "3",
+      "district": "영평동",
+      "startTime": null,
+      "auctionEndTime": "2023-11-24 06:00",
+      "fee": "5000",
+      "fileData": null
+    },
+    {
+      "taskId": 44,
+      "title": "4",
+      "description": "4",
+      "district": "아라일동",
+      "startTime": "",
+      "auctionEndTime": "2023-11-24 06:00",
+      "fee": "5000",
+      "fileData": null
+    },
+    {
+      "taskId": 45,
+      "title": "대신 잠 좀 자줄 사람",
+      "description": "너무 피곤합니다 여러분. \r\n저는 여러분들이 너무 존경스러워요.\r\n어떻게 이 시간까지 집중력이 좋으시죠?\r\n\r\n저는 먼저 자러 가보겠습니다 \r\n\r\n밑에 선호 성별은 이상형을 얘기하는거죠? ㅎ\r\n\r\n",
+      "district": "화양동",
+      "startTime": null,
+      "auctionEndTime": "2023-11-24 11:00",
+      "fee": "200000000000000",
+      "fileData": "https://ssap-ganeung.s3.ap-northeast-2.amazonaws.com/94bd3601-8595-4fb9-9ea0-8e9ab279a74a_짱구 자는 짤.jpeg"
+    },
+    {
+      "taskId": 46,
+      "title": "수료하면 술마실사람 ㅎㅎ",
+      "description": "여기 조개구이 집인데 진짜 맛집이거든요?\r\n\r\n여기서 전통주랑 조개구이 먹으면 그냥 겁나 행복합니다.\r\n\r\n수료하면 놀러오세요 여러분",
+      "district": "군자동",
+      "startTime": null,
+      "auctionEndTime": "2023-12-01 14:00",
+      "fee": "20000",
+      "fileData": null
+    },
+    {
+      "taskId": 47,
+      "title": "경매 남은 시간 테스트",
+      "description": "경매 남은 시간 테스트",
+      "district": "수유동",
+      "startTime": null,
+      "auctionEndTime": "2023-11-26 19:00",
+      "fee": "333",
+      "fileData": null
+    }
+  ],
+  "pageable": {
+    "pageNumber": 0,
+    "pageSize": 20,
+    "sort": {
+      "empty": true,
+      "sorted": false,
+      "unsorted": true
+    },
+    "offset": 0,
+    "paged": true,
+    "unpaged": false
+  },
+  "totalPages": 1,
+  "totalElements": 7,
+  "last": true,
+  "size": 20,
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": false,
+    "unsorted": true
+  },
+  "numberOfElements": 7,
+  "first": true,
+  "empty": false
+}

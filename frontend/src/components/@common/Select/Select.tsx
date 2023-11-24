@@ -3,23 +3,17 @@ import styled, { css } from "styled-components";
 
 export interface SelectProps
   extends React.SelectHTMLAttributes<HTMLSelectElement> {
-  options: { value: string; text: string }[];
-  /*
-   * 배경색을 설정합니다.
-   */
-  // color?: "white" | "grey";
-  /*
-   * 우측에 들어갈 아이콘을 설정합니다.
-   */
-  // icon?: string;
+  options: Record<string, any>[];
+  id?: string; // 추가 프로퍼티 받아 필드명 지정
+  text?: string; // 추가 프로퍼티 받아 필드명 지정
 }
 
-export const Select = ({ options, ...restProps }: SelectProps) => {
+export const Select = ({ options, id, text, ...restProps }: SelectProps) => {
   return (
     <SelectWrapper {...restProps}>
       {options.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.text}
+        <option key={option[id]} value={option[text]}>
+          {option[text]}
         </option>
       ))}
     </SelectWrapper>

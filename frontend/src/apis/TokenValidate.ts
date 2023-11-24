@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import api from "./api";
 
 function TokenValidate() {
   const [cookies, setCookie] = useCookies(["refreshToken"]);
@@ -25,7 +26,7 @@ function TokenValidate() {
         );
 
         try {
-          const res = await axios({
+          const res = await api({
             method: "GET",
             url: `/api/oauth/validate-token?accessToken=${accessToken}`,
             // headers: {

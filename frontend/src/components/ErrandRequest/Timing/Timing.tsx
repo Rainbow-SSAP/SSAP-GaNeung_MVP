@@ -4,7 +4,7 @@ import { buttonOtions } from "../../../constants/errand";
 import { Controller, useFormContext } from "react-hook-form";
 import DateInput from "../DateInput/DateInput";
 import { useRecoilState } from "recoil";
-import { errandTimeState } from "../../../recoil/atoms/errand";
+import { errandTimeState } from "../../../recoil/atoms/errandState";
 import ErrorMessage from "../../@common/Error/ErrorMessage";
 import { format } from "date-fns";
 

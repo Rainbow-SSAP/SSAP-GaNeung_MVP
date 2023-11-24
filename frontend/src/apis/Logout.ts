@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "./api";
 
-export const LogoutHandler = () => {
+export const useLogoutHandler = () => {
   const navigate = useNavigate();
 
   const logout = async () => {
@@ -13,7 +13,7 @@ export const LogoutHandler = () => {
     }
 
     try {
-      const response = await axios.post(
+      const response = await api.post(
         `/api/oauth/kakao/logout`,
         // `/api/oauth/${provider}/logout`,
         {},
@@ -29,7 +29,7 @@ export const LogoutHandler = () => {
         sessionStorage.removeItem("accessToken"); // 토큰 삭제
         sessionStorage.removeItem("name"); // 다른 로컬 스토리지 데이터도 삭제
         sessionStorage.removeItem("provider");
-        navigate("/login"); // 로그인 페이지로 리디렉션
+        navigate("/"); // 로그인 페이지로 리디렉션
       }
     } catch (error) {
       console.error("로그아웃 실패:", error);

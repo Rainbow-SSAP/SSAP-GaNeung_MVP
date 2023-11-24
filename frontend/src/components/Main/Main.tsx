@@ -5,20 +5,20 @@ import styled from "styled-components";
 
 function Main() {
   return (
-    <MainWrapper>
-      <CategoryWrapper>
+    <MainContainer>
+      <Category>
         <CategoryGrid />
-      </CategoryWrapper>
+      </Category>
       <Errands />
-    </MainWrapper>
+    </MainContainer>
   );
 }
 
-const MainWrapper = styled.section`
+const MainContainer = styled.div`
   width: 100%;
 `;
 
-const CategoryWrapper = styled.div`
+const Category = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

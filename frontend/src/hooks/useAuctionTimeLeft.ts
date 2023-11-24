@@ -29,35 +29,22 @@ const useAuctionTimeLeft = (auctionEndTime) => {
         );
 
         let timeString = "";
-        
+
         // 문자 변환
         if (yearsLeft > 0) {
-          timeString += `${yearsLeft}년 `;
-          if (monthsLeft > 0) {
-            timeString += `${monthsLeft}개월 `;
-          }
+          timeString += `${yearsLeft}년 후 마감`;
         } else if (monthsLeft > 0) {
-          timeString += `${monthsLeft}개월 `;
-          if (daysLeft > 0) {
-            timeString += `${daysLeft}일 `;
-          }
+          timeString += `${monthsLeft}개월 후 마감`;
         } else if (daysLeft > 0) {
-          timeString += `${daysLeft}일 `;
-          if (hoursLeft > 0) {
-            timeString += `${hoursLeft}시간 `;
-          }
+          timeString += `${daysLeft}일 후 마감`;
         } else if (hoursLeft > 0) {
-          timeString += `${hoursLeft}시간 `;
-          if (minutesLeft > 0) {
-            timeString += `${minutesLeft}분 `;
-          }
+          timeString += `${hoursLeft}시간 후 마감`;
         } else if (minutesLeft > 0) {
-          timeString += `${minutesLeft}분 `;
+          timeString += `${minutesLeft}분 후 마감`;
         } else {
-          timeString = "경매 마감";
+          timeString += "마감 임박";
         }
 
-        timeString += "후 마감";
         setTimeLeftString(timeString);
       }
     };

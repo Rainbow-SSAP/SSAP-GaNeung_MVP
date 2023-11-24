@@ -10,6 +10,7 @@ import ssap.ssap.domain.Bid;
 import ssap.ssap.domain.Task;
 import ssap.ssap.domain.User;
 import ssap.ssap.dto.BidRequestDto;
+import ssap.ssap.dto.BidResponseDto;
 import ssap.ssap.repository.AuctionRepository;
 import ssap.ssap.repository.BidRepository;
 import ssap.ssap.repository.TaskRepository;
@@ -73,5 +74,20 @@ public class BidService {
         log.info("입찰 정보 저장 완료: {}", newBid);
 
         return "입찰이 성공적으로 완료되었습니다";
+    }
+
+    public BidResponseDto findLatestBidByAuctionId(Long auctionId) {
+        Bid latestBid = bidRepository.findTopByAuctionIdOrderByTimeDesc(auctionId);
+        if (latestBid == null) {
+            return null;
+        }
+
+        return new BidResponseDto(
+                latestBid.getId(),
+                latestBid.getAmount(),
+                latestBid.getUser().getEmail(),
+                latestBid.getUser().getName(),
+                latestBid.getTime()
+        );
     }
 }

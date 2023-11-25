@@ -10,7 +10,6 @@ import java.util.List;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    List<Task> findByCategoryId(Long categoryId);
-    List<Task> findByJibunAddressContaining(String district);
+    Page<Task> findByCategoryId(Long categoryId, Pageable pageable);
     Page<Task> findByJibunAddressContaining(String district, Pageable pageable);
 }

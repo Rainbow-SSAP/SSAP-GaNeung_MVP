@@ -1,14 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { authInfoState } from "../../recoil/atoms/userInfo";
 
 export const LoginHandler = () => {
   const navigate = useNavigate();
   const code = new URL(window.location.href).searchParams.get("code");
   console.log("code 받음", code);
-  // 사용자 이름과 이메일을 상태로 관리
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
+
+  const setAuthInfo = useSetRecoilState(authInfoState);
 
   useEffect(() => {
     kakaoLogin();
@@ -30,9 +31,16 @@ export const LoginHandler = () => {
       // 백엔드 응답 처리
       if (res.data.loginSuccess) {
         console.log("로그인 성공", res.data);
+
         const { userName, userEmail } = res.data.account;
-        setUserName(userName); // 상태 업데이트
-        setUserEmail(userEmail); // 상태 업데이트
+        const accessToken = res.data.accessToken;
+
+        setAuthInfo({
+          accessToken,
+          userName,
+          userEmail,
+        });
+
         sessionStorage.setItem("accessToken", res.data.accessToken); // 액세스 토큰 저장
         console.log("네비게이팅");
         navigate("/home"); // HomePage로 이동

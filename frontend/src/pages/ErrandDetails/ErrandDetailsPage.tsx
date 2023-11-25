@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../../components/@common/Button/Button";
 import BottomSheet from "../../components/bottomSheet/BottomSheet";
 import Content from "../../components/bottomSheet/Content";
@@ -15,33 +15,94 @@ import { useQuery } from "react-query";
 import { getErrandDetails } from "../../apis/errandDetail";
 import { accessToken } from "../../apis/OAuth";
 import ErrandCategory from "../../components/ErrandDetail/ErrandCategory";
+import { GetCurrentBid } from "../../apis/currentBid";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { authInfoState } from "../../recoil/atoms/userInfo";
+import { getAuctionDetail } from "../../apis/auctionDetail";
 
 const ErrandDetailsPage = () => {
   const [open, setOpen] = useState(false);
+  const [currentBid, setCurrentBid] = useState(0);
+  const [bidAmount, setBidAmount] = useState("");
+  const authInfo = useRecoilValue(authInfoState);
+  const [intervalId, setIntervalId] = useState(null);
 
+  const { userName, userEmail } = authInfo;
+  const userEmailTest = "ssap.rainbow@gmail.com";
+
+  //TODO 밑에 accessToken 말고 recoil에서 저장해놓은 accessToken으로 대체
   const { taskId } = useParams<{ taskId: string }>();
-  const { data, isLoading, error } = useQuery(`errand-details-${taskId}`, () =>
+
+  const {
+    data: errandData,
+    isLoading: errandLoading,
+    error: errandError,
+    refetch: refetchErrandData,
+  } = useQuery(`errand-details-${taskId}`, () =>
     getErrandDetails(String(taskId), accessToken),
   );
 
-  console.log("data", data);
+  const {
+    data: auctionData,
+    isLoading: auctionLoading,
+    error: auctionError,
+    refetch: refetchAuctionData,
+  } = useQuery(
+    `auction-details-${taskId}`,
+    () => getAuctionDetail(errandData.auctionId, accessToken),
+    { enabled: !!errandData }, // errandData가 없으면 호출하지 않음
+  );
 
-  if (isLoading) {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // 여기에서 auctionData를 사용하여 추가 작업 수행
+        console.log("Auction Data:", auctionData);
+      } catch (error) {
+        console.error("에러 발생:", error);
+      }
+    };
+
+    fetchData();
+
+    const id = setInterval(async () => {
+      await refetchErrandData();
+      await refetchAuctionData();
+      fetchData();
+    }, 1000);
+
+    setIntervalId(id);
+
+    return () => {
+      if (intervalId !== null) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [refetchErrandData, refetchAuctionData]);
+
+  if (errandLoading || auctionLoading) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
+  if (errandError || auctionError) {
     return <div>Error: 데이터를 불러오는 중에 오류가 발생하였습니다.</div>;
   }
 
-  if (data == null) {
+  if (!errandData) {
     return <div>데이터가 없습니다.</div>;
   }
 
-  const handleBtnClick = () => {
-    //바텀 시트 로직
+  console.log("Errand Data:", errandData);
+
+  const auctionId = errandData.auctionId;
+
+  console.log("auctionData", auctionData);
+  console.log("userName :", userName);
+  console.log("userEmail :", userEmail);
+  console.log("auctionId :", auctionId);
+
+  const openBottomSheet = () => {
     setOpen(true);
-    console.log("클릭!!");
   };
 
   const handleBack = () => {
@@ -54,7 +115,6 @@ const ErrandDetailsPage = () => {
 
   return (
     <div>
-      {/* 심부름 상세 페이지 보이는 컴포넌트 추가 TODO */}
       {/* <Header
         title="상세 페이지"
         onBack={handleBack}
@@ -63,21 +123,35 @@ const ErrandDetailsPage = () => {
         justifycontent="space-between"
         titleAlign="center"
       /> */}
-      <KakaoMap data={data} />
-      {/* <ErrandCategory data={data} /> */}
-      <Title data={data} />
-      <ErrandFeeContainer data={data} />
-      <ErrandDate data={data} />
-      <ErrandDetail data={data} />
-      <UserProfile data={data} />
+      <KakaoMap data={errandData} />
+      <Title data={errandData} />
+      <ErrandFeeContainer data={errandData} />
+      <ErrandDate data={errandData} />
+      <ErrandDetail data={errandData} />
+      <UserProfile data={errandData} />
       <Button
         text="✋ 심부름 지원하기"
         size="large"
         color="primary"
-        onClick={handleBtnClick}
+        onClick={openBottomSheet}
       />
+      {/* TODO userEmail 테스트용에서 실제 버전으로수정 */}
       {open && (
-        <BottomSheet isOpen={open} setIsOpen={setOpen}>
+        <BottomSheet
+          data={errandData}
+          isOpen={open}
+          setIsOpen={setOpen}
+          currentBid={currentBid}
+          setCurrentBid={setCurrentBid}
+          accessToken={accessToken}
+          taskId={taskId}
+          userEmail={userEmailTest}
+          auctionId={auctionId}
+          bidAmount={bidAmount}
+          termsAgreed={true}
+          setBidAmount={setBidAmount}
+          auctionData={auctionData}
+        >
           {/* <Content /> */}
         </BottomSheet>
       )}

@@ -5,20 +5,17 @@ import styled from "styled-components";
 export interface NavItemProps {
   icon?: string;
   text: string;
-  to: string;
 }
 
-export const NavItem = ({ icon, text, to }: NavItemProps) => {
+export const NavItem = ({ icon, text }: NavItemProps) => {
   return (
     <NavItemWrapper>
-      <Link to={to}>
-        {icon && (
-          <IconWrapper>
-            <img src={icon} alt={`${text} 아이콘`} />
-          </IconWrapper>
-        )}
-        {text !== "" && <h2>{text}</h2>}
-      </Link>
+      {icon && (
+        <IconWrapper>
+          <img src={icon} alt={`${text} 아이콘`} />
+        </IconWrapper>
+      )}
+      {text !== "" && <h2>{text}</h2>}
     </NavItemWrapper>
   );
 };

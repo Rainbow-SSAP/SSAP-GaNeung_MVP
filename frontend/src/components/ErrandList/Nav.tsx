@@ -7,32 +7,16 @@ function Nav() {
   return (
     <NavLayout>
       <MenuListWrapper>
-        <NavItem text="전체" to="/errandList" />
-        <NavItem
-          icon={categoryImage.delivery}
-          text="배달·퀵"
-          to="/errandList"
-        />
-        <NavItem icon={categoryImage.cleaning} text="청소" to="/errandList" />
-        <NavItem
-          icon={categoryImage.repair}
-          text="운반·수리 "
-          to="/errandList"
-        />
-        <NavItem
-          icon={categoryImage.accompany_parenting}
-          text="동행·육아 "
-          to="/errandList"
-        />
-        <NavItem icon={categoryImage.pet} text="펫" to="/errandList" />
-        <NavItem icon={categoryImage.agency} text="역할대행" to="/errandList" />
-        <NavItem
-          icon={categoryImage.part_time}
-          text="‍‍‍알바"
-          to="/errandList"
-        />
-        <NavItem icon={categoryImage.bug} text="벌레잡기" to="/errandList" />
-        <NavItem icon={categoryImage.other} text="기타" to="/errandList" />
+        <NavItem text="전체" />
+        <NavItem icon={categoryImage.delivery} text="배달·퀵" />
+        <NavItem icon={categoryImage.cleaning} text="청소" />
+        <NavItem icon={categoryImage.repair} text="운반·수리 " />
+        <NavItem icon={categoryImage.accompany_parenting} text="동행·육아 " />
+        <NavItem icon={categoryImage.pet} text="펫" />
+        <NavItem icon={categoryImage.agency} text="역할대행" />
+        <NavItem icon={categoryImage.part_time} text="‍‍‍알바" />
+        <NavItem icon={categoryImage.bug} text="벌레잡기" />
+        <NavItem icon={categoryImage.other} text="기타" />
       </MenuListWrapper>
     </NavLayout>
   );

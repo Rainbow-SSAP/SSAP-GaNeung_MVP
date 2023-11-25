@@ -68,7 +68,7 @@ const Content = ({
       successToast("입찰에 성공하였습니다.");
       setIsOpen(false);
     } else {
-      errorToast("유저의 입찰 금액이 현재 입찰가보다 작아야 합니다.");
+      errorToast("현재 입찰가보다 낮은 금액을 입력하세요.");
       setIsOpen(true);
     }
 

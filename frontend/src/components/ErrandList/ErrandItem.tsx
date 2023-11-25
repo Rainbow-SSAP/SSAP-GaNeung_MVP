@@ -56,7 +56,7 @@ export const ErrandItem = (errandItemProps: ErrandItemProps) => {
           <p>{`${numFee}원`}</p>
           <Time>
             <span>{startTime || `지금 즉시 헬프미`}</span>
-            <span>{coutdown || `시간 제한 없음`}</span>
+            <span>{coutdown || `일반 지원`}</span>
           </Time>
         </ItemRight>
       </Link>

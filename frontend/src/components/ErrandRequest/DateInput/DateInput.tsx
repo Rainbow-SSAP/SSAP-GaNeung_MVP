@@ -72,10 +72,7 @@ function DateInput({
           selected={endDate} // 마감 날짜
           dateFormat="yyyy-MM-dd HH:mm" // 2023-11-20 14:00 형식
           showTimeSelect // 시간 설정
-          filterTime={filterPassedTime} // 이전 시간 필터링
           minDate={startDate} // 시작 날짜 이후의 날짜만 선택 가능하도록 설정
-          minTime={startDate}
-          maxTime={setHours(setMinutes(new Date(), 59), 23)}
           onChange={(date: Date) => setEndDate(date)}
           customInput={<CustomInput />}
           withPortal

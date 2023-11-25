@@ -5,11 +5,12 @@ import styled from "styled-components";
 export interface NavItemProps {
   icon?: string;
   text: string;
+  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export const NavItem = ({ icon, text }: NavItemProps) => {
+export const NavItem = ({ icon, text, onClick }: NavItemProps) => {
   return (
-    <NavItemWrapper>
+    <NavItemWrapper onClick={onClick}>
       {icon && (
         <IconWrapper>
           <img src={icon} alt={`${text} 아이콘`} />

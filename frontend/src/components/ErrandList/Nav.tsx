@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { categoryImage } from "../../assets/categoryImages";
 import { NavItem } from "./NavBar";
+import { getCategories } from "../../apis/category";
+import { fetchErrandCategory } from "../../apis/errandCategory";
 
-function Nav() {
+function Nav({ handleCategoryClick }) {
   return (
     <NavLayout>
       <MenuListWrapper>
         <NavItem text="전체" />
-        <NavItem icon={categoryImage.delivery} text="배달·퀵" />
+        <NavItem
+          icon={categoryImage.delivery}
+          text="배달·퀵"
+          onClick={() => handleCategoryClick(1)}
+        />
         <NavItem icon={categoryImage.cleaning} text="청소" />
         <NavItem icon={categoryImage.repair} text="운반·수리 " />
         <NavItem icon={categoryImage.accompany_parenting} text="동행·육아 " />

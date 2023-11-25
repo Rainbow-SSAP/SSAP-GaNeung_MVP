@@ -20,7 +20,7 @@ const ErrandFeeContainer = ({ data }) => {
 
 export default ErrandFeeContainer;
 
-const ErrandContainer = styled.div`
+const ErrandContainer = styled.section`
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -31,7 +31,7 @@ const ErrandContainer = styled.div`
 
 const ErrandFeeSection = styled.div`
   display: flex;
-  width: 15.7rem;
+  width: 50%;
   padding: 2rem 0rem;
   flex-direction: column;
   align-items: flex-start;
@@ -47,7 +47,7 @@ const ErrandFeeTitle = styled.h1`
   line-height: 2.2rem;
 `;
 
-const Fee = styled.h2`
+const Fee = styled.p`
   color: #007aff;
   font-size: 1.4rem;
   font-style: normal;
@@ -57,7 +57,7 @@ const Fee = styled.h2`
 
 const PayMethodContainer = styled.div`
   display: flex;
-  width: 17.7rem;
+  width: 50%;
   padding: 2rem 0rem;
   flex-direction: column;
   align-items: center;

@@ -6,5 +6,10 @@ export const authInfoState = atom({
     accessToken: "",
     userName: "",
     userEmail: "",
+    ageRange: "",
+    birthdate: "",
+    gender: "",
+    profileImageUrl: "",
+    introduction: "",
   },
 });

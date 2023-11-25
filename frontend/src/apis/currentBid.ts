@@ -1,5 +1,5 @@
-import axios from "axios";
 import { accessToken } from "./OAuth";
+import api from "./api";
 
 export const GetCurrentBid = async (
   taskId: string,
@@ -9,7 +9,7 @@ export const GetCurrentBid = async (
   termsAgreed: boolean,
 ) => {
   try {
-    const response = await axios.post(
+    const response = await api.post(
       "/api/bids/place",
       {
         taskId,

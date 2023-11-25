@@ -37,7 +37,7 @@ const MenuContainer = styled.aside<MenuProps>`
   width: 100%;
   height: 100vh;
   z-index: 10;
-  padding: 0 2rem;
+  padding: 0 3vw;
   background-color: white;
   transition: right 0.3s;
   overflow-y: auto;
@@ -50,7 +50,5 @@ const MenuContainer = styled.aside<MenuProps>`
   }
 `;
 
-const MenuContents = styled.div`
-  padding: 0 2rem;
-`;
+const MenuContents = styled.div``;
 export default Menu;

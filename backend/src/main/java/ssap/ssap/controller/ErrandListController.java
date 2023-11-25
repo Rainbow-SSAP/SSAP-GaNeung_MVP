@@ -11,10 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ssap.ssap.dto.ErrandListResponseDto;
 import ssap.ssap.service.ErrandListService;
 import ssap.ssap.service.OAuthService;
-
-import java.util.Map;
 
 @RestController
 @Slf4j
@@ -45,7 +44,7 @@ public class ErrandListController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("액세스 토큰이 유효하지 않거나 만료되었습니다.");
             }
 
-            Page<Map<String, Object>> errands = errandListService.getErrands(categoryId, address, pageable);
+            Page<ErrandListResponseDto> errands = errandListService.getErrands(categoryId, address, pageable);
             return ResponseEntity.ok(errands);
 
         }catch (EntityNotFoundException e){

@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ssap.ssap.domain.*;
-import ssap.ssap.dto.AddressDto;
 import ssap.ssap.repository.AuctionRepository;
 import ssap.ssap.repository.TaskRepository;
 import ssap.ssap.repository.UserRepository;
@@ -30,18 +29,32 @@ public class ErrandListService {
     }
 
     @Transactional(readOnly = true)
-    public Page<Map<String, Object>> getErrands(Long categoryId, AddressDto addressDto, Pageable pageable) {
-        String address = (addressDto != null) ? addressDto.getAddress() : null;
-        return (address != null && !address.isEmpty())
-                ? getFilteredErrands(address, pageable)
-                : getErrandsByCategory(categoryId, pageable);
+    public Page<Map<String, Object>> getErrands(Long categoryId, String address, Pageable pageable) {
+        if (address != null && !address.isEmpty()) {
+            String district = extractDistrictFromAddress(address);
+            if (district != null) {
+                return getFilteredErrands(categoryId, district, pageable);
+            }
+        }
+        if (categoryId != null) {
+            return getErrandsByCategory(categoryId, pageable);
+        }
+        return findAllErrands(pageable);
     }
 
-    // 카테고리 기반 심부름 리스트 반환 메서드
     private Page<Map<String, Object>> getErrandsByCategory(Long categoryId, Pageable pageable) {
         Page<Task> taskPage = taskRepository.findByCategoryId(categoryId, pageable);
         return taskPage.map(this::convertTaskToMap);
     }
+
+    private Page<Map<String, Object>> getFilteredErrands(Long categoryId, String district, Pageable pageable) {
+        return taskRepository.findByCategoryIdAndJibunAddressContaining(categoryId, district, pageable).map(this::convertTaskToMap);
+    }
+
+    private Page<Map<String, Object>> findAllErrands(Pageable pageable) {
+        return taskRepository.findAll(pageable).map(this::convertTaskToMap);
+    }
+
 
     private Map<String, Object> convertTaskToMap(Task task) {
         Map<String, Object> errandMap = new HashMap<>();
@@ -85,27 +98,31 @@ public class ErrandListService {
         return errandMap;
     }
 
-    // 주소 기반 필터링된 심부름 리스트 반환 메서드
-    private Page<Map<String, Object>> getFilteredErrands(String address, Pageable pageable) {
-        String district = extractDistrictFromAddress(address);
-        if (district == null) {
-            return Page.empty(); // '동'을 찾지 못한 경우 빈 페이지 반환
-        }
-        Page<Task> taskPage = taskRepository.findByJibunAddressContaining(district, pageable);
-        return taskPage.map(this::convertTaskToMap);
-    }
-
     // 주소에서 '동'을 추출하는 메서드
-    public String extractDistrictFromAddress(String fullAddress) {
-        if(fullAddress == null || fullAddress.isEmpty()) {
+//    private String extractDistrictFromAddress(String fullAddress) {
+//        if (fullAddress == null || fullAddress.isEmpty()) {
+//            return null;
+//        }
+//        String[] parts = fullAddress.split(" ");
+//        for (int i = parts.length - 1; i >= 0; i--) {
+//            if (parts[i].endsWith("구")) {
+//                return parts[i];
+//            }
+//        }
+//        return null;
+//    }
+
+    // 주소에서 '구'를 추출하는 메서드
+    private String extractDistrictFromAddress(String fullAddress) {
+        if (fullAddress == null || fullAddress.isEmpty()) {
             return null;
         }
         String[] parts = fullAddress.split(" ");
-        for (int i = parts.length - 1; i >= 0; i--) {
-            if (parts[i].matches("\\d+.*")) {
-                return i > 0 ? parts[i - 1] : null;
+        for (String part : parts) {
+            if (part.endsWith("구")) {
+                return part;
             }
         }
-        return null; // '동'을 찾지 못한 경우
+        return null; // '구'를 찾지 못한 경우
     }
 }

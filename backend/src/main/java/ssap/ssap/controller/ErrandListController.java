@@ -1,6 +1,5 @@
 package ssap.ssap.controller;
 
-import io.micrometer.common.lang.Nullable;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;
@@ -12,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ssap.ssap.dto.AddressDto;
 import ssap.ssap.service.ErrandListService;
 import ssap.ssap.service.OAuthService;
 
@@ -36,7 +34,7 @@ public class ErrandListController {
     @GetMapping("/category/{categoryId}")
     @Operation(summary = "심부름 리스트 상세 페이지 조회")
     public ResponseEntity<?> getErrandsByCategory(@PathVariable Long categoryId,
-                                                  @RequestBody(required = false) AddressDto addressDto,
+                                                  @RequestParam(required = false) String address,
                                                   @ParameterObject Pageable pageable,
                                                   @RequestHeader("Authorization") String authorizationHeader) {
 
@@ -47,7 +45,7 @@ public class ErrandListController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("액세스 토큰이 유효하지 않거나 만료되었습니다.");
             }
 
-            Page<Map<String, Object>> errands = errandListService.getErrands(categoryId, addressDto, pageable);
+            Page<Map<String, Object>> errands = errandListService.getErrands(categoryId, address, pageable);
             return ResponseEntity.ok(errands);
 
         }catch (EntityNotFoundException e){

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Template from "../../components/Template";
-import Errands from "../../components/ErrandList/Errands";
+import Errands from "../../components/Main/Errands";
 import Nav from "../../components/ErrandList/Nav";
 import { ErrandItem } from "../../components/ErrandList/ErrandItem";
 import { getCategories } from "../../apis/category";

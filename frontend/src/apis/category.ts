@@ -6,7 +6,7 @@ export const getCategories = async () => {
   try {
     const response = await api.get(`/api/categories`, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        // Authorization: `Bearer ${accessToken}`,
       },
     });
     console.log("category.ts 안 response.data:", response.data);
@@ -23,7 +23,7 @@ export const getSubCategories = async (categoryId) => {
   try {
     const response = await api.get(`/api/categories/${categoryId}/items`, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        // Authorization: `Bearer ${accessToken}`,
       },
     });
     return response.data;

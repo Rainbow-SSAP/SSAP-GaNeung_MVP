@@ -1,19 +1,25 @@
 import React from "react";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { authInfoState } from "../../recoil/atoms/userInfo";
 
 const UserProfile = ({ data }) => {
+  const user = useRecoilValue(authInfoState);
   return (
     <OutsideLayout>
       <InsideLayout>
         <UserThumbnail>
-          <img src={data.profileImageUrl} />
+          <img
+            src={user.profileImageUrl}
+            alt={`${user.userName}의 프로필 이미지`}
+          />
         </UserThumbnail>
         <UserInfoLayout>
           <UserInfoDetail>
-            <UserNickname>{data.name}</UserNickname>
+            <UserNickname>{user.userName || "이름 없음"}</UserNickname>
             <UserAge>
-              {data.gender}
-              {data.ageRange}
+              {user.gender}
+              {user.ageRange}
             </UserAge>
           </UserInfoDetail>
         </UserInfoLayout>

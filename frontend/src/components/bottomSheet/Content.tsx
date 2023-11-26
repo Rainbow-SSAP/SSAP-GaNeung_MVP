@@ -32,9 +32,19 @@ const Content = ({
   const [currentBid, setCurrentBid] = useState(auctionData.amount); //현재 입찰가
   const [bidAmount, setBidAmount] = useState(""); //유저가 입력한 값
 
+  const currentDate = new Date();
+  const auctionEndTimeString = data.auctionEndTime;
+  const auctionEndTime = new Date(auctionEndTimeString);
+
   const errandFeeLocale = Number(data.fee).toLocaleString();
   const currentBidAmount = Number(auctionData.amount).toLocaleString();
-  //TODO 입찰에 실패했을 경우 추후에 추가
+
+  const isAuctionClosed = currentDate > auctionEndTime; //경매 종료 여부 확인
+
+  // 버튼 텍스트 설정
+  const buttonText = isAuctionClosed
+    ? "이미 경매가 마감되었습니다"
+    : "💓 입찰하기";
 
   console.log("bidAmount", bidAmount);
   console.log("currentBid", currentBid);
@@ -118,9 +128,9 @@ const Content = ({
         <Button
           size="large"
           color="primary"
-          text="💓 입찰하기"
-          // onClick={bidBtnClick}
+          text={buttonText}
           onClick={handleBidClick}
+          disabled={isAuctionClosed}
         />
       </ContentWrapper>
     </FormProvider>

@@ -21,6 +21,8 @@ import { authInfoState } from "../../recoil/atoms/userInfo";
 import { getAuctionDetail } from "../../apis/auctionDetail";
 import Template from "../../components/Template";
 import styled from "styled-components";
+import ErrorMessage from "../../components/@common/Error/ErrorMessage";
+import { errorToast, successToast } from "../../constants/toast";
 
 const ErrandDetailsPage = () => {
   const [open, setOpen] = useState(false);
@@ -110,7 +112,10 @@ const ErrandDetailsPage = () => {
   console.log("auctionId :", auctionId);
 
   const openBottomSheet = () => {
-    setOpen(true);
+    // setOpen(true);
+    errandData.auctionId === null
+      ? successToast("지원이 완료되었습니다.")
+      : setOpen(true);
   };
 
   const handleBack = () => {

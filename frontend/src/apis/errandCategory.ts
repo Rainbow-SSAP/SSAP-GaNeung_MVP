@@ -10,6 +10,7 @@ const fetchErrandCategory = async (categoryId, location: string) => {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
+
       },
     );
     console.log("fetchErrandCategory", response.data);

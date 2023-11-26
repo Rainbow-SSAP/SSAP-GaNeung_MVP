@@ -5,7 +5,7 @@ const Title = ({ data }) => {
   const [requestData, setRequestData] = useState(mockData.request);
   const [response, setResponseData] = useState(mockData.response);
   const auctionEndTime =
-    data.auctionEndTime || "경매로 설정되지 않은 심부름입니다.";
+    `${data.auctionEndTime} 경매마감` || "경매로 설정되지 않은 심부름입니다.";
 
   //TODO 편의점 배달 부분 detailItem api 수정되면 고치기
   return (
@@ -19,7 +19,7 @@ const Title = ({ data }) => {
       <Layout>
         <TitleLayout>
           <ErrandTitle>{data.title}</ErrandTitle>
-          <Deadline>{auctionEndTime} 경매 마감</Deadline>
+          <Deadline>{auctionEndTime}</Deadline>
         </TitleLayout>
       </Layout>
     </Wrapper>

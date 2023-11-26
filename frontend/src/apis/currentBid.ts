@@ -20,7 +20,7 @@ export const GetCurrentBid = async (
       },
       {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          // Authorization: `Bearer ${accessToken}`,
         },
       },
     );

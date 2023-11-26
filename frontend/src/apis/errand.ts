@@ -16,7 +16,7 @@ export const ErrandRequestPost = async (
   try {
     const response = await api.post(`/api/request`, formData, {
       headers: {
-        Authorization: `Bearer ${accessToken}`, // TODO 로컬 테스트용
+        // Authorization: `Bearer ${accessToken}`, // TODO 로컬 테스트용
         "Content-Type": "multipart/form-data",
       },
     });
@@ -36,7 +36,7 @@ export const getErrands = async (location: string) => {
       `/api/errands?address=${location}&page=0&size=100`,
       {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          // Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
       },

@@ -56,6 +56,8 @@ function ErrandListPage() {
   );
 }
 
-const ErrandsList = styled.ul``;
+const ErrandsList = styled.ul`
+  padding: 0 3vw 2rem;
+`;
 
 export default ErrandListPage;

@@ -5,13 +5,15 @@ const ErrandDetail = ({ data }) => {
   return (
     <Layout>
       <DetailTitle>심부름 장소 및 요청 내용</DetailTitle>
-      <StopOverContainer>
-        <StopOverTitle>장소</StopOverTitle>
-        <StopOverAddress>{data.detailedAddress}</StopOverAddress>
-      </StopOverContainer>
-      <StopOverDetailLayout>
-        <StopOverContents>{data.description}</StopOverContents>
-      </StopOverDetailLayout>
+      <ErrandDetailInner>
+        <StopOverContainer>
+          <StopOverTitle>장소</StopOverTitle>
+          <StopOverAddress>{data.detailedAddress}</StopOverAddress>
+        </StopOverContainer>
+        <StopOverDetailLayout>
+          <StopOverContents>{data.description}</StopOverContents>
+        </StopOverDetailLayout>
+      </ErrandDetailInner>
     </Layout>
   );
 };
@@ -35,6 +37,9 @@ const DetailTitle = styled.h1`
   line-height: 2.2rem; /* 157.143% */
 `;
 
+const ErrandDetailInner = styled.div`
+  width: 100%;
+`;
 const StopOverContainer = styled.div`
   display: flex;
   padding: 1rem;
@@ -63,6 +68,7 @@ const StopOverAddress = styled.h2`
 
 const StopOverDetailLayout = styled.div`
   display: flex;
+  min-height: 10rem;
   padding: 1rem;
   flex-direction: column;
   align-items: flex-start;

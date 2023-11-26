@@ -16,6 +16,7 @@ function Main() {
 
 const MainContainer = styled.div`
   width: 100%;
+  padding: 2rem 3vw;
 `;
 
 const Category = styled.div`

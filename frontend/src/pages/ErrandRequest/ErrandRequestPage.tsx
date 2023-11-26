@@ -93,7 +93,7 @@ const ErrandRequestPage = () => {
         {/* useForm 훅에서 반환된 메서드를 자식 컴포넌트로 전달합니다 */}
         <FormProvider {...methods}>
           <ErrandRequest />
-          <Button text="🚨 심부름 요청하기" type="submit" />
+          <Button text="🚨 심부름 요청하기" type="submit" fixed />
         </FormProvider>
       </FormWapper>
     </Template>
@@ -104,6 +104,7 @@ const FormWapper = styled.form`
   width: 100%;
   display: grid;
   grid-gap: 2rem;
+  padding: 2rem 3vw;
 `;
 
 export default ErrandRequestPage;

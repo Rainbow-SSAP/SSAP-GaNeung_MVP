@@ -53,7 +53,6 @@ const NavLayout = styled.nav`
 
 const MenuListWrapper = styled.div`
   display: flex;
-  height: 4.8rem;
   align-items: center;
   justify-content: flex-start;
   white-space: nowrap;
@@ -62,8 +61,12 @@ const MenuListWrapper = styled.div`
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
 
+  /* Firefox용 스크롤바 숨기기 */
+  scrollbar-width: none;
+
+  /* Chrome, Safari 등 기타 브라우저용 스크롤바 숨기기 */
   &::-webkit-scrollbar {
-    width: 6px;
+    display: none; /* 스크롤바 자체를 숨김 */
   }
 
   &::-webkit-scrollbar-thumb {

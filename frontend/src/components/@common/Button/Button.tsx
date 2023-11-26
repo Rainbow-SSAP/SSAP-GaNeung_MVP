@@ -43,7 +43,7 @@ export const Button = (buttonProps: ButtonProps) => {
   } = buttonProps;
 
   return (
-    <ButtonOuter fixed={fixed}>
+    <ButtonOuter fixed={fixed} size={size}>
       <ButtonWrapper
         size={size}
         color={color}
@@ -94,13 +94,22 @@ const ButtonOuter = styled.div<Omit<ButtonProps, "text">>`
   justify-content: center;
   width: 100%;
 
-  ${({ fixed }) =>
+  ${({ fixed, size, theme }) =>
     fixed &&
     css`
       position: fixed;
       left: 0;
-      /* top: 0 */
       bottom: 20px;
+      z-index: 10;
+
+      ${size === "large" &&
+      css`
+        position: sticky;
+        bottom: 0;
+        padding: 2rem 3vw;
+        background-color: white;
+        /* border-top: 1px solid ${theme.color.grey50}; */
+      `}
     `}
 `;
 

@@ -92,6 +92,7 @@ const ItemLeft = styled.div<{ fileData?: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
 
   > img {
     width: 100%;

@@ -1,6 +1,7 @@
 import React, { ReactNode, useEffect } from "react";
 import styled from "styled-components";
 import { Header, HeaderProps } from "./@common/Header/Header";
+import Footer from "./@common/Footer/Footer";
 
 export interface TemplateProps {
   headerProps?: HeaderProps;
@@ -27,6 +28,7 @@ function Template({ children, headerProps }: TemplateProps) {
     <Layout>
       <Header {...headerProps} />
       <Container>{children}</Container>
+      <Footer />
     </Layout>
   );
 }
@@ -34,6 +36,7 @@ function Template({ children, headerProps }: TemplateProps) {
 const Layout = styled.div`
   position: relative;
   width: 100%;
+  min-width: 320px;
   max-height: calc(var(--vh, 1vh) * 100);
   position: relative;
   overflow-x: hidden;
@@ -51,7 +54,6 @@ const Container = styled.section`
   width: 100%;
   height: 100%;
   min-height: calc((var(--vh, 1vh) * 100));
-  padding: 2rem 3vw;
 `;
 
 export default Template;

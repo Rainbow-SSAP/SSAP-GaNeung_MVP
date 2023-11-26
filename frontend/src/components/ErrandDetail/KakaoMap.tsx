@@ -79,7 +79,7 @@ const KakaoMap = ({ data }) => {
       id="map"
       style={{
         width: "100%",
-        height: "15rem",
+        height: "24rem",
       }}
     ></div>
   );

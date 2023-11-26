@@ -59,8 +59,9 @@ const PayMethodContainer = styled.div`
   display: flex;
   width: 50%;
   padding: 2rem 0rem;
+  padding-left: 2rem;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
 `;
 

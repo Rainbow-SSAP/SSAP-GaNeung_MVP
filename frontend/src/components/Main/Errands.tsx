@@ -55,11 +55,15 @@ function Errands() {
 
 const ErrandsWrapper = styled.section`
   width: 100%;
-  margin: 40px 0;
+  margin: 40px 0 0;
   > h3 {
     font-size: 18px;
   }
 `;
-const ErrandItemsWrapper = styled.ul``;
+const ErrandItemsWrapper = styled.ul`
+  li:last-child {
+    border-bottom: none;
+  }
+`;
 
 export default Errands;

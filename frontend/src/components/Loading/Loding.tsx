@@ -1,21 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { loadingState } from "../../recoil/atoms/settingsState";
 
 function Loading() {
-  const isLoading = useRecoilValue(loadingState);
-
-  useEffect(() => {
-    if (isLoading) {
-      // 메뉴가 열려있으면 body 스크롤을 비활성화
-      document.body.style.overflow = "hidden";
-    } else {
-      // 메뉴가 닫혀있으면 스크롤을 다시 활성화
-      document.body.style.overflow = "";
-    }
-  }, [isLoading]);
-
   return (
     <LoadingContainer>
       <p>모든 심부름은 SSAP에서 쌉가능!</p>

@@ -11,15 +11,15 @@ const BottomSheet = ({
   children,
   isOpen,
   setIsOpen,
-  currentBid,
-  setCurrentBid,
+  // currentBid,
+  // setCurrentBid,
   accessToken,
   taskId,
   userEmail,
   auctionId,
-  bidAmount,
+  // bidAmount,
   termsAgreed,
-  setBidAmount,
+  // setBidAmount,
   auctionData,
 }) => {
   const { onDragEnd, controls } = useBottomSheet(isOpen, setIsOpen);
@@ -46,15 +46,15 @@ const BottomSheet = ({
         <Content
           data={data}
           setIsOpen={setIsOpen}
-          currentBid={currentBid}
-          setCurrentBid={setCurrentBid}
+          // currentBid={currentBid}
+          // setCurrentBid={setCurrentBid}
           accessToken={accessToken}
           taskId={taskId}
           userEmail={userEmail}
           auctionId={auctionId}
-          bidAmount={bidAmount}
+          // bidAmount={bidAmount}
           termsAgreed={termsAgreed}
-          setBidAmount={setBidAmount}
+          // setBidAmount={setBidAmount}
           auctionData={auctionData}
         />
       </ContentWrapper>

@@ -8,6 +8,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { userLocationState } from "../../recoil/atoms/LocationState";
 import { loadingState } from "../../recoil/atoms/settingsState";
 import Loading from "../../components/Loading/Loding";
+import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 
 declare global {
   interface Window {
@@ -16,7 +17,6 @@ declare global {
 }
 
 function HomePage() {
-  // const [currentLocation, setCurrentLocation] = useState(null);
   const [userLocation, setUserLocation] = useRecoilState(userLocationState);
   const [loading, setLoading] = useRecoilState(loadingState);
   const navigate = useNavigate();
@@ -50,6 +50,8 @@ function HomePage() {
       }
     });
   }, []);
+
+  useLockBodyScroll(loading);
 
   // 요청서 작성하기로 이동
   const handleRequestClick = () => {

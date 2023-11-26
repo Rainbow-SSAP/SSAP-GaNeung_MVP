@@ -28,18 +28,15 @@ const NavItemWrapper = styled.div<{ isSelected: boolean }>`
   align-items: center;
   flex-shrink: 0;
   align-self: stretch;
+  border-bottom: 2px solid white;
+  padding: 10px 20px;
   cursor: pointer;
 
   ${({ isSelected }) =>
     isSelected &&
     css`
-      border-bottom: 5px solid ${({ theme }) => theme.color.grey700};
+      border-bottom: 2px solid ${({ theme }) => theme.color.pirmary};
     `}
-
-  a {
-    display: flex;
-    align-items: center;
-  }
 
   h2 {
     font-size: 16px;

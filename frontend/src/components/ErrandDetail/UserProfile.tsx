@@ -52,8 +52,9 @@ const UserThumbnail = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  border-radius: 10rem;
+  border-radius: 50%;
   background: #c4c4c4;
+  overflow: hidden;
 `;
 
 const UserInfoLayout = styled.div`
@@ -65,8 +66,10 @@ const UserInfoLayout = styled.div`
 
 const UserInfoDetail = styled.div`
   display: flex;
+  flex-flow: column;
   height: 2.2rem;
-  align-items: center;
+  /* align-items: center; */
+  justify-content: center;
   gap: 0.4rem;
   align-self: stretch;
 `;

@@ -19,6 +19,8 @@ import { GetCurrentBid } from "../../apis/currentBid";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { authInfoState } from "../../recoil/atoms/userInfo";
 import { getAuctionDetail } from "../../apis/auctionDetail";
+import Template from "../../components/Template";
+import styled from "styled-components";
 
 const ErrandDetailsPage = () => {
   const [open, setOpen] = useState(false);
@@ -114,7 +116,7 @@ const ErrandDetailsPage = () => {
   };
 
   return (
-    <div>
+    <Template>
       {/* <Header
         title="상세 페이지"
         onBack={handleBack}
@@ -124,12 +126,16 @@ const ErrandDetailsPage = () => {
         titleAlign="center"
       /> */}
       <KakaoMap data={errandData} />
-      <Title data={errandData} />
-      <ErrandFeeContainer data={errandData} />
-      <ErrandDate data={errandData} />
-      <ErrandDetail data={errandData} />
-      <UserProfile data={errandData} />
+      <ErrandDetailInner>
+        <Title data={errandData} />
+        <ErrandFeeContainer data={errandData} />
+        <ErrandDate data={errandData} />
+        <ErrandDetail data={errandData} />
+        <UserProfile data={errandData} />
+      </ErrandDetailInner>
       <Button
+        className="button"
+        fixed
         text="✋ 심부름 지원하기"
         size="large"
         color="primary"
@@ -166,8 +172,12 @@ const ErrandDetailsPage = () => {
         pauseOnHover // 마우스를 올리면 알람 정지
         theme="light"
       />
-    </div>
+    </Template>
   );
 };
+
+const ErrandDetailInner = styled.div`
+  padding: 2rem 3vw;
+`;
 
 export default ErrandDetailsPage;

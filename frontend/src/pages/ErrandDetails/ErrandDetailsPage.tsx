@@ -22,8 +22,8 @@ import { getAuctionDetail } from "../../apis/auctionDetail";
 
 const ErrandDetailsPage = () => {
   const [open, setOpen] = useState(false);
-  const [currentBid, setCurrentBid] = useState(0);
-  const [bidAmount, setBidAmount] = useState("");
+  // const [currentBid, setCurrentBid] = useState(0);
+  // const [bidAmount, setBidAmount] = useState("");
   const authInfo = useRecoilValue(authInfoState);
   const [intervalId, setIntervalId] = useState(null);
 
@@ -50,21 +50,27 @@ const ErrandDetailsPage = () => {
   } = useQuery(
     `auction-details-${taskId}`,
     () => getAuctionDetail(errandData.auctionId, accessToken),
-    { enabled: !!errandData }, // errandData가 없으면 호출하지 않음
+    {
+      enabled: !!errandData,
+    },
   );
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // 여기에서 auctionData를 사용하여 추가 작업 수행
-        console.log("Auction Data:", auctionData);
+
+        // errandData가 존재할 때만 호출
+        const auctionDetails = await getAuctionDetail(
+          errandData.auctionId,
+          accessToken,
+        );
+        console.log("use Effect 내 Auction Data:", auctionDetails);
       } catch (error) {
         console.error("에러 발생:", error);
       }
     };
-
     fetchData();
-
     const id = setInterval(async () => {
       await refetchErrandData();
       await refetchAuctionData();
@@ -141,15 +147,15 @@ const ErrandDetailsPage = () => {
           data={errandData}
           isOpen={open}
           setIsOpen={setOpen}
-          currentBid={currentBid}
-          setCurrentBid={setCurrentBid}
+          // currentBid={currentBid}
+          // setCurrentBid={setCurrentBid}
           accessToken={accessToken}
           taskId={taskId}
           userEmail={userEmailTest}
           auctionId={auctionId}
-          bidAmount={bidAmount}
+          // bidAmount={bidAmount}
           termsAgreed={true}
-          setBidAmount={setBidAmount}
+          // setBidAmount={setBidAmount}
           auctionData={auctionData}
         >
           {/* <Content /> */}

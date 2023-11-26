@@ -1,14 +1,11 @@
-import React, { useEffect } from "react";
-import { ErrandItem, ErrandItemProps } from "../ErrandList/ErrandItem";
+import React from "react";
 import styled from "styled-components";
 import { useQuery } from "react-query";
 import { getErrands } from "../../apis/errand";
 import { useRecoilState } from "recoil";
 import { userLocationState } from "../../recoil/atoms/LocationState";
-
-type ErrandsData = {
-  content: ErrandItemProps[];
-};
+import { ErrandsData } from "../../types/errand";
+import { ErrandItem } from "../ErrandList/ErrandItem";
 
 function Errands() {
   const [userLocation, setUserLocation] = useRecoilState(userLocationState);

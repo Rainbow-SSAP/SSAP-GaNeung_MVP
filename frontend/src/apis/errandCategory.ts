@@ -1,14 +1,17 @@
 import api from "./api";
 import { accessToken } from "./OAuth";
 
-const fetchErrandCategory = async (categoryId) => {
+const fetchErrandCategory = async (categoryId, location: string) => {
   try {
-    const response = await api.get(`/api/errands/category/${categoryId}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
+    const response = await api.get(
+      `/api/errands/category/${categoryId}?address=${location}&page=0&size=100`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
       },
-    });
+    );
     console.log("fetchErrandCategory", response.data);
 
     if (response.status === 200) {

@@ -1,12 +1,9 @@
 import React from "react";
-import { ErrandItem, ErrandItemProps } from "./ErrandItem";
+import { ErrandItem } from "../ErrandList/ErrandItem";
 import styled from "styled-components";
 import { useQuery } from "react-query";
 import { getErrands } from "../../apis/errand";
-
-type ErrandsData = {
-  content: ErrandItemProps[];
-};
+import { ErrandsData } from "../../types/errand";
 
 function Errands() {
   const { data, isLoading, error } = useQuery<ErrandsData>(

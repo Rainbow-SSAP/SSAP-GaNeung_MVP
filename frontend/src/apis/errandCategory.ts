@@ -1,10 +1,9 @@
-import axios from "axios";
 import api from "./api";
 import { accessToken } from "./OAuth";
 
 const fetchErrandCategory = async (categoryId) => {
   try {
-    const response = await axios.get(`/api/errands/category/${categoryId}`, {
+    const response = await api.get(`/api/errands/category/${categoryId}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",

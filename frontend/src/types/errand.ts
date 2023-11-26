@@ -1,3 +1,4 @@
+// 심부름 요청 데이터 타입
 export interface ErrandFormData {
   category: string; // 심부름 항목
   detailedItem: string; // 상세 항목
@@ -19,8 +20,18 @@ export interface ErrandFormData {
   files: FileList; // 이미지 파일 (여러개 처리)
 }
 
-export interface Category {
-  value: string;
-  text: string;
-  detailedItems?: Category[];
+// 심부름 내역 타입
+export type ErrandsData = {
+  content: ErrandItemProps[];
+};
+
+export interface ErrandItemProps {
+  taskId: string;
+  fileData?: string; // 썸네일 이미지 URL
+  district: string; // 동 이름
+  title: string; // 제목
+  fee: number; // 심부름비
+  startTime?: string; // 심부름 시작 시간
+  auctionEndTime?: string; // 경매 마감 시간
+  isLiked?: boolean; // 찜하기
 }

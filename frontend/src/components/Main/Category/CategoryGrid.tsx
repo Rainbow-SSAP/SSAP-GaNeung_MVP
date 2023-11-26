@@ -5,11 +5,7 @@ import { categoryImage, categoryMapping } from "../../../assets/categoryImages";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { getCategories } from "../../../apis/category";
-
-export interface Category {
-  id: number;
-  categoryName: string;
-}
+import { Category } from "../../../types/category";
 
 const CategoryGrid = () => {
   const navigate = useNavigate();
@@ -24,14 +20,12 @@ const CategoryGrid = () => {
       ? data.map((category) => ({
           id: category.id,
           text: category.categoryName,
-          icon:
-            categoryImage[categoryMapping[category.categoryName]] ||
-            "기본_아이콘_URL",
+          icon: categoryImage[categoryMapping[category.categoryName]] || "",
         }))
       : [];
 
-  const handleCategoryClick = () => {
-    navigate("/errandList");
+  const handleCategoryClick = (categoryId) => {
+    navigate(`/errand/category/${categoryId}`);
   };
 
   return (
@@ -41,7 +35,7 @@ const CategoryGrid = () => {
           key={category.id}
           icon={category.icon}
           text={category.text}
-          onClick={handleCategoryClick}
+          onClick={() => handleCategoryClick(category.id)}
         />
       ))}
     </Grid>

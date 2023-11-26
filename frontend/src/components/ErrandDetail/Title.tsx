@@ -7,7 +7,21 @@ const Title = ({ data }) => {
   const auctionEndTime =
     `${data.auctionEndTime} 경매마감` || "경매로 설정되지 않은 심부름입니다.";
 
+  const currentDate = new Date();
+  const auctionEndTimeString = data.auctionEndTime;
+  const auctionEnd = new Date(auctionEndTimeString);
+  const isAuctionClosed = currentDate > auctionEnd; //경매 종료 여부 확인
+
+  // const dateText = isAuctionClosed ? "경매 마감" : auctionEndTime;
   //TODO 편의점 배달 부분 detailItem api 수정되면 고치기
+
+  if (data.auctionId === null) {
+    ("일반 지원");
+  } else {
+    auctionEndTime;
+  }
+  const dateText = data.auctionId === null ? "일반 지원" : auctionEndTime;
+
   return (
     <Wrapper>
       <BtnLayout>
@@ -19,7 +33,7 @@ const Title = ({ data }) => {
       <Layout>
         <TitleLayout>
           <ErrandTitle>{data.title}</ErrandTitle>
-          <Deadline>{auctionEndTime}</Deadline>
+          <Deadline>{dateText}</Deadline>
         </TitleLayout>
       </Layout>
     </Wrapper>

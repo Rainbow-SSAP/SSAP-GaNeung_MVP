@@ -61,6 +61,13 @@ const GlobalStyle = styled.createGlobalStyle`
     color: inherit;
   }
 
+  select {
+    -o-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
   button {
     cursor: pointer;
   }

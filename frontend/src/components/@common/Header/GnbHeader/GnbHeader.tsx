@@ -56,7 +56,7 @@ export const GnbHeader = (gnbHeaderProps: GnbHeaderProps) => {
 const GnbHeaderWrapper = styled.div`
   display: flex;
   width: 100%;
-  padding: 20px 0;
+  padding: 2rem 0;
   justify-content: space-between;
   align-items: center;
 `;

@@ -17,7 +17,7 @@ export default function Fee() {
           validate: {
             isNumber: (value) =>
               (!isNaN(value) && /^\d+$/.test(value)) || "숫자만 입력해주세요.", // 숫자만 입력 확인
-            positive: (value) => value > 0 || "심부름비는 0보다 커야 합니다.", // 양수 검사
+            positive: (value) => value > 1000 || "최소 금액은 1000원 입니다.", // 양수 검사
           },
         }}
         render={({
@@ -36,7 +36,7 @@ export default function Fee() {
                 color: "grey",
                 align: "right",
                 id: "fee",
-                placeholder: "0",
+                placeholder: "최소 금액: 1000원",
               }}
             />
             <ErrorMessage message={error?.message} />

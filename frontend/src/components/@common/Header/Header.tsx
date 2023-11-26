@@ -65,7 +65,7 @@ const HeaderContainer = styled.header<{ type: string }>`
   z-index: 10;
   display: flex;
   width: 100%;
-  padding: 2rem;
+  padding: 2rem 2.6vw;
   justify-content: space-between;
   align-items: center;
   ${({ type, theme }) =>

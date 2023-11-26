@@ -1,15 +1,25 @@
-import React from "react";
-import { ErrandItem } from "../ErrandList/ErrandItem";
+import React, { useEffect } from "react";
+import { ErrandItem, ErrandItemProps } from "../ErrandList/ErrandItem";
 import styled from "styled-components";
 import { useQuery } from "react-query";
 import { getErrands } from "../../apis/errand";
-import { ErrandsData } from "../../types/errand";
+import { useRecoilState } from "recoil";
+import { userLocationState } from "../../recoil/atoms/LocationState";
+
+type ErrandsData = {
+  content: ErrandItemProps[];
+};
 
 function Errands() {
+  const [userLocation, setUserLocation] = useRecoilState(userLocationState);
   const { data, isLoading, error } = useQuery<ErrandsData>(
     "errands",
-    getErrands,
+    () => getErrands(userLocation),
+    {
+      enabled: !!userLocation, // userLocation 값이 있을 때만 쿼리를 활성화
+    },
   );
+
   console.log("Query data:", data); // 데이터 로깅
   console.log("Is loading:", isLoading); // 로딩 상태 로깅
   console.log("Error:", error); // 에러 로깅
@@ -20,14 +30,13 @@ function Errands() {
   if (error)
     return <div>Error: 데이터를 불러오는 중에 오류가 발생하였습니다.</div>;
 
-  if (!data || !data.content) return <div>데이터가 없습니다.</div>;
+  if (!data || !data.content) return <div></div>;
 
   return (
     <ErrandsWrapper>
       <h3>🌈 우리 동네 심부름</h3>
       <ErrandItemsWrapper>
         {data.content.map((item) => {
-          console.log("Errands Porps:", item);
           return (
             <ErrandItem
               key={item.taskId}

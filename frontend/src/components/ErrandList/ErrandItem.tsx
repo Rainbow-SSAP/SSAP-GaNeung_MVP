@@ -21,17 +21,6 @@ export const ErrandItem = (errandItemProps: ErrandItemProps) => {
   const [liked, setLiked] = useState(isLiked);
   const coutdown = useAuctionTimeLeft(auctionEndTime);
 
-  console.log("심부름 내역", {
-    taskId,
-    fileData,
-    district,
-    title,
-    fee,
-    startTime,
-    auctionEndTime,
-    isLiked,
-  });
-
   // fee가 문자열이라면 숫자로 변환, 아니면 그대로 사용
   const numFee = typeof fee === "string" ? parseInt(fee, 10) : fee;
 
@@ -57,7 +46,7 @@ export const ErrandItem = (errandItemProps: ErrandItemProps) => {
           <p>{`${numFee}원`}</p>
           <Time>
             <span>{startTime || `지금 즉시 헬프미`}</span>
-            <span>{coutdown || `시간 제한 없음`}</span>
+            <span>{coutdown || `일반 지원`}</span>
           </Time>
         </ItemRight>
       </Link>

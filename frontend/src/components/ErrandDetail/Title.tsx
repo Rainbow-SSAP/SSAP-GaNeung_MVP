@@ -9,7 +9,7 @@ const Title = ({ data }) => {
 
   //TODO 편의점 배달 부분 detailItem api 수정되면 고치기
   return (
-    <>
+    <Wrapper>
       <BtnLayout>
         <Btn>
           <CategoryTag>{data.categoryTag}</CategoryTag>
@@ -22,11 +22,19 @@ const Title = ({ data }) => {
           <Deadline>{auctionEndTime} 경매 마감</Deadline>
         </TitleLayout>
       </Layout>
-    </>
+    </Wrapper>
   );
 };
 
 export default Title;
+
+const Wrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+`;
 
 const Layout = styled.div`
   display: flex;

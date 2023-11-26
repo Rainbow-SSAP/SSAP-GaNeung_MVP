@@ -8,15 +8,15 @@ import { ErrandRequestPost } from "../../apis/errand";
 import { ErrandFormData } from "../../types/errand";
 import { buttonOtions, categories } from "../../constants/errand";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { uploadImgState } from "../../recoil/atoms/errandState";
 import Template from "../../components/Template";
+import { authInfoState } from "../../recoil/atoms/userInfo";
 
 const ErrandRequestPage = () => {
+  const userProfile = useRecoilValue(authInfoState);
   const [uploadImg, setUploadImg] = useRecoilState<File[]>(uploadImgState);
   const navigaet = useNavigate();
-  const mutation = useMutation(ErrandRequestPost);
-
   const methods = useForm<ErrandFormData>({
     defaultValues: {
       // 기본값
@@ -47,6 +47,12 @@ const ErrandRequestPage = () => {
     formState: { errors },
   } = methods;
 
+  const email = userProfile.userEmail;
+
+  const mutation = useMutation((errandFormData: ErrandFormData) =>
+    ErrandRequestPost(errandFormData, email),
+  );
+
   const onSubmit = (data: ErrandFormData) => {
     // 폼 제출 시 실행될 로직
     console.log(data);
@@ -59,6 +65,8 @@ const ErrandRequestPage = () => {
         formData.append("files", file);
       });
     }
+
+    // formData.append("email", userEmail);
 
     mutation.mutate(data, {
       onSuccess: (response) => {

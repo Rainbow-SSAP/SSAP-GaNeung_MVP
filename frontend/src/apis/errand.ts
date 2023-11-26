@@ -1,19 +1,20 @@
 import { ErrandFormData } from "../types/errand";
-import { APP_URL, accessToken } from "./OAuth";
+import { accessToken } from "./OAuth";
 import api from "./api";
 
-// TODO 사용자 데이터로 변경 예정
-const userEmail = "ssap.rainbow@gmail.com";
-
 // 심부름 요청 데이터 보내기
-export const ErrandRequestPost = async (errandFormData: ErrandFormData) => {
+export const ErrandRequestPost = async (
+  errandFormData: ErrandFormData,
+  userEmail: string,
+) => {
+  console.log(userEmail);
   const formData = {
     ...errandFormData,
     email: userEmail, // 이메일 추가
   };
   console.log("ErrandRequestPost", formData);
   try {
-    const response = await api.post(`${APP_URL}/api/request`, formData, {
+    const response = await api.post(`/api/request`, formData, {
       headers: {
         Authorization: `Bearer ${accessToken}`, // TODO 로컬 테스트용
         "Content-Type": "multipart/form-data",
@@ -28,14 +29,18 @@ export const ErrandRequestPost = async (errandFormData: ErrandFormData) => {
 };
 
 // 심부름 내역 가져오기
-export const getErrands = async () => {
+export const getErrands = async (location: string) => {
+  console.log("api 호출전 주소 확인:", location);
   try {
-    const response = await api.get(`${APP_URL}/api/errands`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
+    const response = await api.get(
+      `/api/errands?address=${location}&page=0&size=100`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
       },
-    });
+    );
     return response.data;
   } catch (error) {
     // 오류 처리

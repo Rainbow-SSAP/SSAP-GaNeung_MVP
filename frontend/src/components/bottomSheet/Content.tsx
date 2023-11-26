@@ -32,8 +32,6 @@ const Content = ({
 
   const errandFeeLocale = Number(data.fee).toLocaleString();
 
-  const notify = () => toast("입찰에 성공하였습니다");
-  const warn = () => toast("입찰 금액이 현재 입찰가보다 커야 합니다. ");
   //TODO 입찰에 실패했을 경우 추후에 추가
 
   const validateInputChange = (event) => {

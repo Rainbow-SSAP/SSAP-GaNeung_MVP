@@ -104,8 +104,6 @@ public class TaskService {
         task.setCategory(category);
         task.setDetailedItem(detailedItem);
 
-        taskRepository.save(task); // task 저장
-
         if (task.getAuctionStatus()) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime auctionStartTime = LocalDateTime.parse(createForm.getAuctionStartTime(), formatter);
@@ -115,8 +113,12 @@ public class TaskService {
             auction.setTask(task);
             auction.setStartTime(auctionStartTime);
             auction.setEndTime(auctionEndTime);
+
+            task.setAuction(auction); // auction_id 외래키 매핑
             auctionRepository.save(auction);
         }
+
+        taskRepository.save(task);
 
         return task;
     }

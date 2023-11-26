@@ -5,7 +5,7 @@ const fetchErrandCategory = async (categoryId) => {
   try {
     const response = await api.get(`/api/errands/category/${categoryId}`, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        // Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
     });

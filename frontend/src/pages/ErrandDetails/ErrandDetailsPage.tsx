@@ -115,14 +115,14 @@ const ErrandDetailsPage = () => {
 
   return (
     <div>
-      <Header
+      {/* <Header
         title="상세 페이지"
         onBack={handleBack}
         onMenu={handleMenu}
         alignItems="center"
         justifycontent="space-between"
         titleAlign="center"
-      />
+      /> */}
       <KakaoMap data={errandData} />
       <Title data={errandData} />
       <ErrandFeeContainer data={errandData} />

@@ -32,13 +32,25 @@ export const LoginHandler = () => {
       if (res.data.loginSuccess) {
         console.log("로그인 성공", res.data);
 
-        const { userName, userEmail } = res.data.account;
+        const {
+          userName,
+          userEmail,
+          ageRange,
+          birthdate,
+          gender,
+          profileImageUrl,
+        } = res.data.account;
         const accessToken = res.data.accessToken;
 
         setAuthInfo({
           accessToken,
           userName,
           userEmail,
+          ageRange,
+          birthdate,
+          gender,
+          profileImageUrl,
+          introduction: "",
         });
 
         sessionStorage.setItem("accessToken", res.data.accessToken); // 액세스 토큰 저장

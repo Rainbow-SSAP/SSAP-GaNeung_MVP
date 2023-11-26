@@ -42,7 +42,11 @@ const useAuctionTimeLeft = (auctionEndTime) => {
         } else if (minutesLeft > 0) {
           timeString += `${minutesLeft}분 후 마감`;
         } else {
-          timeString += "마감 임박";
+          if (auctionEndTime === "") {
+            setTimeLeftString("");
+          } else {
+            timeString += "마감 임박";
+          }
         }
 
         setTimeLeftString(timeString);

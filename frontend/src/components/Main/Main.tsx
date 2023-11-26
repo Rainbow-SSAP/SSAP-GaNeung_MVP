@@ -1,6 +1,6 @@
 import React from "react";
 import CategoryGrid from "./Category/CategoryGrid";
-import Errands from "../ErrandList/Errands";
+import Errands from "./Errands";
 import styled from "styled-components";
 
 function Main() {

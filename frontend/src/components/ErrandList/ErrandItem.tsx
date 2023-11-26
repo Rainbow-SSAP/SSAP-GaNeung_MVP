@@ -4,17 +4,7 @@ import defaultProfileImg from "../../assets/images/ssap_icon.svg";
 import { LikedButton } from "./LikedButton";
 import { Link } from "react-router-dom";
 import useAuctionTimeLeft from "../../hooks/useAuctionTimeLeft";
-
-export interface ErrandItemProps {
-  taskId: string;
-  fileData?: string; // 썸네일 이미지 URL
-  district: string; // 동 이름
-  title: string; // 제목
-  fee: number; // 심부름비
-  startTime?: string; // 심부름 시작 시간
-  auctionEndTime?: string; // 경매 마감 시간
-  isLiked?: boolean; // 찜하기
-}
+import { ErrandItemProps } from "../../types/errand";
 
 export const ErrandItem = (errandItemProps: ErrandItemProps) => {
   const {

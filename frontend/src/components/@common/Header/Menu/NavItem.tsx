@@ -5,18 +5,18 @@ import styled, { css } from "styled-components";
 export interface NavItemProps {
   icon?: string;
   text: string;
-  to: string;
+  onClick: () => void;
 }
 
-export const NavItem = ({ icon, text, to }: NavItemProps) => {
+export const NavItem = ({ icon, text, onClick }: NavItemProps) => {
   return (
-    <NavItemWrapper>
-      <Link to={to}>
+    <NavItemWrapper onClick={onClick}>
+      <a>
         <IconWrapper>
           {icon && <img src={icon} alt={`${text} 아이콘`} />}
         </IconWrapper>
         <h2>{text}</h2>
-      </Link>
+      </a>
     </NavItemWrapper>
   );
 };

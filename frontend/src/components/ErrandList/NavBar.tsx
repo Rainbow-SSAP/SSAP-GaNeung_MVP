@@ -1,16 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export interface NavItemProps {
   icon?: string;
   text: string;
+  isSelected: boolean;
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export const NavItem = ({ icon, text, onClick }: NavItemProps) => {
+export const NavItem = ({ icon, text, onClick, isSelected }: NavItemProps) => {
+  console.log("isSelected", isSelected);
   return (
-    <NavItemWrapper onClick={onClick}>
+    <NavItemWrapper onClick={onClick} isSelected={isSelected}>
       {icon && (
         <IconWrapper>
           <img src={icon} alt={`${text} 아이콘`} />
@@ -21,14 +22,19 @@ export const NavItem = ({ icon, text, onClick }: NavItemProps) => {
   );
 };
 
-const NavItemWrapper = styled.div`
+const NavItemWrapper = styled.div<{ isSelected: boolean }>`
   display: flex;
-  height: 4.8rem;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
   align-self: stretch;
   cursor: pointer;
+
+  ${({ isSelected }) =>
+    isSelected &&
+    css`
+      border-bottom: 5px solid ${({ theme }) => theme.color.grey700};
+    `}
 
   a {
     display: flex;

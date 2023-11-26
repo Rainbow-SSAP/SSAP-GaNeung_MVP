@@ -1,28 +1,47 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { categoryImage } from "../../assets/categoryImages";
+import { categoryImage, categoryMapping } from "../../assets/categoryImages";
 import { NavItem } from "./NavBar";
 import { getCategories } from "../../apis/category";
-import { fetchErrandCategory } from "../../apis/errandCategory";
+import { useQuery } from "react-query";
+import { Category } from "../../types/category";
+import { useNavigate } from "react-router-dom";
 
-function Nav({ handleCategoryClick }) {
+function Nav({ selectedCategoryId }) {
+  const navigate = useNavigate();
+  const { data, isLoading, error } = useQuery<Category[]>(
+    "categories",
+    getCategories,
+  );
+
+  // 아이콘이랑 매칭
+  const transformedCategories =
+    data && Array.isArray(data)
+      ? data.map((category) => ({
+          id: category.id,
+          text: category.categoryName,
+          icon: categoryImage[categoryMapping[category.categoryName]] || "",
+        }))
+      : [];
+
+  const handleCategoryClick = async (categoryId) => {
+    navigate(`/errand/category/${categoryId}`);
+  };
+
+  console.log("nav selectedCategoryId", selectedCategoryId);
   return (
     <NavLayout>
       <MenuListWrapper>
-        <NavItem text="전체" />
-        <NavItem
-          icon={categoryImage.delivery}
-          text="배달·퀵"
-          onClick={() => handleCategoryClick(1)}
-        />
-        <NavItem icon={categoryImage.cleaning} text="청소" />
-        <NavItem icon={categoryImage.repair} text="운반·수리 " />
-        <NavItem icon={categoryImage.accompany_parenting} text="동행·육아 " />
-        <NavItem icon={categoryImage.pet} text="펫" />
-        <NavItem icon={categoryImage.agency} text="역할대행" />
-        <NavItem icon={categoryImage.part_time} text="‍‍‍알바" />
-        <NavItem icon={categoryImage.bug} text="벌레잡기" />
-        <NavItem icon={categoryImage.other} text="기타" />
+        {/* <NavItem text="전체" /> */}
+        {transformedCategories.map((category) => (
+          <NavItem
+            key={category.id}
+            icon={category.icon}
+            text={category.text}
+            isSelected={category.id === selectedCategoryId}
+            onClick={() => handleCategoryClick(category.id)}
+          />
+        ))}
       </MenuListWrapper>
     </NavLayout>
   );

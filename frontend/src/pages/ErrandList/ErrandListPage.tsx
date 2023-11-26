@@ -1,45 +1,58 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Template from "../../components/Template";
-import Errands from "../../components/Main/Errands";
 import Nav from "../../components/ErrandList/Nav";
 import { ErrandItem } from "../../components/ErrandList/ErrandItem";
-import { getCategories } from "../../apis/category";
 import { fetchErrandCategory } from "../../apis/errandCategory";
+import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { useQuery } from "react-query";
 
 function ErrandListPage() {
-  const [category, setCategory] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const { categoryId } = useParams();
+  const selectedCategoryId = parseInt(categoryId, 10);
+  console.log("categoryId", categoryId);
+  console.log("selectedCategoryId", selectedCategoryId);
 
-  const handleCategoryClick = async (categoryId) => {
-    try {
-      const data = await fetchErrandCategory(categoryId);
-      setSelectedCategory(data);
-      console.log("handleCategoryClick 함수 내 data:", data);
-      console.log("클릭됨!");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const {
+    data: errandCategory,
+    isLoading,
+    isError,
+    error,
+  } = useQuery(
+    ["errandCategory", selectedCategoryId],
+    () => fetchErrandCategory(selectedCategoryId),
+    {
+      // 옵션: staleTime, cacheTime 등을 설정할 수 있습니다.
+    },
+  );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const categoryData = await getCategories();
-        setCategory(categoryData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
+  console.log("selectedCategory", errandCategory);
 
   return (
-    <Template headerProps={{ title: "사용자 위치" }}>
-      <Nav handleCategoryClick={handleCategoryClick} />
-      <Errands />
-      {/* <ErrandItem /> */}
+    <Template headerProps={{ title: "현재 위치" }}>
+      <Nav selectedCategoryId={selectedCategoryId} />
+      <ErrandsList>
+        {errandCategory?.content.map((item) => {
+          console.log("Errands Porps:", item);
+          return (
+            <ErrandItem
+              key={item.taskId}
+              taskId={item.taskId}
+              fileData={item.fileData}
+              district={item.district}
+              title={item.title}
+              fee={item.fee}
+              startTime={item.startTime}
+              auctionEndTime={item.auctionEndTime}
+              isLiked={item.isLiked}
+            />
+          );
+        })}
+      </ErrandsList>
     </Template>
   );
 }
+
+const ErrandsList = styled.ul``;
 
 export default ErrandListPage;

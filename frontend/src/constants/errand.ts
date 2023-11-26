@@ -1,22 +1,15 @@
-import { Category } from "../types/errand";
+import { Category } from "../types/category";
 
 export const categories: Category[] = [
-  {
-    value: "category1",
-    text: "카테고리 1",
-    detailedItems: [
-      { value: "subcategory1-1", text: "서브 카테고리 1-1" },
-      { value: "subcategory1-2", text: "서브 카테고리 1-2" },
-    ],
-  },
-  {
-    value: "category2",
-    text: "카테고리 2",
-    detailedItems: [
-      { value: "subcategory2-1", text: "서브 카테고리 2-1" },
-      { value: "subcategory2-2", text: "서브 카테고리 2-2" },
-    ],
-  },
+  { id: 1, categoryName: "배달·퀵" },
+  { id: 2, categoryName: "청소" },
+  { id: 3, categoryName: "운반·수리" },
+  { id: 4, categoryName: "동행·육아" },
+  { id: 5, categoryName: "펫" },
+  { id: 6, categoryName: "역할대행" },
+  { id: 7, categoryName: "알바" },
+  { id: 8, categoryName: "벌레잡기" },
+  { id: 9, categoryName: "기타" },
 ];
 
 export const buttonOtions = {

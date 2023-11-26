@@ -1,4 +1,4 @@
-import { APP_URL, accessToken } from "./OAuth";
+import { accessToken } from "./OAuth";
 import api from "./api";
 
 // 카테고리 리스트 가져오기

@@ -6,15 +6,16 @@ import { Button } from "../../components/@common/Button/Button";
 import { ErrandRequest } from "../../components/ErrandRequest/ErrandRequest";
 import { ErrandRequestPost } from "../../apis/errand";
 import { ErrandFormData } from "../../types/errand";
-import { buttonOtions, categories } from "../../constants/errand";
+import { buttonOtions } from "../../constants/errand";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { uploadImgState } from "../../recoil/atoms/errandState";
 import Template from "../../components/Template";
 import { authInfoState } from "../../recoil/atoms/userInfo";
+import userProfile from "../../mocks/userData.json"; // 로컬 TEST용
 
 const ErrandRequestPage = () => {
-  const userProfile = useRecoilValue(authInfoState);
+  // const userProfile = useRecoilValue(authInfoState);
   const [uploadImg, setUploadImg] = useRecoilState<File[]>(uploadImgState);
   const navigaet = useNavigate();
   const methods = useForm<ErrandFormData>({

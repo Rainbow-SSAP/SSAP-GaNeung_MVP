@@ -26,7 +26,7 @@ export default UserProfile;
 
 const OutsideLayout = styled.div`
   display: flex;
-  width: 33.5rem;
+  width: 100%;
   padding: 2rem;
   flex-direction: column;
   align-items: center;

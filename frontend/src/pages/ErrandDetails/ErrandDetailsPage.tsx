@@ -140,15 +140,15 @@ const ErrandDetailsPage = () => {
         <ErrandDate data={errandData} />
         <ErrandDetail data={errandData} />
         <UserProfile data={errandData} />
-        <Button
-          className="button"
-          fixed
-          text="✋ 심부름 지원하기"
-          size="large"
-          color="primary"
-          onClick={openBottomSheet}
-        />
       </ErrandDetailInner>
+      <Button
+        className="button"
+        fixed
+        text="✋ 심부름 지원하기"
+        size="large"
+        color="primary"
+        onClick={openBottomSheet}
+      />
       {/* TODO userEmail 테스트용에서 실제 버전으로수정 */}
       {open && (
         <BottomSheet

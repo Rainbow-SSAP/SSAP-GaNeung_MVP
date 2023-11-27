@@ -24,9 +24,7 @@ function ErrandListPage() {
   } = useQuery(
     ["errandCategory", selectedCategoryId],
     () => fetchErrandCategory(selectedCategoryId, location),
-    {
-      // 옵션: staleTime, cacheTime 등을 설정할 수 있습니다.
-    },
+    {},
   );
 
   console.log("selectedCategory", errandCategory);

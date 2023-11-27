@@ -36,6 +36,7 @@ const ErrandRequestPage = () => {
       auctionStartTime: "",
       auctionEndTime: "",
       files: undefined,
+      termsAgreed: false,
     },
   });
 
@@ -55,13 +56,17 @@ const ErrandRequestPage = () => {
   );
 
   const onSubmit = (data: ErrandFormData) => {
+    // 폼 제출 시 실행될 로직
+    console.log(data);
     if (!data.termsAgreed) {
       // 약관 동의가 체크되지 않았다면 경고창
       alert("약관에 동의해야 합니다.");
+      console.log("약관에 동의해야 합니다.");
       return;
+    } else {
+      console.log("오류류류");
     }
-    // 폼 제출 시 실행될 로직
-    console.log(data);
+
     // 새로운 FormData 인스턴스 생성
     const formData = new FormData();
 
@@ -94,13 +99,18 @@ const ErrandRequestPage = () => {
 
   return (
     <Template headerProps={{ title: "심부름 요청서" }}>
-      <FormWapper onSubmit={handleSubmit(onSubmit)}>
+      <FormWapper id="errandRequestForm" onSubmit={handleSubmit(onSubmit)}>
         {/* useForm 훅에서 반환된 메서드를 자식 컴포넌트로 전달합니다 */}
         <FormProvider {...methods}>
           <ErrandRequest />
-          <Button text="🚨 심부름 요청하기" type="submit" fixed />
         </FormProvider>
       </FormWapper>
+      <Button
+        text="🚨 심부름 요청하기"
+        type="submit"
+        form="errandRequestForm"
+        fixed
+      />
     </Template>
   );
 };

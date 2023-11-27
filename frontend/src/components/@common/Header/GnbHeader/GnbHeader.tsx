@@ -28,6 +28,7 @@ export const GnbHeader = (gnbHeaderProps: GnbHeaderProps) => {
   // 홈 버튼 클릭 시
   const handleHome = () => {
     navigate("/home");
+    setIsMenuOpen(!isMenuOpen);
   };
 
   // 닫기 버튼 클릭 시

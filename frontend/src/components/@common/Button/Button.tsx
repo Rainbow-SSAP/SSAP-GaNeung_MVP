@@ -106,7 +106,7 @@ const ButtonOuter = styled.div<Omit<ButtonProps, "text">>`
       css`
         position: sticky;
         bottom: 0;
-        padding: 2rem 0;
+        padding: 2rem 3vw;
         background-color: white;
         /* border-top: 1px solid ${theme.color.grey50}; */
       `}

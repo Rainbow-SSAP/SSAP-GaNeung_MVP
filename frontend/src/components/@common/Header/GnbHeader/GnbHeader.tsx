@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { headerImage } from "../../../../assets/headerImages";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { isMenuOpenState } from "../../../../recoil/atoms/settingsState";
 
@@ -15,6 +15,10 @@ export const GnbHeader = (gnbHeaderProps: GnbHeaderProps) => {
   const { title, goBack = true, close = true } = gnbHeaderProps;
   const [isMenuOpen, setIsMenuOpen] = useRecoilState(isMenuOpenState);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // 현재 경로가 /main이 아닐 때만 홈 버튼을 표시
+  const showHomeButton = location.pathname !== "/home";
 
   // 뒤로가기 버튼 클릭 시
   const handleGoBack = () => {
@@ -42,6 +46,11 @@ export const GnbHeader = (gnbHeaderProps: GnbHeaderProps) => {
             onClick={handleGoBack}
           />
         )}
+        {showHomeButton && (
+          <IconWrapper onClick={handleHome}>
+            <img src={headerImage.home_line} alt="홈 버튼" />
+          </IconWrapper>
+        )}
       </IconWrapper>
       <Title>{title}</Title>
       <IconWrapper>
@@ -54,11 +63,15 @@ export const GnbHeader = (gnbHeaderProps: GnbHeaderProps) => {
 };
 
 const GnbHeaderWrapper = styled.div`
+  position: sticky;
+  top: 0;
   display: flex;
   width: 100%;
   padding: 2rem 0;
   justify-content: space-between;
   align-items: center;
+  background-color: white;
+  z-index: 10;
 `;
 
 const IconWrapper = styled.div`

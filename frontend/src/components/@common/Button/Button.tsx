@@ -100,13 +100,13 @@ const ButtonOuter = styled.div<Omit<ButtonProps, "text">>`
       position: fixed;
       left: 0;
       bottom: 20px;
-      z-index: 10;
+      z-index: 2;
 
       ${size === "large" &&
       css`
         position: sticky;
         bottom: 0;
-        padding: 2rem 3vw;
+        padding: 2rem 0;
         background-color: white;
         /* border-top: 1px solid ${theme.color.grey50}; */
       `}

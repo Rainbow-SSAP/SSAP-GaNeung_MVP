@@ -92,9 +92,9 @@ const BtnLayout = styled.div`
 
 const Btn = styled.div`
   display: flex;
-  width: 6.5rem;
-  height: 2.3rem;
-  padding: 0.45rem 1.4rem 0.65rem 1.2rem;
+  /* width: 6.5rem; */
+  /* height: 2.3rem; */
+  padding: .6rem 2rem;
   justify-content: center;
   align-items: center;
   border-radius: 5rem;
@@ -105,7 +105,7 @@ const Btn = styled.div`
 const CategoryTag = styled.p`
   color: var(--neutral-white, #fff);
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-style: normal;
   font-weight: 700;
   line-height: 100%;

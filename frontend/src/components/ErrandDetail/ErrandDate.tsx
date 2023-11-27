@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const ErrandDate = ({ data }) => {
-  const errandStartTime = data.startTime || "심부름 시작 시간 미설정";
+  const errandStartTime = data.StartTime || "심부름 시작 시간 미설정";
   return (
     <Layout>
       <Date>일시</Date>

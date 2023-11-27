@@ -11,15 +11,6 @@ interface MenuProps {
 
 function Menu({ isOpen }: MenuProps) {
   useLockBodyScroll(isOpen);
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     // 메뉴가 열려있으면 body 스크롤을 비활성화
-  //     document.body.style.overflow = "hidden";
-  //   } else {
-  //     // 메뉴가 닫혀있으면 스크롤을 다시 활성화
-  //     document.body.style.overflow = "";
-  //   }
-  // }, [isOpen]);
 
   return (
     <MenuContainer isOpen={isOpen}>

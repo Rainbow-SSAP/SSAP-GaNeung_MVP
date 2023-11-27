@@ -55,6 +55,11 @@ const ErrandRequestPage = () => {
   );
 
   const onSubmit = (data: ErrandFormData) => {
+    if (!data.termsAgreed) {
+      // 약관 동의가 체크되지 않았다면 경고창
+      alert("약관에 동의해야 합니다.");
+      return;
+    }
     // 폼 제출 시 실행될 로직
     console.log(data);
     // 새로운 FormData 인스턴스 생성

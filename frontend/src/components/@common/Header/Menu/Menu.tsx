@@ -3,21 +3,23 @@ import UserProfile from "./UserProfile";
 import styled, { css } from "styled-components";
 import Nav from "./Nav";
 import { GnbHeader } from "../GnbHeader/GnbHeader";
+import { useLockBodyScroll } from "../../../../hooks/useLockBodyScroll";
 
 interface MenuProps {
   isOpen: boolean;
 }
 
 function Menu({ isOpen }: MenuProps) {
-  useEffect(() => {
-    if (isOpen) {
-      // 메뉴가 열려있으면 body 스크롤을 비활성화
-      document.body.style.overflow = "hidden";
-    } else {
-      // 메뉴가 닫혀있으면 스크롤을 다시 활성화
-      document.body.style.overflow = "";
-    }
-  }, [isOpen]);
+  useLockBodyScroll(isOpen);
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     // 메뉴가 열려있으면 body 스크롤을 비활성화
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     // 메뉴가 닫혀있으면 스크롤을 다시 활성화
+  //     document.body.style.overflow = "";
+  //   }
+  // }, [isOpen]);
 
   return (
     <MenuContainer isOpen={isOpen}>

@@ -6,8 +6,11 @@ import { fetchErrandCategory } from "../../apis/errandCategory";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
+import { useRecoilValue } from "recoil";
+import { userLocationState } from "../../recoil/atoms/LocationState";
 
 function ErrandListPage() {
+  const location = useRecoilValue(userLocationState);
   const { categoryId } = useParams();
   const selectedCategoryId = parseInt(categoryId, 10);
   console.log("categoryId", categoryId);
@@ -29,7 +32,7 @@ function ErrandListPage() {
   console.log("selectedCategory", errandCategory);
 
   return (
-    <Template headerProps={{ title: "현재 위치" }}>
+    <Template headerProps={{ title: "우리 동네 심부름" }}>
       <Nav selectedCategoryId={selectedCategoryId} />
       <ErrandsList>
         {errandCategory?.content.map((item) => {
@@ -55,6 +58,9 @@ function ErrandListPage() {
 
 const ErrandsList = styled.ul`
   padding: 0 3vw 2rem;
+  li:last-child {
+    border-bottom: none;
+  }
 `;
 
 export default ErrandListPage;

@@ -18,8 +18,10 @@ const UserProfile = ({ data }) => {
           <UserInfoDetail>
             <UserNickname>{user.userName || "이름 없음"}</UserNickname>
             <UserAge>
-              {user.gender}
-              {user.ageRange}
+              {`
+              ${user.gender} 
+              ${user.ageRange}
+              `}
             </UserAge>
           </UserInfoDetail>
         </UserInfoLayout>

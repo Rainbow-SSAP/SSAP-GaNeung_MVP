@@ -222,12 +222,11 @@ const BidPriceContainer = styled.div`
 `;
 
 const BidInput = styled.input`
-  display: flex;
-  padding: 1rem;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  align-self: stretch;
-  border-radius: 0.5rem;
-  background: #f4f4f4;
+  width: 100%;
+  padding: 10px;
+  font-size: 13px;
+  border: 1px solid ${({ theme }) => theme.color.grey50};
+  border-radius: 4px;
+  color: ${({ theme }) => theme.color.primary};
+  background-color: ${({ theme }) => theme.color.grey50};
 `;

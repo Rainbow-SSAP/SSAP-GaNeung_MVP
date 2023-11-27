@@ -13,6 +13,8 @@ import { uploadImgState } from "../../recoil/atoms/errandState";
 import Template from "../../components/Template";
 import { authInfoState } from "../../recoil/atoms/userInfo";
 import userProfile from "../../mocks/userData.json"; // 로컬 TEST용
+import { ToastContainer } from "react-toastify";
+import { errorToast } from "../../constants/toast";
 
 const ErrandRequestPage = () => {
   // const userProfile = useRecoilValue(authInfoState);
@@ -60,11 +62,8 @@ const ErrandRequestPage = () => {
     console.log(data);
     if (!data.termsAgreed) {
       // 약관 동의가 체크되지 않았다면 경고창
-      alert("약관에 동의해야 합니다.");
-      console.log("약관에 동의해야 합니다.");
+      errorToast("약관에 동의해야 합니다.");
       return;
-    } else {
-      console.log("오류류류");
     }
 
     // 새로운 FormData 인스턴스 생성
@@ -110,6 +109,17 @@ const ErrandRequestPage = () => {
         type="submit"
         form="errandRequestForm"
         fixed
+      />
+      <ToastContainer
+        position="bottom-right" // 알람 위치 지정
+        autoClose={3000} // 자동 off 시간
+        hideProgressBar={false} // 진행시간바 숨김
+        closeOnClick // 클릭으로 알람 닫기
+        rtl={false} // 알림 좌우 반전
+        pauseOnFocusLoss // 화면을 벗어나면 알람 정지
+        draggable // 드래그 가능
+        pauseOnHover // 마우스를 올리면 알람 정지
+        theme="light"
       />
     </Template>
   );

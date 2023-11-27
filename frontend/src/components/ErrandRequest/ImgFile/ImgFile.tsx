@@ -4,6 +4,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { uploadImgState } from "../../../recoil/atoms/errandState";
 import ErrorMessage from "../../@common/Error/ErrorMessage";
+import { errorToast } from "../../../constants/toast";
 
 function ImgFile() {
   const [uploadImg, setUploadImg] = useRecoilState<File[]>(uploadImgState);
@@ -43,7 +44,7 @@ function ImgFile() {
     if (validationMessage === true) {
       setUploadImg(fileList); // 선택한 이미지 파일 저장
     } else {
-      alert(validationMessage); // 유효성 검사에 실패한 경우 경고 메시지 표시
+      errorToast(validationMessage); // 유효성 검사에 실패한 경우 경고 메시지 표시
     }
     console.log("선택한 이미지 파일: ", uploadImg);
   };

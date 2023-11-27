@@ -115,24 +115,8 @@ const ErrandDetailsPage = () => {
       : setOpen(true);
   };
 
-  const handleBack = () => {
-    console.log("뒤로가기 로직 구현 //TODO");
-  };
-
-  const handleMenu = () => {
-    console.log("메뉴 창 오픈 (오른쪽 애니메이션으로) //TODO");
-  };
-
   return (
     <Template>
-      {/* <Header
-        title="상세 페이지"
-        onBack={handleBack}
-        onMenu={handleMenu}
-        alignItems="center"
-        justifycontent="space-between"
-        titleAlign="center"
-      /> */}
       <KakaoMap data={errandData} />
       <ErrandDetailInner>
         <Title data={errandData} />

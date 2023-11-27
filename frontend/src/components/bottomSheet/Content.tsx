@@ -143,6 +143,9 @@ const ContentWrapper = styled.div`
   padding: 2rem;
   position: relative;
   flex-shrink: 0;
+  button {
+    margin-top: 20px;
+  }
 `;
 
 const Title = styled.h2`
@@ -225,6 +228,7 @@ const BidInput = styled.input`
   width: 100%;
   padding: 10px;
   font-size: 13px;
+  text-align: right;
   border: 1px solid ${({ theme }) => theme.color.grey50};
   border-radius: 4px;
   color: ${({ theme }) => theme.color.primary};

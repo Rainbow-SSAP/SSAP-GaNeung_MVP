@@ -21,6 +21,8 @@ function HomePage() {
   const [loading, setLoading] = useRecoilState(loadingState);
   const navigate = useNavigate();
 
+  useLockBodyScroll(loading);
+
   useEffect(() => {
     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -50,8 +52,6 @@ function HomePage() {
       }
     });
   }, []);
-
-  useLockBodyScroll(loading);
 
   // 요청서 작성하기로 이동
   const handleRequestClick = () => {

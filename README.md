@@ -10,6 +10,11 @@
 
 `SSAP 가능`은 심부름 경매 플랫폼으로, 기존의 갑을 구조를 넘어서, 서비스 제공자(싸퍼)와 이용자가 파트너쉽을 형성하여 서로의 필요와 가치를 공유하고 더 나은 서비스 경험을 만들어가는 공간을 제공합니다.
 <br/>
+<div align="center">
+  <a href="https://youtu.be/oliKkKtftME" target="_blank">
+    <img width="409" alt="시연영상" src="https://github.com/Rainbow-SSAP/SSAP-GaNeung_MVP/assets/134491629/be2b1809-d745-4564-916b-4e9ddf1db440">
+  </a>
+</div>
 <br/>
 
 ## :technologist: 팀원

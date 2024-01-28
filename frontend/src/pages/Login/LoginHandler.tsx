@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { authInfoState } from "../../recoil/atoms/userInfo";
+import api from "../../apis/api";
 
 export const LoginHandler = () => {
   const navigate = useNavigate();
@@ -18,10 +19,9 @@ export const LoginHandler = () => {
   const kakaoLogin = async () => {
     try {
       console.log("서버에 코드 요청 보냄", code);
-      const res = await axios({
+      const res = await api({
         method: "GET",
         url: `/api/oauth/kakao/callback?code=${code}`,
-        // url: `https://k1e5f1ddb1135a.user-app.krampoline.com/api/oauth/kakao/callback?code=${code}`,
         headers: {
           "Content-Type": "application/json;charset=utf-8",
         },
@@ -55,7 +55,7 @@ export const LoginHandler = () => {
 
         sessionStorage.setItem("accessToken", res.data.accessToken); // 액세스 토큰 저장
         console.log("네비게이팅");
-        navigate("/home"); // HomePage로 이동
+        navigate("/"); // HomePage로 이동
       } else {
         console.error("로그인 실패", res.data);
       }

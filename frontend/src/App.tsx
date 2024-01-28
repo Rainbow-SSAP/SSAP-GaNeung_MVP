@@ -1,7 +1,8 @@
 import React from "react";
 import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "react-query";
-import AppRouter from "../src/router/Router";
+import { RouterProvider } from "react-router-dom";
+import router from "./router/router";
 
 import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
@@ -15,7 +16,7 @@ function App() {
       <GlobalStyle />
       <RecoilRoot>
         <QueryClientProvider client={queryClient}>
-          <AppRouter />
+          <RouterProvider router={router} />
         </QueryClientProvider>
       </RecoilRoot>
     </ThemeProvider>

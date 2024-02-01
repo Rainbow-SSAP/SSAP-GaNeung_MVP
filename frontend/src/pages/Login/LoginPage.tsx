@@ -4,9 +4,22 @@ import kakaoImage from "../../assets/images/Kakao.png";
 import styled from "styled-components";
 import logo from "../../assets/images/ssap_logo_W.svg";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
+import { Navigate } from "react-router-dom";
 
 export default function LoginPage() {
   useLockBodyScroll(); // body 스크롤 막기
+
+  const isAuthenticated = (): boolean => {
+    const accessToken = sessionStorage.getItem("accessToken");
+    console.log("로그인 인증 완료..", accessToken);
+    // 엑세스 토근 존재 여부 확인
+    return accessToken !== null;
+  };
+
+  if (isAuthenticated()) {
+    // 이미 로그인한 상태라면 홈페이지로 리다이렉트
+    return <Navigate to="/" />;
+  }
 
   return (
     <LoginContainer>

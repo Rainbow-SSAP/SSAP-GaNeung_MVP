@@ -9,6 +9,7 @@ import support from "./images/support.svg";
 import home_line from "./images/home_line.svg";
 import arrow_back from "./images/arrow_back.svg";
 import close from "./images/close.svg";
+import arrow from "./images/arrow.png";
 
 export const headerImage = {
   goback,
@@ -22,4 +23,5 @@ export const headerImage = {
   home_line,
   arrow_back,
   close,
+  arrow,
 };

@@ -30,7 +30,7 @@ function ErrandListPage() {
   console.log("selectedCategory", errandCategory);
 
   return (
-    <Template headerProps={{ title: "우리 동네 심부름" }}>
+    <Template headerProps={{ gnb: true, type: "location" }}>
       <Nav selectedCategoryId={selectedCategoryId} />
       <ErrandsList>
         {errandCategory?.content.map((item) => {

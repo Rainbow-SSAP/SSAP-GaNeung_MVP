@@ -11,5 +11,7 @@ export const authInfoState = atom({
     gender: "",
     profileImageUrl: "",
     introduction: "",
+    address: "",
+    shortAddress: "",
   },
 });

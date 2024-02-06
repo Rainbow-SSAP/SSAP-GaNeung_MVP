@@ -1,7 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { authInfoState } from "../../recoil/atoms/userInfo";
 import api from "../../apis/api";
 
@@ -39,8 +38,12 @@ export const LoginHandler = () => {
           birthdate,
           gender,
           profileImageUrl,
+          introduction,
+          address,
         } = res.data.account;
         const accessToken = res.data.accessToken;
+
+        const shortAddress = address ? address.split(" ").pop() : "";
 
         setAuthInfo({
           accessToken,
@@ -50,7 +53,9 @@ export const LoginHandler = () => {
           birthdate,
           gender,
           profileImageUrl,
-          introduction: "",
+          introduction,
+          address,
+          shortAddress,
         });
 
         sessionStorage.setItem("accessToken", res.data.accessToken); // 액세스 토큰 저장

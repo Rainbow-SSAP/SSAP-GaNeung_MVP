@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
-import SSAP_logo from "../../../assets/images/ssap_logo_B.svg";
 import Menu from "./Menu/Menu";
 import { headerImage } from "../../../assets/headerImages";
 import { useRecoilState } from "recoil";
 import { isMenuOpenState } from "../../../recoil/atoms/settingsState";
 import { useNavigate } from "react-router-dom";
+import { authInfoState } from "../../../recoil/atoms/userInfo";
 
 export interface HeaderProps {
-  type?: "logo" | "gnb";
+  gnb?: boolean;
+  type?: "location" | "title";
   title?: string;
 }
 
 export const Header = (headerProps: HeaderProps) => {
-  const { title, type = "gnb" } = headerProps;
+  const { title, gnb, type = "title" } = headerProps;
   // 메뉴 열림/닫힘 상태 관리
   const [isMenuOpen, setIsMenuOpen] = useRecoilState(isMenuOpenState);
+  const [authInfo, setAuthInfo] = useRecoilState(authInfoState);
   const navigate = useNavigate();
 
   // 메뉴 토글
@@ -23,20 +25,17 @@ export const Header = (headerProps: HeaderProps) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // 로고 클릭 시 home으로 이동
-  const handleHome = () => {
-    navigate("/home");
-  };
-
   // 뒤로가기 버튼 클릭 시
   const handleGoBack = () => {
     navigate(-1); // 이전 페이지로 이동
   };
 
+  // TODO: 위치 정보 재설성
+  
   return (
     <HeaderContainer type={type}>
-      {type === "gnb" ? (
-        <LeftItem>
+      <LeftItem>
+        {gnb && (
           <IconWrapper>
             <img
               src={headerImage.arrow_back}
@@ -44,13 +43,16 @@ export const Header = (headerProps: HeaderProps) => {
               onClick={handleGoBack}
             />
           </IconWrapper>
+        )}
+        {type === "title" ? (
           <Title>{title}</Title>
-        </LeftItem>
-      ) : (
-        <Logo onClick={handleHome}>
-          <img src={SSAP_logo} alt="SSAP 로고" />
-        </Logo>
-      )}
+        ) : (
+          <LocationInfoWapper>
+            <span>{authInfo.shortAddress}</span>
+          </LocationInfoWapper>
+        )}
+      </LeftItem>
+
       <IconWrapper onClick={toggleMenu}>
         <img src={headerImage.menu} />
       </IconWrapper>
@@ -77,7 +79,6 @@ const HeaderContainer = styled.header<{ type: string }>`
   /* box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25); */
 `;
 
-const Logo = styled.div``;
 const LeftItem = styled.div`
   display: flex;
   justify-content: center;
@@ -102,4 +103,28 @@ const Title = styled.h3`
   color: #262626;
   font-size: 1.8rem;
   font-weight: 600;
+`;
+
+const LocationInfoWapper = styled.div`
+  display: flex;
+  justify-content: center;
+  line-height: 2.4rem;
+
+  span {
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+  }
+  span::after {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url(${headerImage.arrow});
+    background-color: transparent;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 `;

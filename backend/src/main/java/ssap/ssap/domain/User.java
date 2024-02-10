@@ -34,4 +34,7 @@ public class User {
     @Column(name = "profileImageUrl", nullable = true)
     private String profileImageUrl;
 
+    @Column(name = "address", nullable = true)
+    private String address;
+
 }

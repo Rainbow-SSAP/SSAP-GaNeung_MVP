@@ -9,6 +9,9 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -34,20 +37,23 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<?> handleUserNotFoundException(UserNotFoundException ex) {
+        log.info("사용자를 찾을 수 없음: " + ex.getMessage());
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        StringBuilder errorMessageBuilder = new StringBuilder();
-
-        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
-            if (errorMessageBuilder.length() > 0) {
-                errorMessageBuilder.append(", ");
-            }
-            errorMessageBuilder.append(fieldError.getDefaultMessage());
-        }
-
-        return new ResponseEntity<>(errorMessageBuilder.toString(), HttpStatus.BAD_REQUEST);
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
 
     @ExceptionHandler(InvalidAccessTokenException.class)
     public ResponseEntity<?> handleInvalidAccessTokenException(InvalidAccessTokenException ex) {

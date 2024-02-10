@@ -1,12 +1,15 @@
 package ssap.ssap.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import ssap.ssap.domain.User;
 import ssap.ssap.dto.Account;
+import ssap.ssap.dto.UserAddressDTO;
 import ssap.ssap.exception.CustomServiceException;
+import ssap.ssap.exception.UserNotFoundException;
 import ssap.ssap.repository.UserRepository;
 
 import java.util.Optional;
@@ -53,5 +56,35 @@ public class UserService {
             log.error("데이터베이스 접근 중 오류 발생: {}", email, e);
             throw new CustomServiceException("데이터베이스 접근 중 오류 발생", e);
         }
+    }
+    public UserAddressDTO updateUserAddress(String email, String address) {
+        if (email == null || email.isBlank() || !EmailValidator.getInstance().isValid(email)) {
+            log.warn("유효하지 않은 이메일 형식: {}", email);
+            throw new IllegalArgumentException("유효하지 않은 이메일 형식입니다.");
+        }
+
+        if (email == null || email.isBlank()) {
+            log.debug("이메일이 null이거나 공백입니다: {}", email);
+            throw new IllegalArgumentException("이메일은 비어 있을 수 없습니다.");
+        }
+
+        if (!EmailValidator.getInstance().isValid(email)) {
+            log.info("유효하지 않은 이메일 형식: {}", email);
+            throw new IllegalArgumentException("유효하지 않은 이메일 형식입니다: " + email);
+        }
+
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("사용자를 찾을 수 없음: " + email));
+
+        user.setAddress(address);
+        User savedUser = userRepository.save(user);
+        log.info("사용자 주소 정보 업데이트: {}", email);
+
+        UserAddressDTO userAddressDTO = new UserAddressDTO();
+        userAddressDTO.setEmail(savedUser.getEmail());
+        userAddressDTO.setAddress(savedUser.getAddress());
+
+        return userAddressDTO;
     }
 }

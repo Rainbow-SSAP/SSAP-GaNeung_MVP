@@ -12,12 +12,11 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { uploadImgState } from "../../recoil/atoms/errandState";
 import Template from "../../components/Template";
 import { authInfoState } from "../../recoil/atoms/userInfo";
-import userProfile from "../../mocks/userData.json"; // 로컬 TEST용
 import { ToastContainer } from "react-toastify";
 import { errorToast } from "../../constants/toast";
 
 const ErrandRequestPage = () => {
-  // const userProfile = useRecoilValue(authInfoState);
+  const userProfile = useRecoilValue(authInfoState);
   const [uploadImg, setUploadImg] = useRecoilState<File[]>(uploadImgState);
   const navigaet = useNavigate();
   const methods = useForm<ErrandFormData>({

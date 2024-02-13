@@ -11,6 +11,7 @@ import ErrorPage from "../pages/Error/ErrorPage";
 import ChatPage from "../pages/Chat/ChatPage";
 import HistoryPage from "../pages/History/HistoryPage";
 import ProfilePage from "../pages/Profile/ProfilePage";
+import LocationConsentPage from "../pages/Home/LocationConsentPage";
 
 const routes: RouteObject[] = [
   {
@@ -26,6 +27,14 @@ const routes: RouteObject[] = [
     element: (
       <Private>
         <HomePage />
+      </Private>
+    ),
+  },
+  {
+    path: "/location-consent",
+    element: (
+      <Private>
+        <LocationConsentPage />
       </Private>
     ),
   },

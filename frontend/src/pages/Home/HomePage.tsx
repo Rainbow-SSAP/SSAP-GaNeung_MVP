@@ -9,13 +9,6 @@ import { loadingState } from "../../recoil/atoms/settingsState";
 import Loading from "../../components/Loading/Loding";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import { authInfoState } from "../../recoil/atoms/userInfo";
-import getKakaoLocation from "../../apis/kakaoLoaction";
-
-declare global {
-  interface Window {
-    kakao: any;
-  }
-}
 
 function HomePage() {
   const [authInfo, setAuthInfo] = useRecoilState(authInfoState);
@@ -25,32 +18,12 @@ function HomePage() {
 
   useLockBodyScroll(loading);
 
-  const fetchLocation = async () => {
-    if (!authInfo.address) {
-      // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        const x = position.coords.longitude; // 경도
-        const y = position.coords.latitude; // 위도
-
-        if (x && y) {
-          const data = await getKakaoLocation(x, y);
-          const address_name = data.documents[1].address_name;
-          const region_3depth_name = data.documents[1].region_3depth_name;
-          console.log("현재 위치 정보: ", address_name);
-
-          setAuthInfo({
-            ...authInfo,
-            address: address_name,
-            shortAddress: region_3depth_name,
-          });
-        }
-      });
-    }
-  };
-
   useEffect(() => {
-    fetchLocation();
-  }, []);
+    // 사용자의 위치 정보가 없을 경우
+    if (!authInfo.address) {
+      navigate("/location-consent"); // 위치 정보 동의 페이지로 리디렉션
+    }
+  }, [authInfo.address, navigate]);
 
   // 요청서 작성하기로 이동
   const handleRequestClick = () => {

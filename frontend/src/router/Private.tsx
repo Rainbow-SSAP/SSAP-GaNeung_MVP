@@ -2,10 +2,10 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 
 interface PrivateProps {
-  children: JSX.Element;
+  children: React.ReactElement;
 }
 
-const Private: React.FC<PrivateProps> = ({ children }) => {
+const Private = ({ children }: PrivateProps) => {
   const isAuthenticated = (): boolean => {
     const accessToken = sessionStorage.getItem("accessToken");
     console.log("로그인 인증 완료..", accessToken);

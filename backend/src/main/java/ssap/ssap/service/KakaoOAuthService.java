@@ -82,6 +82,7 @@ public class KakaoOAuthService implements OAuthService {
                 account.setBirthdate(user.getBirthdate());
                 account.setAgeRange(user.getAgeRange());
                 account.setProfileImageUrl(user.getProfileImageUrl());
+                account.setAddress(user.getAddress());
                 loginResponse.setAccount(account);
                 loginResponse.setLoginSuccess(true);
 

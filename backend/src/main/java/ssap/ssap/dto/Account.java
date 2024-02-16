@@ -12,4 +12,5 @@ public class Account {
     private String birthdate;
     private String ageRange;
     private String profileImageUrl;
+    private String address;
 }

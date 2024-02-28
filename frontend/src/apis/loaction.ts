@@ -25,7 +25,7 @@ export default getKakaoLocation;
 export const fetchUserAddress = async ({ address, email }) => {
   console.table("fetchUserAddress: ", address);
   try {
-    const response = await api.post(
+    const response = await api.put(
       `/api/user-address`,
       { address, email },
       {
@@ -34,6 +34,7 @@ export const fetchUserAddress = async ({ address, email }) => {
         },
       },
     );
+
     return response.data;
   } catch (error) {
     console.error("위치 정보 저장에 실패했습니다:", error);

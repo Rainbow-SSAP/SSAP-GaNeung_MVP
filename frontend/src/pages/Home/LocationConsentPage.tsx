@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { authInfoState } from "../../recoil/atoms/userInfo";
@@ -7,24 +7,30 @@ import { headerImage } from "../../assets/headerImages";
 import styled from "styled-components";
 import { Button } from "../../components/@common/Button/Button";
 import { useMutation } from "react-query";
-
-declare global {
-  interface Window {
-    kakao: any;
-  }
-}
+import Loading from "../../components/Loading/Loding";
 
 export default function LocationConsentPage() {
   const navigate = useNavigate();
   const userProfile = useRecoilValue(authInfoState);
   const [authInfo, setAuthInfo] = useRecoilState(authInfoState);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  console.log(userProfile.userEmail);
+  console.log("사용자 주소: ", userProfile.userEmail);
   // const email = userProfile.userEmail;
 
-  const mutation = useMutation(fetchUserAddress);
+  const { mutate } = useMutation(fetchUserAddress, {
+    onSuccess: () => {
+      console.log("서버에 유저 주소 저장 성공");
+    },
+    onError: () => {
+      setLoading(false);
+    },
+  });
 
   const handleLocationConsent = async () => {
+    setLoading(true);
+    setError(null);
     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
     navigator.geolocation.getCurrentPosition(
       async (position) => {
@@ -37,47 +43,74 @@ export default function LocationConsentPage() {
           const region_3depth_name = data.documents[1].region_3depth_name;
           console.log("현재 위치 정보: ", address_name);
 
+          mutate({
+            address: address_name,
+            email: userProfile.userEmail,
+          });
+
           setAuthInfo({
             ...authInfo,
             address: address_name,
             shortAddress: region_3depth_name,
           });
 
-          mutation.mutate({
-            address: address_name,
-            email: userProfile.userEmail,
-          });
-
-          navigate("/"); // 위치 정보를 성공적으로 가져온 후 홈페이지로 이동
+          setLoading(false);
+          navigate("/");
         } catch (error) {
           console.error("위치 정보를 가져오는 데 실패했습니다:", error);
+          setError(
+            "위치 정보를 가져오는데 실패했습니다. 설정을 확인하거나 다시 시도해주세요.",
+          );
+          setLoading(false);
         }
       },
       (error) => {
         console.error("위치 정보 접근 권한을 거부하였습니다:", error);
+        setError(
+          "위치 정보 접근을 거부하였습니다. 설정을 확인하거나 다시 시도해주세요.",
+        );
       },
     );
   };
 
   return (
-    <LocationConsentWrapper>
-      <Container>
-        {/* <h1>위치 정보 동의</h1> */}
-        <LocationIcon>
-          <img src={headerImage.placeholder} alt="위치 아이콘" />
-        </LocationIcon>
-        <p>모든 심부름 SSAP에서 쌉가능!</p>
-        <span>
-          서비스 이용을 위해 위치 정보 접근 권한이 필요합니다. <br />내 동네를
-          설정하고 시작해보세요.
-        </span>
-        <Button
-          size="large"
-          text="동의하고 시작하기"
-          onClick={handleLocationConsent}
-        />
-      </Container>
-    </LocationConsentWrapper>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <LocationConsentWrapper>
+          <Container>
+            {/* <h1>위치 정보 동의</h1> */}
+            <LocationIcon>
+              <img src={headerImage.placeholder} alt="위치 아이콘" />
+            </LocationIcon>
+            <p>모든 심부름 SSAP에서 쌉가능!</p>
+            {error ? (
+              <>
+                <span>
+                  서비스 이용을 위해 위치 정보 접근 권한이 필요합니다. <br />내
+                  동네를 설정하고 시작해보세요.
+                </span>
+                <Button
+                  size="large"
+                  text="다시 시도하기"
+                  onClick={handleLocationConsent}
+                />
+              </>
+            ) : (
+              <>
+                <span>{error}</span>
+                <Button
+                  size="large"
+                  text="동의하고 시작하기"
+                  onClick={handleLocationConsent}
+                />
+              </>
+            )}
+          </Container>
+        </LocationConsentWrapper>
+      )}
+    </>
   );
 }
 

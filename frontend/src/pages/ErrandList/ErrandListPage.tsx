@@ -10,7 +10,7 @@ import { useRecoilValue } from "recoil";
 import { userLocationState } from "../../recoil/atoms/LocationState";
 
 function ErrandListPage() {
-  const location = useRecoilValue(userLocationState);
+const location = useRecoilValue(userLocationState);
   const { categoryId } = useParams();
   const selectedCategoryId = parseInt(categoryId, 10);
   console.log("categoryId", categoryId);
@@ -19,7 +19,6 @@ function ErrandListPage() {
   const {
     data: errandCategory,
     isLoading,
-    isError,
     error,
   } = useQuery(
     ["errandCategory", selectedCategoryId],
@@ -28,6 +27,20 @@ function ErrandListPage() {
   );
 
   console.log("selectedCategory", errandCategory);
+
+  if (errandCategory == null || isLoading) {
+    return (
+      <Template headerProps={{ gnb: true, type: "location" }}>
+        <Nav selectedCategoryId={selectedCategoryId} />
+        <ErrandsList>
+          {[...new Array(10)].map((_, index) => (
+            <ErrandItem.Skeleton key={index} />
+          ))}
+        </ErrandsList>
+      </Template>
+    );
+  }
+  if (error) return <div></div>;
 
   return (
     <Template headerProps={{ gnb: true, type: "location" }}>

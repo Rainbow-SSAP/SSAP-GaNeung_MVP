@@ -5,6 +5,7 @@ import { LikedButton } from "./LikedButton";
 import { Link } from "react-router-dom";
 import useAuctionTimeLeft from "../../hooks/useAuctionTimeLeft";
 import { ErrandItemProps } from "../../types/errand";
+import Skeleton from "../@common/Skeleton/Skeleton";
 
 export const ErrandItem = (errandItemProps: ErrandItemProps) => {
   const {
@@ -55,8 +56,43 @@ export const ErrandItem = (errandItemProps: ErrandItemProps) => {
   );
 };
 
+function ListSkeleton() {
+  return (
+    <ErrandItemWrapper>
+      <ItemLeft>
+        <Skeleton width={100} height={100} />
+      </ItemLeft>
+      <ItemRight>
+        <span>
+          <Skeleton width={50} height={12} />
+        </span>
+        <h4>
+          <Skeleton width={200} height={16} />
+        </h4>
+        <p>
+          <Skeleton width={100} height={18} />
+        </p>
+        <Time>
+          <span>
+            <Skeleton width={100} height={12} />
+          </span>
+          <span>
+            <Skeleton width={60} height={12} />
+          </span>
+        </Time>
+      </ItemRight>
+      <LikedButton />
+    </ErrandItemWrapper>
+  );
+}
+
+ErrandItem.Skeleton = ListSkeleton;
+
 const ErrandItemWrapper = styled.li`
   position: relative;
+  display: flex;
+  grid-gap: 20px;
+  align-items: center;
   margin-top: 40px;
   padding-bottom: 40px;
   border-bottom: 1px solid ${({ theme }) => theme.color.grey50};

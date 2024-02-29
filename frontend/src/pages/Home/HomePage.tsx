@@ -5,18 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/@common/Button/Button";
 import Template from "../../components/Template";
 import { useRecoilState } from "recoil";
-import { loadingState } from "../../recoil/atoms/settingsState";
-import Loading from "../../components/Loading/Loding";
-import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import { authInfoState } from "../../recoil/atoms/userInfo";
 
 function HomePage() {
   const [authInfo, setAuthInfo] = useRecoilState(authInfoState);
-  const [loading, setLoading] = useRecoilState(loadingState);
   const navigate = useNavigate();
-  setLoading(false);
 
-  useLockBodyScroll(loading);
+  console.log("사용자 정보: ", authInfo);
 
   useEffect(() => {
     // 사용자의 위치 정보가 없을 경우
@@ -31,21 +26,15 @@ function HomePage() {
   };
 
   return (
-    <>
-      {loading ? (
-        <Loading />
-      ) : (
-        <Template headerProps={{ type: "location" }}>
-          <Main />
-          <Button
-            fixed
-            text="✋ 요청하기"
-            size="medium"
-            onClick={handleRequestClick}
-          />
-        </Template>
-      )}
-    </>
+    <Template headerProps={{ type: "location" }}>
+      <Main />
+      <Button
+        fixed
+        text="✋ 요청하기"
+        size="medium"
+        onClick={handleRequestClick}
+      />
+    </Template>
   );
 }
 

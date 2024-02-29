@@ -3,8 +3,8 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import styled from "styled-components";
 
 export interface LikedButtonProps {
-  isLiked: boolean;
-  onToggleLiked: () => void; // 찜하기 상태를 변경하는 함수
+  isLiked?: boolean;
+  onToggleLiked?: () => void; // 찜하기 상태를 변경하는 함수
 }
 
 export const LikedButton = ({ isLiked, onToggleLiked }: LikedButtonProps) => {

@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import { userLocationState } from "../../recoil/atoms/LocationState";
 import { ErrandsData } from "../../types/errand";
 import { ErrandItem } from "../ErrandList/ErrandItem";
+import Skeleton from "../@common/Skeleton/Skeleton";
 
 function Errands() {
   const [userLocation, setUserLocation] = useRecoilState(userLocationState);
@@ -21,13 +22,16 @@ function Errands() {
   console.log("Is loading:", isLoading); // 로딩 상태 로깅
   console.log("Error:", error); // 에러 로깅
 
-  if (isLoading) {
-    return <div>Loading...</div>;
+  if (data == null || isLoading) {
+    return (
+      <ErrandsWrapper>
+        {[...new Array(10)].map((_, index) => (
+          <ErrandItem.Skeleton key={index} />
+        ))}
+      </ErrandsWrapper>
+    );
   }
-  if (error)
-    return <div>Error: 데이터를 불러오는 중에 오류가 발생하였습니다.</div>;
-
-  if (!data || !data.content) return <div></div>;
+  if (error) return <div></div>;
 
   return (
     <ErrandsWrapper>

@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import spinner from "../../assets/images/spinner.svg";
 
 function Loading() {
   return (
     <LoadingContainer>
       <p>모든 심부름은 SSAP에서 쌉가능!</p>
       <span>잠시만 기다려주세요.</span>
+      <img src={spinner} alt="로딩 아이콘" width="6%" />
     </LoadingContainer>
   );
 }
@@ -29,7 +31,7 @@ const LoadingContainer = styled.div`
     color: white;
   }
   span {
-    font-size: 12px;
+    font-size: 14px;
     margin: 2rem;
     color: white;
   }

@@ -1,22 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { useQuery } from "react-query";
-import { getErrands } from "../../apis/errand";
-import { useRecoilState } from "recoil";
-import { userLocationState } from "../../recoil/atoms/LocationState";
 import { ErrandsData } from "../../types/errand";
 import { ErrandItem } from "../ErrandList/ErrandItem";
 import Skeleton from "../@common/Skeleton/Skeleton";
 
 function Errands() {
-  const [userLocation, setUserLocation] = useRecoilState(userLocationState);
-  const { data, isLoading, error } = useQuery<ErrandsData>(
-    "errands",
-    () => getErrands(userLocation),
-    {
-      enabled: !!userLocation, // userLocation 값이 있을 때만 쿼리를 활성화
-    },
-  );
+  const { data, isLoading, error } = useQuery<ErrandsData>("errands");
 
   console.log("Query data:", data); // 데이터 로깅
   console.log("Is loading:", isLoading); // 로딩 상태 로깅

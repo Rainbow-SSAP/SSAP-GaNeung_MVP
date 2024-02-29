@@ -6,11 +6,8 @@ import { fetchErrandCategory } from "../../apis/errandCategory";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
-import { useRecoilValue } from "recoil";
-import { userLocationState } from "../../recoil/atoms/LocationState";
 
 function ErrandListPage() {
-const location = useRecoilValue(userLocationState);
   const { categoryId } = useParams();
   const selectedCategoryId = parseInt(categoryId, 10);
   console.log("categoryId", categoryId);
@@ -22,7 +19,7 @@ const location = useRecoilValue(userLocationState);
     error,
   } = useQuery(
     ["errandCategory", selectedCategoryId],
-    () => fetchErrandCategory(selectedCategoryId, location),
+    () => fetchErrandCategory(selectedCategoryId),
     {},
   );
 
